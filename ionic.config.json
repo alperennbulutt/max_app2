@@ -1,0 +1,10 @@
+{
+  "name": "max_app2",
+  "integrations": {
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
+  },
+  "type": "angular"
+}
