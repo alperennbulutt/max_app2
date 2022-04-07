@@ -1,0 +1,17 @@
+<div class="wordgridcomponent">
+	<button
+		class="item"
+		[ngClass]="[isSelected(item.label) ? 'item--selected' : 'item--not-selected']"
+		*ngFor="let item of exercise.options; let i = index"
+		(click)="selectToggle(item.label)"
+	>
+		<p [innerHTML]="item.label"></p>
+		<button class="remove" ion-button round *ngIf="canEdit && item.custom" (click)="selectInputOff(item.label); removeCustomInput(i, $event);"><ion-icon name="close"></ion-icon></button>
+	</button>
+	<div class="actions" *ngIf="canEdit && addCustomAllowed()">
+		<ion-input [(ngModel)]="_custom_input" placeholder="Voeg toe"></ion-input>
+		<button ion-button inset class="button-add btn-add-custom" (click)="addInputValue()">
+			<ion-icon name="add"></ion-icon>
+		</button>
+	</div>
+</div>

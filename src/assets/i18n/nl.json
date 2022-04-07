@@ -1,0 +1,414 @@
+{
+	"GENERAL": {
+		"app-name": "WatDrinkJij",
+		"standard-name": "standaardglazen",
+		"confirm-text": "Ja",
+		"reject-text": "Nee",
+		"save-text": "Opslaan",
+		"cancel-text": "Annuleer",
+		"logout-text": "Uitloggen",
+		"alert-error-title": "Oops...",
+		"continue-text": "Verder",
+		"default-alert": {
+			"title": "Oops...",
+			"subtitle": "Er is iets fout gegaan. Probeer het (later) nog eens."
+		},
+		"glass": "glas",
+		"glass-plural": "glazen",
+		"drinks": "gedronken"
+	},
+	"MEASURES": {
+		"title": "Standaardglazen",
+		"volume": "cl",
+		"alcohol": "alcohol",
+		"standard-type": "glas",
+		"beer-glass": {
+			"title": "Een glas bier",
+			"subtitle": " "
+		},
+		"beer-pint": {
+			"title": "Een halve liter bier",
+			"subtitle": " "
+		},
+		"beer-can": {
+			"title": "Een blik bier",
+			"subtitle": " "
+		},
+		"beer-bottle": {
+			"title": "Een fles bier",
+			"subtitle": " "
+		},
+		"beer-bottle-light": {
+			"title": "Een fles 'light' bier",
+			"subtitle": " "
+		},
+		"wine-glass": {
+			"title": "Een glas wijn",
+			"subtitle": " "
+		},
+		"wine-bottle": {
+			"title": "Een fles wijn",
+			"subtitle": " "
+		},
+		"sherry-glass": {
+			"title": "Een glas sherry/port",
+			"subtitle": " "
+		},
+		"mix-bottle": {
+			"title": "Een fles mixdrank",
+			"subtitle": "(bv. Breezer)"
+		},
+		"distilled-glass": {
+			"title": "Een glas gedistilleerd",
+			"subtitle": " "
+		},
+		"distilled-bottle": {
+			"title": "Een liter gedistilleerd",
+			"subtitle": " "
+		},
+		"mix-glass2": {
+			"title": "Een glas mixdrank",
+			"subtitle": "(bv. rum cola)"
+		},
+		"flugel": {
+			"title": "Een fles shooter",
+			"subtitle": "(bv. Flugel)"
+		}
+	},
+	"INPUT-ERRORS": {
+		"required": "Dit veld is verplicht",
+		"checkboxRequired": "Je moet nog de voorwaarden accepteren",
+		"noStrategies": "Je hebt nog geen aanpak gekozen",
+		"selectionRequired": "Maak hier een keuze",
+		"minlength": "Minimum length ${validatorValue.requiredLength}",
+		"invalidEmailAddress": "Ongeldig email adres",
+		"invalidPhoneNumber": "Ongeldig telefoonnummer",
+		"invalidPassword": "Kies een wachtwoord van minimaal 8 karakters, waarvan tenminste 1 hoofdletter, 1 kleine letter en 1 cijfer",
+		"invalidAge": "Je moet minimaal 16 jaar zijn"
+	},
+	"INTRO": {
+		"title": "Intro",
+		"about-text": "Gebruik de app en kijk hoe het zit met jouw alcohol gebruik.",
+		"research-text": "Lees meer over",
+		"research-link-text": "het onderzoek",
+		"login-button-text": "Log in",
+		"register-button-text": "Aanmelden"
+	},
+	"LOGIN": {
+		"LOGIN": {
+			"title-login": "Terug naar inloggen",
+			"title-register": "Aanmelden",
+			"intro-text": "Hier meld je je aan voor WatDrinkJij",
+			"email-label": "E-mail",
+			"email-feedback-text": "E-mail is incorrect",
+			"password-label": "Wachtwoord",
+			"password-feedback-text": "E-mail is incorrect",
+			"gender-label": "Je bent",
+			"gender-options": [
+				{
+					"label": "Man",
+					"value": "m"
+				},
+				{
+					"label": "Vrouw",
+					"value": "f"
+				}
+			],
+			"gender-feedback-text": "Je geslacht is nodig voor het onderzoek",
+			"age-label": "Leeftijd",
+			"age-feedback-text": "Je moet minimaal 18 jaar zijn om te mogen drinken!",
+			"terms-label": [
+				"Ik heb de ",
+				"button",
+				" gelezen en ga daarmee akkoord"
+			],
+			"terms-button-label": "gebruiksvoorwaarden en het privacystatement",
+			"terms-feedback-text": "Je moet de gebruiksvoorwaarden nog accepteren",
+			"register-button-text": "Aanmelden",
+			"register-error-text": "Er is iets fout gegaan bij het aanmelden",
+			"login-button-text": "Log in",
+			"login-error-text": "We konden je niet inloggen. Controleer je gegevens en probeer openieuw",
+			"password-forgot-button-text": "Wachtwoord vergeten?"
+		},
+		"PASSWORD-FORGOT": {
+			"title": "Wachtwoord vergeten?",
+			"submit-button-text": "Wachtwoord aanvragen"
+		}
+	},
+	"STEP1": {
+		"WELCOME": {
+			"title": "Welkom",
+			"header": "Welkom bij Stap 1",
+			"text-block-1": "Denk je erover je alcoholgebruik te veranderen?<br/>Het kan je helpen om te weten:",
+			"text-block-2": "Deze onderdelen komen nu aan bod in de eerste voorbereidende stap. Daarna beslis je over het eventueel veranderen van je alcoholgebruik.",
+			"list": [
+				"Hoeveel je drinkt",
+				"Of je daardoor een gezondheidsrisico loopt",
+				"Wat voor jou de voor- en nadelen zijn van drinken",
+				"Of je gemotiveerd bent om te minderen of stoppen"
+			],
+			"button-label": "Start"
+		},
+		"LETS-MEET": {
+			"title": "Welkom",
+			"header": "Fijn dat je er bent!",
+			"text-block-1": "WDJ is gemaakt om jou inzicht te geven in je alcoholgebruik"
+		},
+		"START-MEASUREMENT": {
+			"title": "Mijn alcoholgebruik",
+			"START-POINT": {
+				"header": "Hoeveel drink ik?",
+				"text-blocks": [
+					[
+						"De volgende vragen helpen je om inzicht te krijgen in je alcoholgebruik. Denk hierbij aan een gewone week uit de afgelopen maand. Hoeveel glazen alcohol heb je in zo’n week gedronken?"
+					],
+					[
+						"Vul per dag in hoeveel ",
+						"button",
+						"je meestal drinkt"
+					]
+				],
+				"submit-button-text": "Vul in"
+			},
+			"START-POINT-OVERVIEW": {
+				"header-sections": [
+					"Hoeveel glazen alcohol drink jij in een normale week?"
+				],
+				"content-header": "Aantal glazen",
+				"total-label": "Week totaal",
+				"average-label": "Gem. per dag",
+				"binge-label": "Binge dagen",
+				"block-2-header": "Vind je dat je teveel drinkt?",
+				"submit-button-text": "Verder"
+			}
+		},
+		"PROS-CONS": {
+			"title": "Voor- en nadelen",
+			"PRO-CON-INTRO": {
+				"content-text": "<p>Je hebt de test gedaan en weet nu wat jouw risico is op problemen door alcohol.</p><p>Maar los daarvan heeft alcohol drinken grotere en kleinere voor- en nadelen. Welke zijn dit voor jou?</p><p>In de opdracht hierna zet je dat op een rij en bepaal je wat voor jou het zwaarst weegt: de voordelen of de nadelen.</p>"
+			},
+			"PROS": {
+				"title": "Voordelen",
+				"header": "Welke voordelen heb jij van het drinken van alcohol?",
+				"subheader": "Jouw voordelen:",
+				"add-custom": "Voordeel toevoegen",
+				"items": {
+					"__relax": "Ik ontspan",
+					"__alone": "Ik voel mij niet alleen",
+					"__exciting": "Ik vind het spannend",
+					"__confidence": "Ik voel me meer zeker van mezelf",
+					"__taste": "Ik vind het lekker",
+					"__funny": "Ik ben grappig",
+					"__friends": "Ik heb veel vrienden",
+					"__look-up": "Er wordt tegen mij opgekeken",
+					"__contact": "Ik maak gemakkelijk contact met anderen",
+					"__sleep": "Ik slaap beter in",
+					"__bored": "Ik verveel me niet",
+					"__feel-somebody": "Ik voel me iemand",
+					"__mood": "Het is gezellig"
+				}
+			},
+			"CONS": {
+				"title": "Nadelen",
+				"header": "En welke nadelen heb je van het drinken van alcohol?",
+				"subheader": "Jouw nadelen:",
+				"add-custom": "Nadeel toevoegen",
+				"items": {
+					"__health": "het is slecht voor mijn gezondheid",
+					"__fit": "ik voel me niet fit",
+					"__money": "het kost veel geld",
+					"__hangover": "de kater",
+					"__mistakes": "ik maak fouten",
+					"__work": "ik krijg problemen op mijn werk",
+					"__shame": "ik schaam me",
+					"__sleep": "ik slaap slechter",
+					"__fat": "ik word dik",
+					"__annoyed": "het levert irritaties met anderen op",
+					"__sex": "ik presteer seksueel minder",
+					"__aggressive": "ik word agressief",
+					"__relationship": "mijn relatie met mijn partner wordt slechter"
+				}
+			},
+			"START-POINT-OVERVIEW": {
+				"balance": {
+					"header": "Dit is jouw balans van voor- en nadelen van drinken.",
+					"image-title": "Voor jou wegen het zwaarst:",
+					"image-title-pros": "de voordelen van drinken",
+					"image-title-cons": "de nadelen van drinken",
+					"pros": "Voordelen",
+					"cons": "Nadelen"
+				},
+				"pros-cons": {
+					"header": "Dit zijn jouw voor- en nadelen van het drinken van alcohol.",
+					"pros": "Jouw voordelen:",
+					"cons": "Jouw nadelen:"
+				},
+				"weight": {
+					"header": "Wat weegt voor jou het zwaarst?",
+					"subheader": "Misschien weegt &eacute;&eacute;n nadeel zwaarder dan vier voordelen of andersom. Maak je keuze:",
+					"pros": "De voordelen van drinken",
+					"cons": "De nadelen van drinken"
+				}
+			}
+		},
+		"OUTRO": {
+			"title": "Overzicht Voorbereiden",
+			"header": "<p>Je hebt nu alle onderdelen van de eerste stap van deze app afgerond.</p><p>Goed gedaan!</p><p>In het overzicht hieronder zie je alles nog eens kort op een rij.</p>",
+			"overview-date-label": "Dit is jouw overzicht van",
+			"start-measurement": {
+				"title": "Je beginstand",
+				"subtitle": "Je drinkt per week:",
+				"glasses-total": "glazen in totaal",
+				"days-sober": "dagen geen alcohol"
+			},
+			"drink-test": {
+				"title": "De drink test"
+			},
+			"pros-cons": {
+				"title": "Voor- en nadelen",
+				"subtitle": [
+					"de",
+					"van drinken wegen voor jou het zwaarst"
+				]
+			},
+			"motivation": {
+				"title": "Je motivatie"
+			},
+			"action-button-text": "Naar je overzicht"
+		},
+		"DECIDE": {
+			"title": "Beslissen",
+			"header": "<p>Je weet nu hoe je alcoholgebruik ervoor staat.</p><p class='gradient-background__header-description'>Bedenk dan nu:<br />Heb je redenen om te minderen of te stoppen?</p>",
+			"header2": "<p>Bedenk  nu of je echt iets aan je alcoholgebruik wilt veranderen.</p><p class='gradient-background__header-description'>Maak je keuze:<br />Wil je minderen of stoppen?</p>",
+			"links": {
+				"header": "Heb je nog twijfels over minderen of stoppen? Lees dan:",
+				"items": [
+					{
+						"label": "Is alcohol wel of niet gezond?",
+						"content": "Sommige mensen denken dat een beetje alcohol (en dan vooral rode wijn) goed is voor de gezondheid. Maar de eventuele positieve effecten wegen niet op tegen de risico&#39;s. Dus geen alcohol drinken is beter dan wel alcohol drinken. Want alcohol drinken heeft altijd een zeker risico. Het gaat immers om een giftige stof."
+					},
+					{
+						"label": "Wanneer verstandig om te stoppen?",
+						"content": "<p>Het is verstandig om helemaal geen alcohol te drinken als je door te drinken last hebt van:</p><ul><li>maag/darm klachten</li><li>grote vermoeidheid</li><li>concentratie- of geheugenstoornissen (black out)</li><li>een andere aandoening vanwege alcoholgebruik, bijvoorbeeld een levercirrose</li><li>angsten</li><li>neerslachtigheid</li><li>slapeloosheid</li><li>gespannenheid</li><li>financiële problemen</li><li>problemen met je gezin, familie of vrienden</li><li>problemen op of met werk (bijv. te laat komen, ziekteverzuim)</li></ul><p>En ook geen alcohol meer als:</p><ul><li>Je door alcohol betrokken raakte bij een ongeluk (thuis, op het werk of in het verkeer);</li><li>De politie je 2x of meer aanhield met teveel alcohol in je bloed;</li><li>Je drinkt om een probleem op te lossen.</li><li>Je bepaalde medicijnen gebruikt, bijv. slaapmiddelen: lees altijd de bijsluiter en raadpleeg je arts;</li><li>Jij of je partner zwanger wilt worden of al bent, of wanneer je borstvoeding geeft: alcohol beïnvloedt de vruchtbaarheid en is schadelijk voor je kindje.</li></ul>"
+					},
+					{
+						"label": "Wat is verantwoord drinken?",
+						"content": "<p>De Gezondheidsraad geeft als advies: &quot;Drink geen alcohol of niet meer dan één glas per dag.&quot; Dit geldt voor zowel mannen als vrouwen (18+). Minder of geen alcohol drinken is altijd beter.</p><p>Verder geldt:</p><ul><li>Drink minstens 2 dagen per week niet</li><li>Geen drank in combinatie met werken, studeren, sporten en verkeer</li><li>Geen drank met medicijnen of drugs</li><li>Niet drinken bij vermoeidheid, als reactie op spanningen of persoonlijke problemen</li><li>Drink niet als jij / je partner zwanger bent of wil worden of wanneer je borstvoeding geeft.</li></ul>"
+					},
+					{
+						"label": "Minder drinken, makkelijk of moeilijk?",
+						"content": "<p>In het begin kan het moeilijk zijn om minder te drinken bijvoorbeeld:</p><ul><li>op die momenten waarop je gewend bent te drinken;</li><li>wanneer je met mensen bent waarmee je gewoonlijk drinkt.</li></ul><p>Ben je gewend om flink te drinken? En ben je van plan om sterk te minderen? Dan kun je je een week of langer gespannen of zenuwachtig voelen door lichamelijke reacties hierop.</p><p>Drink je nu heel veel en wil je stoppen met drinken? Doe dit dan in overleg met een arts of verslavingskliniek! Plotseling stoppen kan ernstige lichamelijke gevolgen hebben en heftige onthoudingsverschijnselen veroorzaken. Je kunt zelfs in een delirium raken.</p>"
+					},
+					{
+						"label": "Wat doet alcohol met je lichaam?",
+						"content": "<p><strong>Diverse soorten kanker</strong><br />Het drinken van 1 glas alcohol per dag verhoogt al de kans op kanker.</p><p><strong>Spierziekte</strong><br />Alcohol drinken kan leiden tot polyneuropathie: een spierziekte waarbij de zenuwen beschadigd raken. Dit zorgt onder meer voor veranderingen in het gevoel, gevoelloosheid voor pijn, brandende of stekende pijn, krimpende spieren en spierzwakte.</p><p><strong>Hart- en bloedvaten</strong><br />Het drinken van alcohol kan hart- en vaatziekten tot gevolg hebben, zoals hoge bloeddruk, hartritmestoornissen en hersenbloedingen.</p><p><strong>Maag</strong><br />Veel drinken kan het slijmvlies van de maag beschadigen.</p><p><strong>Lever</strong><br/>Door overmatig alcoholgebruik raakt de afbraakfunctie van de lever verstoord. Het kan uiteindelijk leiden tot levercirrose.</p><p><strong>Hersenen</strong><br />Als je lange tijd zwaar drinkt (meer dan 25 glazen alcohol per week), loop je risico op hersenbeschadiging. Het kan door een tekort aan vitamine B1 leiden tot het Korsakovsyndroom.</p>"
+					}
+				]
+			}
+		},
+		"APP-OUTRO": {
+			"content": "<p>Je hebt besloten dat je je alcoholgebruik nu niet wilt minderen of stoppen.</p><p>Weet je dat zeker? Dan kun je nu de app sluiten. Als je twijfelt kun je terug en je keuze wijzigen.</p><p>Je bent natuurlijk altijd welkom om terug te komen en opnieuw van start te gaan met WatDrinkJij!",
+			"button-text": "App sluiten",
+			"alert": {
+				"title": "Weet je het zeker?",
+				"subtitle": "Al je voortgang wordt verwijderd zodat je volgende keer met een schone lei kan beginnen."
+			}
+		}
+	},
+	"STEP2": {
+		"title": "Doelen",
+		"INTRO": {
+			"header1": "Je hebt besloten om te minderen of te stoppen. Dit is een belangrijke stap. Het stellen van doelen geeft je houvast. Jij bepaalt zelf wat je doel wordt!",
+			"header2": [
+				"Als je doel is om te minderen, dan kan het toch nuttig zijn een tijdje niet te drinken. Lees ",
+				"button",
+				" meer daarover."
+			],
+			"button-label": "hier",
+			"subheader": "<p class='gradient-background__header-description'>Bedenk dan nu:<br/>Wat wordt je doel voor de komende <strong>2 weken?</strong></p>",
+			"lower-option": "Minderen",
+			"abstinence-option": "Niet drinken",
+			"info": {
+				"title": "Minderen?",
+				"header": "Wil je minderen maar niet stoppen?",
+				"content": "Dan kan het toch goed zijn een tijd bijvoorbeeld een maand, niet te drinken. Niet alleen is dat goed voor je lichaam. Je komt er ook snel achter in welke situaties je veel behoefte hebt aan alcohol. Ook doorbreekt het drinken uit gewoonte."
+			}
+		},
+		"GOALS": {
+			"header-abstinent": "Je doel is <i><strong>niet drinken!</strong></i>",
+			"subheader-abstinent": "Gefeliciteerd! Dit is een gezond en prima doel!",
+			"header-lower": "Stel nu jouw doelen voor de komende <i><strong>2 weken</strong></i>.<br />Wat drink je maximaal per dag?",
+			"goal-period": "Jouw doel voor:",
+			"date-until": "t/m"
+		},
+		"OUTRO": {
+			"slides": [
+				{
+					"title": "Stap 3: Uitvoeren",
+					"header": "Aan de slag!",
+					"content": "Je hebt nu 2 belangrijke stappen gezet in WatDrinkJij!<br /><br />Stap 1: je hebt besloten je alcoholgebruik te veranderen.<br /><br />Stap 2: je hebt doelen gesteld.<br /><br />Je kunt nu beginnen met stap 3: het uitvoeren!<br />Om je doel te bereiken kun je verschillende dingen doen.<br />We geven je daarvan nu een kort overzicht."
+				},
+				{
+					"title": "Je logboek bijhouden",
+					"header": "Logboek",
+					"image": "http://lorempixel.com/400/400",
+					"content": "Hou bij hoeveel je drinkt en in welke situaties. Je houdt zo zich op je doelen en vorderingen. Ook ontdek je wat jouw risicosituaties zijn."
+				},
+				{
+					"title": "Bereid je voor en hou vol!",
+					"header": "Volhouden",
+					"image": "http://lorempixel.com/400/400",
+					"content": "Ga goed voorbereid aan de slag! Dit vergroot je kans op succes. Doe daarom de oefeningen en lees de tips."
+				},
+				{
+					"title": "Leer van je fouten",
+					"header": "Terugval",
+					"image": "http://lorempixel.com/400/400",
+					"content": "Drink je toch meer dan gepland? Niet alles is meteen verloren! Zorg dat je leert van je fouten!"
+				},
+				{
+					"title": "Check je voortgang",
+					"header": "Voortgang",
+					"image": "http://lorempixel.com/400/400",
+					"content": "Je logboek bijgehouden? Je kunt bij voortgang zien hoe je vordert."
+				}
+			],
+			"final-slide": {
+				"title": "That's it!",
+				"header": "That's it!",
+				"content": "Nu kan je starten met WatDrinkJij!"
+			}
+		}
+	},
+	"STEP3": {
+		"TABS": {
+			"modules": "Oefeningen",
+			"help": "Help",
+			"logbook": "Dagboek",
+			"stats": "Statistieken",
+			"profile": "Profiel"
+		},
+		"LOG": {
+			"max": "Jouw max",
+			"empty": "Niets gedronken?",
+			"registry-add": {
+				"daypart-label": "Wanneer dronk je dit aantal glazen?",
+				"dayparts": {
+					"morning": "Ochtend",
+					"afternoon": "Middag",
+					"evening": "Avond",
+					"night": "Nacht",
+					"wholeDay": "Hele dag"
+				},
+				"mood-label": "Ben je tevreden over dit aantal glazen?"
+			},
+			"registry-edit": {
+				"location-label": "Waar was je?",
+				"people-label": "Met wie was je?",
+				"feelings-label": "Hoe was je gevoel?",
+				"notes-label": "Notities"
+			},
+			"save-text": "Opslaan"
+		}
+	}
+}

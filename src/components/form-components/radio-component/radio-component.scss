@@ -1,0 +1,47 @@
+radio-component {
+	.input-wrapper {
+		order: 2;
+	}
+
+	.item-ios {
+		-ms-flex-align: center;
+		margin: 0;
+		padding: 4px 0;
+		border-bottom: 1px solid #d9d2c7;
+		font-size: 17px;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+
+		ion-label {
+			white-space: normal;
+		}
+
+		&.item-radio-checked {
+			background: rgba(217, 210, 199, 0.3);
+		}
+
+		&.item-radio-checked.item-ios ion-label {
+			color: $color-text;
+		}
+
+		&.item-radio-checked .radio-ios {
+			border-color: #414040;
+			background-color: #414040;
+
+			.radio-inner {
+				top: 2px;
+				left: 6px;
+				border-color: white;
+			}
+		}
+
+		.radio-ios {
+			margin-left: 11px;
+			width: 21px;
+			height: 21px;
+			border: 2px solid #d9d2c7;
+			border-radius: 50%;
+		}
+	}
+}

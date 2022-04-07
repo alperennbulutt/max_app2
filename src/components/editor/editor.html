@@ -1,0 +1,128 @@
+<div class="editor__inner">
+    <div class="editor__loader" *ngIf="showLoader">
+        <ion-spinner></ion-spinner>
+        <div>Afbeelding uploaden</div>
+    </div>
+    <ng-template ngFor let-option [ngForOf]="_options" let-i="index">
+        <ng-template [ngIf]="option.type == 'textarea' && editorStep == i">
+            <div class="editor__text">
+                <textarea
+                    class="editor__textarea"
+                    placeholder="{{option.placeholder}}"
+                    [(ngModel)]="editorResult.text"
+                ></textarea>
+            </div>
+        </ng-template>
+
+        <ng-template [ngIf]="option.type == 'choose-text' && editorStep == i">
+            <div *ngIf="option.introText"></div>
+            <div class="editor__text">
+                <div class="slides__wrapper">
+                    <ion-slides
+                        #slider
+                        spaceBetween="15"
+                        pager="true"
+                        [initialSlide]="initialSlide"
+                        (ionSlideWillChange)="sliderChanged(editorStep)"
+                        class="choose-text-slider pagination"
+                    >
+                        <ng-container *ngIf="!isEditing">
+                            <ion-slide *ngFor="let option of option.texts">
+                                <!-- <span [innerHTML]="option.text"></span> -->
+                                <textarea
+                                    class="editor__textarea"
+                                    placeholder="{{option.placeholder}}"
+                                    [(ngModel)]="editorResult.text"
+                                ></textarea>
+                            </ion-slide>
+                        </ng-container>
+                        <ion-slide class="is-last">
+                            <textarea
+                                class="editor__textarea"
+                                placeholder="{{option.placeholder}}"
+                                [(ngModel)]="editorResult.text"
+                            ></textarea>
+                        </ion-slide>
+                    </ion-slides>
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template [ngIf]="option.type == 'imagePicker' && editorStep == i">
+            <div class="editor__image-picker">
+                <div class="editor__image-picker__image-container" #imagePicker>
+                    <div
+                        class="editor__image-picker__image"
+                        *ngFor="let image of editorImages; let i = index"
+                        [class.is-active]="i === activeImage"
+                        tappable
+                        (click)="changeImage(image, i)"
+                    >
+                        <div
+                            tappable
+                            (click)="removeImage(image, index)"
+                            class="remove-button"
+                            *ngIf="image.length > 50"
+                        ></div>
+                        <div class="img-holder">
+                            <img [src]="image | URLSanitizer" />
+                            <!-- <img [src]="image" /> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="editor__image-picker__add-button" tappable (click)="addNewImage()">
+                    <ion-icon name="lnr-camera"></ion-icon>
+                </div>
+            </div>
+        </ng-template>
+
+        <div
+            class="editor__preview"
+            *ngIf="editorStep === i && option.showPreview"
+            [style.background-image]="editorResult.imageStyle"
+        >
+            <div class="editor__preview__text">
+                <div *ngIf="editorResult.friend">
+                    {{editorResult.friend + ' zegt:'}}
+                </div>
+                <div [innerHTML]="editorResult.text"></div>
+            </div>
+        </div>
+    </ng-template>
+    <div class="editor__footer">
+        <div class="pagination pagination__wrapper editor__pagination" *ngIf="pagination === false">
+            <div
+                class="pagination__bullet"
+                *ngFor="let pagination of _options; let i = index"
+                [class.is-active]="i === editorStep"
+            ></div>
+        </div>
+        <div class="button-container">
+            <button ion-button icon-start class="themed-button" (click)="updateStep()">
+                <ion-icon name="fa-chevron-left"></ion-icon>
+                Terug
+            </button>
+            <button
+                ion-button
+                icon-end
+                class="themed-button"
+                [disabled]="!editorResult.text || editorResult.text.length > 400"
+                (click)="updateStep(true)"
+                *ngIf="editorStep < _options.length -1"
+            >
+                Volgende
+                <ion-icon name="fa-chevron-right"></ion-icon>
+            </button>
+            <button
+                ion-button
+                icon-start
+                class="themed-button"
+                (click)="save(true)"
+                *ngIf="editorStep === _options.length -1"
+            >
+                <ion-icon name="fa-check"></ion-icon>
+                Opslaan
+            </button>
+        </div>
+    </div>
+</div>

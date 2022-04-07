@@ -1,0 +1,54 @@
+$select-switch-font-family: arial, helvetica, sans-serif !default;
+$select-switch-font-size: 14px !default;
+$select-switch-color-border: gray !default;
+$select-switch-color-active: orange !default;
+$select-switch-color-font-active: white !default;
+$select-switch-border-radius: 5px !default;
+
+select-switch {
+	.switch-wrapper {
+		display: flex;
+		height: 36px;
+		flex-wrap: nowrap;
+
+		.input__short & {
+			margin-bottom: 0;
+		}
+	}
+
+	.switch-wrapper__button {
+		position: relative;
+		display: flex;
+		overflow: hidden;
+		width: 50%;
+		height: 100%;
+		border: 2px solid $select-switch-color-border;
+		color: $select-switch-color-border;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		font-family: $select-switch-font-family;
+		font-size: $select-switch-font-size;
+		transition: all 0.3s;
+		justify-content: center;
+		align-items: center;
+
+		&:first-child {
+			border-right: none;
+			border-radius: $select-switch-border-radius 0 0 $select-switch-border-radius;
+		}
+
+		&:last-child {
+			border-left: none;
+			border-radius: 0 $select-switch-border-radius $select-switch-border-radius 0;
+		}
+
+		&:first-child + :last-child {
+			border-left: 1px solid $select-switch-color-border;
+		}
+	}
+
+	.switch-wrapper__button--active {
+		background: $select-switch-color-active;
+		color: $select-switch-color-font-active;
+	}
+}

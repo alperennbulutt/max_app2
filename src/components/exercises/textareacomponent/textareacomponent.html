@@ -1,0 +1,24 @@
+<div class="textareacomponent">
+	<div *ngIf="!_exercise">
+		invalid data...
+	</div>
+
+	<div *ngIf="_exercise">
+		<div *ngFor="let item of _exercise.options; let i = index">
+			<p [innerHTML]="item.label"></p>
+			<textarea [(ngModel)]="_storageData.inputs[i]" (ngModelChange)="onInputChange()"></textarea>
+		</div>
+
+		<div class="custom" *ngFor="let item of _storageData?.customInputs; let i = index">
+			<p class="title">Omschrijving:</p>
+			<ion-input class="title" [(ngModel)]="item.label" (ngModelChange)="onInputChange()"></ion-input>
+			<button class="remove" ion-button round *ngIf="canEdit" (click)="removeCustomInput(i)"><ion-icon name="close"></ion-icon></button>
+			<p>Antwoord:</p>
+			<textarea [(ngModel)]="item.value" (ngModelChange)="onInputChange()"></textarea>
+		</div>
+
+		<button ion-button inset class="btn-add-custom" *ngIf="canEdit && addCustomAllowed()" (click)="addInputValue()">
+			<ion-icon name="add"></ion-icon>
+		</button>
+	</div>
+</div>

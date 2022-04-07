@@ -1,0 +1,131 @@
+.radiocomponent {
+	margin-top: 24px;
+
+	a {
+		color: $color-primary;
+	}
+
+	.radio-button-wrapper {
+		position: relative;
+		display: flex;
+		padding: 8px 0;
+		border-bottom: 1px solid $color-grey;
+		transition: background 0.3s ease;
+		align-items: center;
+
+		&.is-checked {
+			background: rgba(217, 210, 199, 0.3);
+		}
+
+		.label-content {
+			width: 100%;
+
+			a {
+				width: 100%;
+			}
+		}
+	}
+
+	ion-radio {
+		margin: 10px 10px;
+		text-align: center;
+		align-self: flex-start;
+
+		&.right .radio-checked {
+			border: 1px solid $color-success;
+			background: $color-success;
+		}
+
+		&.wrong .radio-checked {
+			display: flex;
+			border: 1px solid $color-error;
+			background: $color-error;
+			justify-content: center;
+			align-items: center;
+
+			.radio-inner {
+				border: none;
+			}
+
+			&:after {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				color: $color-white;
+				content: '\e92a';
+				font-family: 'Linearicons';
+				font-weight: bold;
+				transform: translateX(-50%) translateY(-50%);
+			}
+		}
+
+		.radio-icon {
+			width: 23px;
+			height: 23px;
+			border: 2px solid $color-grey;
+			border-radius: 50%;
+			background: $color-white;
+		}
+
+		.radio-checked {
+			border: 1px solid $color-cta;
+			background: $color-cta;
+
+			.radio-inner {
+				top: 4px;
+				left: 7px;
+				z-index: 1;
+				margin-left: 1px;
+				width: 5px;
+				height: 11px;
+				border-width: 0 2px 2px 0;
+				border-color: $color-white;
+			}
+		}
+	}
+
+	.feedback-button {
+		padding-bottom: 4px;
+
+		button {
+			padding-top: 4px !important;
+		}
+	}
+
+	p,
+	a {
+		display: inline-block;
+		color: $color-text;
+		font-size: 17px;
+	}
+
+	ion-input {
+		display: inline-block;
+		margin: 11px 0;
+		width: auto;
+		border: 1px solid $color-border;
+	}
+
+	.remove {
+		margin: 0;
+		padding: 0;
+		width: 24px;
+		height: 24px;
+		vertical-align: middle;
+	}
+
+	.btn-add-custom {
+		margin: 15px 0;
+		padding: 12px;
+		height: 36px;
+		background: $color-cta;
+
+		ion-icon {
+			font-size: 24px;
+
+			&:before {
+				font-weight: bold;
+			}
+		}
+	}
+}

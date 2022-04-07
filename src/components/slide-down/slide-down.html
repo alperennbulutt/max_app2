@@ -1,0 +1,11 @@
+<div class="content" [class.no-hiddden-content]="!hidden">
+	<div class="content__title" (click)="toggle()">
+		<span>{{ title }}</span>
+		<div class="content__arrow" [class.is-open]="isOpen">
+			<ion-icon name="arrow-forward"></ion-icon>
+		</div>
+	</div>
+	<div class="content__inside" *ngIf="isOpen && hidden" @slideDown>
+		<div class="content__inner" [innerHTML]="hidden"></div>
+	</div>
+</div>

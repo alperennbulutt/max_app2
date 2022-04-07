@@ -1,0 +1,171 @@
+[ion-button][inset] {
+	// border-bottom: 3px solid $color-button-inset;
+}
+
+$button-ios-background-color: $color-grey;
+
+button.button-ios {
+	margin: 0;
+	padding: 17px 16px;
+	height: auto;
+	border-radius: 6px;
+	box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15), inset 0 -1px 2px 3px rgba(255, 255, 255, 0.3);
+	color: $color-text;
+	font-family: $font-primary;
+	font-size: 17px;
+	line-height: 1;
+	contain: content;
+
+	&.activated {
+		background: $color-grey;
+	}
+
+	&.no-shadow {
+		box-shadow: none;
+	}
+
+	ion-icon {
+		padding-left: 10px;
+		font-size: 22px;
+		line-height: 10px;
+
+		&.ion-ios-arrow-forward {
+			font-weight: bold;
+		}
+	}
+
+	&[icon-start] ion-icon {
+		padding-left: 0;
+	}
+
+	&.button-clear-ios {
+		box-shadow: none;
+		text-decoration: underline;
+	}
+
+	&[clear] {
+		font-family: $font-secondary;
+		font-weight: 500;
+
+		&.activated {
+			background: transparent;
+		}
+	}
+
+	&.align-left {
+		.button-inner {
+			justify-content: space-between;
+		}
+	}
+}
+
+[ion-button][inline],
+[dir='ltr'] [ion-button][inline] {
+	margin: 0;
+	padding: 0;
+	height: auto;
+	border-bottom: 1px solid $color-background;
+	border-radius: 0;
+	background: none;
+	vertical-align: inherit;
+	font-size: inherit;
+
+	&.activated {
+		background: none;
+	}
+}
+
+.coloured-background--blue {
+	.themed-button {
+		background: $color-blue;
+		color: #1c579d;
+
+		&.activated {
+			background: darken($color-blue, 10%);
+		}
+	}
+}
+
+.coloured-background--red {
+	.themed-button {
+		background: $color-red;
+		color: white;
+
+		&.activated {
+			background: darken($color-red, 10%);
+		}
+	}
+}
+
+.coloured-background--pink {
+	.themed-button {
+		background: $color-pink;
+		color: white;
+
+		&.activated {
+			background: darken($color-pink, 10%);
+		}
+	}
+}
+
+.coloured-background--green {
+	.themed-button {
+		background: $color-green;
+
+		&.activated {
+			background: darken($color-green, 10%);
+		}
+	}
+}
+
+.coloured-background--yellow {
+	.themed-button {
+		background: $color-yellow;
+		color: $color-text;
+
+		&.activated {
+			background: darken($color-yellow, 10%);
+		}
+	}
+}
+
+.coloured-background--grey {
+	.themed-button {
+		background: $color-background;
+		color: white;
+
+		&.activated {
+			background: darken($color-grey, 10%);
+		}
+	}
+}
+
+button.button-ios-blue {
+	&.activated {
+		background: darken($color-blue, 10%);
+	}
+}
+
+button.button-ios-red {
+	&.activated {
+		background: darken($color-red, 10%);
+	}
+}
+
+button.button-ios-pink {
+	&.activated {
+		background: darken($color-pink, 10%);
+	}
+}
+
+button.button-ios-primary {
+	&.activated {
+		background: darken($color-green, 10%);
+	}
+}
+
+button.button-ios-yellow {
+	&.activated {
+		background: darken($color-yellow, 10%);
+	}
+}

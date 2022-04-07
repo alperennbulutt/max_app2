@@ -1,0 +1,15 @@
+
+<h4 *ngIf="pageContent?.title">{{ pageContent?.title }}</h4>
+<img *ngIf="pageContent?.image" src="{{ pageContent.image | imageUrl : [720] }}" />
+<video
+	*ngIf="pageContent?.video"
+	controls="controls"
+	[poster]='pageContent?.image_preview | imageUrl : [720]'
+	preload="auto"
+	webkit-playsinline="webkit-playsinline"
+	class="video-player"
+>
+	<source [src]="pageContent?.video | videoUrl" type="video/mp4" />
+</video>
+<podcastcomponent *ngIf="pageContent?.audio" [url]="pageContent?.audio" (playFromStart)="startPodcast(pageContent)"></podcastcomponent>
+<div [innerHTML]="pageContent.content"></div>

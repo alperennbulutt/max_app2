@@ -1,0 +1,23 @@
+ion-item,
+ion-item.item-ios,
+[dir='ltr'] ion-item.item-ios {
+	padding-left: 0;
+	background: none;
+}
+
+ion-item.item-block .item-inner,
+ion-item.item-ios.item-block .item-inner,
+[dir='ltr'] ion-item.item-ios.item-block .item-inner {
+	padding-right: 0;
+}
+
+ion-item.item-checkbox {
+	align-items: flex-start;
+
+	ion-label {
+		margin-top: 4px;
+		white-space: normal;
+		font-size: $font-size-primary;
+		font-weight: normal;
+	}
+}

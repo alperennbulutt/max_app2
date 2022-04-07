@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>Energetic</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="10" cy="10" r="10"></circle>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Energetic">
+            <g id="Oval-4">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <circle stroke="#631f0e" stroke-width="0.936" cx="10" cy="10" r="9.532"></circle>
+            </g>
+            <path d="M7,12.5 C7,12.5 8.29294988,12.881115 9.82263706,12.881115 C11.3523242,12.881115 12.6452741,12.5 12.6452741,12.5 C12.6452741,12.5 12.3630104,15.1486486 9.82263706,15.1486486 C7.28226371,15.1486486 7,12.5 7,12.5 Z" id="Path-3" fill="#631f0e"></path>
+            <circle id="Oval-6" fill="#631f0e" cx="6.12903226" cy="9.12903226" r="1.12903226"></circle>
+            <circle id="Oval-6" fill="#631f0e" cx="13.6290323" cy="9.12903226" r="1.12903226"></circle>
+            <path d="M4.59832707,7.16824257 C4.59832707,7.16824257 4.88960152,6.39188192 5.72293485,5.97521526 C6.55626818,5.55854859 7.51499374,5.91824257 7.51499374,5.91824257" id="Path-2" stroke="#631f0e" stroke-width="0.5" stroke-linecap="round" transform="translate(6.056660, 6.471127) rotate(12.000000) translate(-6.056660, -6.471127) "></path>
+            <path d="M12.9316604,7.16824257 C12.9316604,7.16824257 13.2229349,6.39188192 14.0562682,5.97521526 C14.8896015,5.55854859 15.8483271,5.91824257 15.8483271,5.91824257" id="Path-2" stroke="#631f0e" stroke-width="0.5" stroke-linecap="round" transform="translate(14.389994, 6.471127) scale(-1, 1) rotate(12.000000) translate(-14.389994, -6.471127) "></path>
+        </g>
+    </g>
+</svg>

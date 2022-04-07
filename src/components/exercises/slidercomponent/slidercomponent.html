@@ -1,0 +1,18 @@
+<div class="slidercomponent">
+	<div *ngFor="let item of exercise.options; let i = index">
+		<p *ngIf="!item.custom" [innerHTML]="item.label"></p>
+		<ion-range
+			[class.undefined]="_storageData.ranges[i] === undefined"
+			[pin]="true"
+			[disabled]="!canEdit"
+			[min]="item.minvalue"
+			[max]="item.maxvalue"
+			[step]="item.step"
+			[(ngModel)]="_storageData.ranges[i]"
+			(ngModelChange)="data = _storageData"
+		>
+			<ion-label range-left [innerHTML]="item.minlabel"></ion-label>
+			<ion-label range-right [innerHTML]="item.maxlabel"></ion-label>
+		</ion-range>
+	</div>
+</div>

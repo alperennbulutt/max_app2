@@ -1,0 +1,13 @@
+@font-face {
+	font-family: 'Chivo';
+	src: url($font-path+'/chivo/Chivo-Regular.ttf');
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+	font-family: 'Chivo-Bold';
+	src: url($font-path+'/chivo/Chivo-Bold.ttf');
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+}

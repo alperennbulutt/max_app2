@@ -1,0 +1,13 @@
+<div class="checkboxcomponent">
+	<div class="checkbox-wrapper" *ngFor="let item of exercise.options; let i = index">
+		<ion-checkbox [(ngModel)]="_storage_data.check_boxes[i]" (ngModelChange)="onChange()"></ion-checkbox>
+		<a (click)="onToggle(i)" [innerHTML]="item.label"></a>
+		<button class="remove" ion-button round *ngIf="canEdit && item.custom" (click)="removeCustomInput(i)"><ion-icon name="close"></ion-icon></button>
+	</div>
+	<div class="actions" *ngIf="canEdit && addCustomAllowed()">
+		<input [(ngModel)]="_custom_input" placeholder="Voeg toe">
+		<button ion-button inset class="btn-add-custom" (click)="addInputValue()">
+			<ion-icon name="add"></ion-icon>
+		</button>
+	</div>
+</div>

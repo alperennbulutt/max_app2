@@ -1,0 +1,17 @@
+<div class="controls">
+	<button ion-button class="controls--button button-play" *ngIf="!_isPlaying" (click)="play()">
+		<ion-icon name="ios-play"></ion-icon>
+	</button>
+	<button ion-button class="controls--button button-pause" *ngIf="_isPlaying" (click)="pause()">
+		<ion-icon name="ios-pause"></ion-icon>
+	</button>
+
+	<div class="controls--seeker">
+		<div class="progress-bar">
+			<div class="progress-bar--played" [ngStyle]="{'width': (_progressPercentage || 0) + '%'}"></div>
+		</div>
+
+		<span class="progress--number progress-current">{{_progress}}</span>
+		<span class="progress--number progress-duration">{{_duration}}</span>
+	</div>
+</div>

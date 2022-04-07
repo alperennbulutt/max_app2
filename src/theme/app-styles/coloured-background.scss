@@ -1,0 +1,157 @@
+$content-padding: 10px;
+
+.platform-mobileweb .coloured-background,
+.platform-android .coloured-background {
+	ion-header {
+		// top: 10px;
+		padding-top: 10px;
+	}
+
+	ion-navbar {
+		align-items: center !important;
+	}
+}
+
+.coloured-background {
+	ion-header {
+		.bar-button-ios {
+			margin-top: 6px;
+			padding: 0 10px;
+		}
+	}
+
+	.toolbar.toolbar-ios {
+		align-items: flex-start;
+	}
+
+	.toolbar-background {
+		top: unset !important;
+		left: 10px;
+		display: flex;
+		width: calc(100% - 20px);
+		border-radius: 16px 16px 0 0;
+		background-color: white !important;
+		align-items: center;
+	}
+
+	ion-content {
+		padding-bottom: 20px !important;
+
+		&:before {
+			position: absolute;
+			top: 60px;
+			bottom: 150px;
+			left: 10px;
+			z-index: 1;
+			width: 100%;
+			width: calc(100% - 20px);
+			height: calc(100% - 250px);
+			background: $color-white;
+			content: '';
+		}
+	}
+
+	.wrapper {
+		position: absolute;
+		left: 10px;
+		padding: 0 $content-padding $content-padding;
+		min-height: calc(100% - 10px);
+		width: calc(100% - 20px);
+		border-radius: 0 0 16px 16px;
+		background: white;
+		box-shadow: 0 4px 1px rgba(0, 0, 0, 0.3);
+
+		&:after {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			margin-bottom: -10px;
+			width: 100%;
+			height: 100%;
+			height: 10px;
+			content: '';
+		}
+
+		&.buttons-bottom {
+			padding-bottom: 68px;
+
+			.button-container {
+				position: absolute;
+				bottom: 10px;
+				width: calc(100% - 20px);
+			}
+		}
+	}
+
+	&.one-page {
+		.wrapper {
+			min-height: 475px;
+			height: calc(100% - 10px);
+		}
+
+		.scroll-content {
+			overflow: hidden;
+		}
+	}
+
+	ion-content {
+		&:after {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: $color-background;
+			content: '';
+		}
+	}
+}
+
+.coloured-background--blue ion-content:after {
+	background: $color-blue;
+}
+
+.coloured-background--red ion-content:after {
+	background: $color-red;
+}
+
+.coloured-background--yellow ion-content:after {
+	background: $color-yellow;
+}
+
+.coloured-background--pink ion-content:after {
+	background: $color-pink;
+}
+
+.coloured-background--green ion-content:after {
+	background: $color-primary;
+}
+
+.coloured-background--green ion-content:after {
+	background: $color-primary;
+}
+
+//Fix for iphone
+.platform-ios:not(.platform-mobileweb) {
+	//Fix for iphonex
+	@media only screen
+	and (device-width : 375px)
+	and (device-height : 812px)
+	and (-webkit-device-pixel-ratio : 3) {
+		page-home .menu-toggle {
+			margin-top: 20px;
+		}
+
+		.coloured-background {
+			.wrapper {
+				min-height: calc(100% - 25px);
+			}
+
+			&.one-page {
+				.wrapper {
+					height: calc(100% - 25px);
+				}
+			}
+		}
+	}
+}

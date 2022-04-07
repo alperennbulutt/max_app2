@@ -1,0 +1,20 @@
+@font-face {
+	font-family: 'raleway';
+	font-weight: normal;
+	src: url($font-path+'/raleway/raleway-regular.ttf');
+	-webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+	font-family: 'raleway';
+	font-weight: 500;
+	src: url($font-path+'/raleway/raleway-semibold.ttf');
+	-webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+	font-family: 'raleway';
+	font-weight: 300;
+	src: url($font-path+'/raleway/raleway-light.ttf');
+	-webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>Happy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="10" cy="10" r="10"></circle>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Happy">
+            <g id="Oval-4">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <circle stroke="#631f0e" stroke-width="0.936" cx="10" cy="10" r="9.532"></circle>
+            </g>
+            <circle id="Oval-6" fill="#631f0e" cx="6.12903226" cy="8.62903226" r="1.12903226"></circle>
+            <circle id="Oval-6" fill="#631f0e" cx="13.6290323" cy="8.62903226" r="1.12903226"></circle>
+            <path d="M5.80645161,12.2580645 C5.80645161,12.2580645 6.78763441,15.1612903 9.83870968,15.1612903 C12.8897849,15.1612903 13.8709677,12.2580645 13.8709677,12.2580645 C13.8709677,12.2580645 12.5806452,14.1935484 9.83870968,14.1935484 C7.09677419,14.1935484 5.80645161,12.2580645 5.80645161,12.2580645 Z" id="Path-3" fill="#631f0e"></path>
+        </g>
+    </g>
+</svg>

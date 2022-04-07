@@ -1,29 +1,67 @@
-<ion-app>
-  <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
-      <ion-content>
-        <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>alperenbulut.ab@gmail.com</ion-note>
+<ion-nav id="nav" [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
+<ion-menu side="left" type="overlay" [swipeEnabled]="false" [content]="content" class="navigation-menu left-menu" (ionOpen)="openMenu()">
+	<ion-header>
+		<ion-navbar>
+			<ion-title>
+				<div class="title">
+					Maxx
+				</div>
+			</ion-title>
+			<div divider nospace=true></div>
+			<button ion-button menuToggle color="dark">
+				<ion-icon name="md-close"></ion-icon>
+			</button>
+		</ion-navbar>
+	</ion-header>
 
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
+	<ion-content>
+		<ul class="app-menu">
+			<li *ngFor="let page of menuPages">
+				<button class="app-menu__button" [class.is-open]="page?.submenu && page?.isOpen" ion-button (click)="openPage(page, $event)" color=white>
+					<div class="icon-wrapper" [ngClass]="'icon-wrapper--' + page.color">
+						<ion-icon [name]="page.icon" *ngIf="page.icon !== 'custom'"></ion-icon>
+						<div class="custom-icon" *ngIf="page.icon === 'custom'">
+							<div *ngFor="let i of [0,1,2,3]" class="bar" [ngClass]="'bar-' + i"></div>
+						</div>
+					</div>
+					<span class="custom-icon" [ngClass]="page.component" *ngIf="page.icon === 'custom'"></span>
+					{{page.title}}
+					<ion-icon *ngIf="page?.submenu" class="submenu-icon" name="fa-chevron-right"></ion-icon>
+				</button>
+			</li>
+			<li>
+				<button class="app-menu__button" ion-button (click)="logOut()" color=white>
+					<div class="icon-wrapper">
+						<ion-icon name="lnr-move-out-right"></ion-icon>
+					</div>
+					Uitloggen
+				</button>
+			</li>
+		</ul>
+	</ion-content>
+</ion-menu>
 
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
-  </ion-split-pane>
-</ion-app>
+<ion-menu side="right" type="overlay" [swipeEnabled]="false" [content]="content" class="navigation-menu right-menu">
+	<ion-header>
+		<ion-navbar>
+			<ion-title>
+				<div class="title">
+					{{ menuContent.title }}
+				</div>
+			</ion-title>
+			<div divider nospace=true></div>
+			<ion-buttons end>
+				<button ion-button menuToggle="right" color="dark">
+					<ion-icon name="md-close"></ion-icon>
+				</button>
+			</ion-buttons>
+		</ion-navbar>
+	</ion-header>
+
+	<ion-content>
+		<p *ngIf="menuContent.header">{{ menuContent.header }}</p>
+		<div [innerHTML]="menuContent.content" class="menu-content"></div>
+	</ion-content>
+</ion-menu>
+

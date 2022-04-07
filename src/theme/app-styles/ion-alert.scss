@@ -1,0 +1,30 @@
+ion-alert,
+ion-alert.alert-ios {
+	.alert-title {
+		font-weight: 500;
+	}
+
+	.alert-sub-title {
+		color: $color-text;
+	}
+
+	.alert-button {
+		color: $color-text;
+
+		&:last-child {
+			font-weight: normal;
+		}
+	}
+
+	&.logbook-feedback {
+		p {
+			margin: 0;
+		}
+
+		.divider {
+			margin: 10px 0;
+			height: 1px;
+			background: $color-dark;
+		}
+	}
+}

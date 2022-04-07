@@ -1,0 +1,30 @@
+ion-input {
+	border-bottom: 1px solid $color-primary;
+
+	&[contrast] {
+		padding: 0 12px;
+		border: 1px solid $color-primary;
+		border-radius: 4px;
+		background: rgba($color-background, 0.5);
+	}
+}
+
+ion-input input.text-input-ios,
+[dir='ltr'] ion-input input.text-input-ios {
+	margin: 0;
+	width: 100%;
+	height: 36px;
+	color: $color-text;
+	font-family: $font-primary;
+	font-size: 17px;
+}
+
+ion-item.item-ios.item-label-stacked .text-input,
+[dir='ltr'] ion-item.item-ios.item-label-stacked .text-input {
+	margin: 0 !important;
+	width: 100%;
+	height: 36px;
+	color: $color-primary;
+	font-family: $font-bold;
+	font-size: 15px;
+}

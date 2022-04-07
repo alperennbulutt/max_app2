@@ -1,0 +1,30 @@
+ion-list,
+ion-list.list-ios,
+[dir='ltr'] ion-list.list-ios {
+	margin: 0;
+	border: none;
+}
+
+ion-list .item-block .item-inner,
+ion-list.list-ios .item-block .item-inner,
+[dir='ltr'] ion-list.list-ios .item-block .item-inner {
+	border-bottom: none;
+}
+
+ion-list > .item-block:first-child,
+ion-list.list-ios > .item-block:first-child,
+[dir='ltr'] ion-list.list-ios > .item-block:first-child {
+	border-top: none;
+}
+
+ion-list > .item-block:last-child,
+ion-list.list-ios > .item-block:last-child,
+[dir='ltr'] ion-list.list-ios > .item-block:last-child {
+	border-bottom: none;
+}
+
+ion-list div[item-content],
+ion-list.list-ios div[item-content],
+[dir='ltr'] ion-list.list-ios div[item-content] {
+	width: 100%;
+}

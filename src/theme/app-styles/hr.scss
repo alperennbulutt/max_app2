@@ -1,0 +1,9 @@
+hr {
+	min-height: 3px;
+	background: $color-dark;
+}
+
+ion-content.content-ios hr {
+	margin: 10px 0;
+	background: $color-dark;
+}

@@ -1,0 +1,16 @@
+pagecomponent {
+	h4 {
+		margin-bottom: 0;
+		color: $color-text;
+		font-family: $font-primary;
+		font-size: 20px;
+
+		 + .page-content p {
+			margin-top: 10px;
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+}

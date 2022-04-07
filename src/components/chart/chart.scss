@@ -1,0 +1,340 @@
+$chart-y-axis-width: 24px !default;
+$chart-x-axis-height: 60px !default;
+$chart-top-padding: 12px !default;
+
+@function overlay-color($color) {
+	@if (lightness($color) > 70) {
+		@return $color-primary; // Lighter backgorund, return dark color
+	}
+
+	@else {
+		@return $color-background; // Darker background, return light color
+	}
+}
+
+column-chart {
+	.chart-wrapper {
+		display: flex;
+		flex-direction: column;
+		padding: 4px;
+		width: 100%;
+		height: 100%;
+
+		.chart-title {
+			margin-bottom: 10px;
+			text-align: left;
+		}
+
+		.chart-container {
+			display: flex;
+			height: 0; // Hack for getting bars to have proper height
+			height: 200px; // Safari height workaround
+			flex-grow: 1;
+		}
+
+		.chart-body {
+			width: calc(100% - #{$chart-y-axis-width});
+			height: 100%;
+			flex-shrink: 1;
+		}
+
+		&.chart-wrapper--yAxis-hidden .chart-body {
+			width: 100%;
+		}
+
+		.slide-zoom {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			height: 100%;
+		}
+
+		.chart-y-axis {
+			display: flex;
+			flex-direction: column;
+			margin-top: -14px;
+			width: $chart-y-axis-width;
+			height: calc(100% + 14px);
+			font-size: 14px;
+			justify-content: space-between;
+			align-items: center;
+			flex-shrink: 0;
+
+			&.has-x-axis {
+				padding-bottom: calc(#{$chart-x-axis-height} + 1px);
+			}
+		}
+
+		.chart__y-axis-value {
+			overflow-x: hidden;
+			margin: 0 2%;
+			transform: translateY(50%);
+			flex: 0 0 auto;
+		}
+
+		.chart-x-axis {
+			display: flex;
+			width: 100%;
+			height: $chart-x-axis-height;
+			color: $color-text;
+			justify-content: space-around;
+			align-items: center;
+		}
+
+		.chart__x-axis-value {
+			position: relative;
+			text-align: center;
+
+			&.x-axis-value--selected {
+				&:after {
+					position: absolute;
+					bottom: -8px;
+					left: 0;
+					width: 100%;
+					height: 2px;
+					//background: $color-text;
+					content: '';
+				}
+			}
+
+			&.x-axis-value--disabled {
+				opacity: 0.4;
+			}
+		}
+
+		.x-axis-value__title {
+			font-size: 12px;
+		}
+
+		.x-axis-value__subtitle {
+			font-size: 14px;
+		}
+
+		.chart__content {
+			position: relative;
+			display: flex;
+			height: 0; // Hack for getting bars to have proper height
+			// border-bottom: 1px solid $color-border-light;
+			flex-grow: 1;
+			justify-content: space-around;
+			align-items: flex-end;
+		}
+
+		.chart__page-title {
+			position: absolute;
+			top: 0;
+			font-size: 14px;
+		}
+
+		.chart__bar-wrapper {
+			position: relative;
+			margin: 0 4px;
+			width: 100%;
+			height: 100%;
+			height: 132px; // Safari height workaround
+			border-bottom: 2px solid $color-background;
+			flex: 1 1 auto;
+			align-items: flex-end;
+			justify-content: center;
+
+			&.chart__bar--disabled {
+				opacity: 0.4;
+			}
+		}
+
+		.chart__bar--undefined {
+			.chart__bar-background {
+				display: none;
+			}
+		}
+
+		.chart__bar--value-0 {
+			.chart__bar-background {
+				display: none;
+			}
+		}
+
+		.chart__bar--no-goal {
+			.chart__bar-background {
+				display: none;
+			}
+
+			.chart__bar-goal {
+				display: none;
+			}
+		}
+
+		.chart__bar--goal-0 {
+			.chart__bar-background {
+				display: none;
+			}
+		}
+
+		.chart__bar-goal {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			border: 2px solid $color-background;
+			border-top: none;
+			border-bottom: none;
+			transition: height 0.3s;
+			perspective: 60px;
+
+			.top {
+				position: absolute;
+				top: 0;
+				left: -4px;
+				width: calc(100% + 8px);
+				height: 4px;
+				border: 2px solid transparent;
+				border-top-color: $color-background;
+				border-bottom: none;
+				content: '';
+			}
+		}
+
+		.chart__bar-background {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			background: $color-background;
+			transition: height 0.3s, max-height 0.3s;
+			perspective: 60px;
+		}
+
+		.chart__bar {
+			position: absolute;
+			bottom: 0;
+			left: 1px;
+			display: flex;
+			padding-bottom: 4px;
+			min-height: 1%;
+			width: calc(100% - 2px);
+			border: 1px solid $color-background;
+			border-bottom: none;
+			background: $color-border-light;
+			color: $color-background;
+			transition: height 0.3s;
+			align-items: flex-end;
+			justify-content: center;
+
+			&.chart__bar--shaded {
+				background-image: url(../assets/img/pattern.svg);
+				background-size: 20px;
+				background-repeat: repeat;
+			}
+
+			&.chart__bar--primary-dark {
+				background-color: rgba(map-get($colors, primary), 0.7);
+			}
+
+			&.chart__bar--primary-medium {
+				background-color: rgba(map-get($colors, primary), 0.7);
+			}
+
+			&.chart__bar--primary {
+				background-color: rgba(map-get($colors, primary), 0.7);
+			}
+
+			&.chart__bar--secondary {
+				background-color: rgba(map-get($colors, secondary), 0.7);
+			}
+
+			&.chart__bar--light {
+				background-color: rgba(map-get($colors, light), 0.7);
+			}
+
+			&.chart__bar--white {
+				background-color: rgba(map-get($colors, white), 0.7);
+			}
+
+			&.chart__bar--neutral {
+				background-color: $color-blue;
+			}
+		}
+
+		.chart__bar--undefined .chart__bar {
+			border: none;
+			background-color: transparent;
+		}
+
+		.chart__bar-value {
+			color: $color-text;
+			text-align: center;
+
+			// text-shadow: 0 1px rgba($color-black, 0.3);
+
+			ion-icon {
+				font-size: 15px;
+			}
+		}
+	}
+
+	.highest-value-under-5 {
+		.goal-height1 {
+			max-height: 14px !important;
+		}
+
+		.goal-height2 {
+			max-height: 36px !important;
+		}
+
+		.goal-height3 {
+			max-height: 48px !important;
+		}
+
+		.goal-height4 {
+			max-height: 60px !important;
+		}
+
+		.goal-height5 {
+			max-height: 72px !important;
+		}
+
+		.value-1 {
+			.chart__bar,
+			.chart__bar-background {
+				max-height: 14px !important;
+			}
+		}
+
+		.value-2 {
+			.chart__bar,
+			.chart__bar-background {
+				max-height: 36px !important;
+			}
+		}
+
+		.value-3 {
+			.chart__bar,
+			.chart__bar-background {
+				max-height: 48px !important;
+			}
+		}
+
+		.value-4 {
+			.chart__bar,
+			.chart__bar-background {
+				max-height: 60px !important;
+			}
+		}
+
+		.value-5 {
+			.chart__bar,
+			.chart__bar-background {
+				max-height: 72px !important;
+			}
+		}
+	}
+
+	&.view-day .x-axis-value__title {
+		margin-top: 10px;
+		margin-bottom: -3px;
+	}
+
+	&.view-day .x-axis-value__subtitle {
+		width: 28px;
+	}
+}

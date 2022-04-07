@@ -1,0 +1,28 @@
+star-rating {
+	display: flex;
+
+	.star-button {
+		margin-right: 7px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+
+		svg {
+			display: block;
+			padding: 1px;
+		}
+
+		svg path {
+			fill: transparent;
+			stroke: $color-text;
+			stroke-width: 15px;
+		}
+
+		&.is-active svg path {
+			fill: #38d55f;
+			stroke: none;
+			stroke-width: 0;
+		}
+	}
+}

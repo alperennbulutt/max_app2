@@ -1,0 +1,85 @@
+$footer-double-button-padding: 24px;
+$footer-double-button-height: 56px;
+$footer-double-button-button-difference: 16px;
+$footer-double-button-right-button-width: 50%;
+$footer-double-button-icon-offset: 16px;
+
+ion-footer.footer-double-button {
+	height: calc(#{$footer-double-button-height} + (#{$footer-double-button-padding} * 2));
+
+	.dual-buttons {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+
+	.dual-buttons__button {
+		position: relative;
+		margin: 0;
+		box-shadow: 0 1px 3px 0 rgba($color-black, 0.3);
+		font-family: $font-primary;
+	}
+
+	.footer-button--left {
+		margin-top: calc(#{$footer-double-button-button-difference} / 2) !important;
+		padding: 0;
+		width: 100%;
+		height: calc(#{$footer-double-button-height} - #{$footer-double-button-button-difference});
+		color: $color-button-inset;
+
+		.button-inner {
+			width: calc(100% - #{$footer-double-button-right-button-width} - (#{$footer-double-button-padding} + 15px));
+			font-family: $font-primary;
+		}
+
+		ion-icon {
+			position: absolute;
+			top: 0;
+			left: $footer-double-button-icon-offset;
+			display: flex;
+			margin-left: 0 !important;
+			height: 100%;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+
+	.footer-button--right {
+		position: absolute;
+		top: 0;
+		right: $footer-double-button-button-difference;
+		width: $footer-double-button-right-button-width;
+		height: 100%;
+		color: $color-button-inset;
+
+		.button-inner {
+			font-family: $font-bold;
+		}
+
+		ion-icon {
+			position: absolute;
+			right: $footer-double-button-icon-offset;
+		}
+	}
+}
+
+.button-container {
+	display: flex;
+	justify-content: center;
+
+	button {
+		min-width: 48%;
+		flex-grow: 1;
+
+		 + button {
+			margin-left: 12px;
+		}
+
+		&.small {
+			min-width: 80px;
+			max-width: 30%;
+			flex-grow: 0;
+			flex-shrink: 1;
+		}
+	}
+}

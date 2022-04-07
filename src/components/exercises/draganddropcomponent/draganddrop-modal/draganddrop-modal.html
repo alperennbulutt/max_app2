@@ -1,0 +1,41 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>{{ title }}</ion-title>
+		<ion-buttons end>
+			<button ion-button (click)="close()"><ion-icon name="lnr-close"></ion-icon></button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="gradient-background gradient-background--has-footer" [class.dnd-disable-scroll]="isDragging">
+	<div class="gradient-background__header">Sleep de items naar de juiste colom</div>
+
+	<div class="gradient-background__content">
+		<div class='wrapper'>
+			<div class="row">
+				<div class="dnd-container dnd-container-header">Ongeselecteerd</div>
+				<div class="dnd-container dnd-container-header">Geselecteerd</div>
+			</div>
+			<div class="row">
+				<div class='dnd-container' [dragula]="draganddropcomponent" [dragulaModel]="_visibleValues.left">
+					<div class="dnd-elem" *ngFor="let item of _visibleValues.left">
+						{{item.label}}
+						<ion-icon name="menu"></ion-icon>
+					</div>
+				</div>
+				<div class='dnd-container' [dragula]="draganddropcomponent" [dragulaModel]="_visibleValues.right">
+					<div class="dnd-elem" *ngFor="let item of _visibleValues.right">
+						{{item.label}}
+						<ion-icon name="menu"></ion-icon>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ion-content>
+
+<ion-footer class="invisible-footer">
+	<div class="footer__button-wrapper">
+		<button ion-button inset color="white" (click)="done()">Klaar</button>
+	</div>
+</ion-footer>

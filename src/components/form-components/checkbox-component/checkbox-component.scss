@@ -1,0 +1,36 @@
+checkbox-component {
+	.item-ios {
+		padding: 4px 0;
+		border-bottom: 1px solid #d9d2c7;
+		align-items: center;
+
+		&.item-checkbox-checked {
+			background: rgba(217, 210, 199, 0.3);
+		}
+
+		&.item-block .item-inner {
+			border-bottom: none;
+
+			.label-ios {
+				margin: 0;
+			}
+		}
+	}
+
+	.checkbox-ios .checkbox-icon {
+		margin-left: 10px;
+		border: 2px solid #d9d2c7;
+		border-radius: 2px;
+	}
+
+	.checkbox-ios .checkbox-checked {
+		border-color: #414040;
+		background-color: #414040;
+	}
+
+	textarea-component {
+		display: block;
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+}

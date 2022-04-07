@@ -1,0 +1,38 @@
+<ng-container *ngFor="let section of sections">
+
+	<div class="questionnaire__label">
+		{{currentQuestion?.title}}
+		<div divider *ngIf="currentQuestion?.type !== 'display'"></div>
+	</div>
+
+	<ng-container *ngIf="currentQuestion?.type">
+		<div [ngSwitch]="currentQuestion.type">
+			<ng-template [ngSwitchCase]="'memo'">
+				<textarea-component [(textareaValue)]="currentAnswer" (textareaValueChange)="updateAnswer($event)"></textarea-component>
+			</ng-template>
+
+			<ng-template [ngSwitchCase]="'number'">
+				<div>
+					<p *ngIf="currentQuestion.text" [innerHTML]="currentQuestion.text"></p>
+					<ion-input type="number" [(ngModel)]="currentAnswer" (ionChange)="updateAnswer($event)" [placeholder]="currentQuestion.note"></ion-input>
+				</div>
+			</ng-template>
+
+			<ng-template [ngSwitchCase]="'display'">
+				<div class="survey__intro">
+					<p [innerHTML]="currentQuestion.text"></p>
+				</div>
+			</ng-template>
+
+			<ng-template [ngSwitchCase]="'radio'">
+				<radio-component [items]="currentAnswer" (onChange)="updateAnswer($event)"></radio-component>
+			</ng-template>
+
+			<ng-template [ngSwitchCase]="'checkbox'">
+				{{currentAnswertextfield}}
+				<checkbox-component [items]="currentAnswer" (onChange)="updateAnswer($event)" outputAll=true [showExplanationField]="showCustom" [(explanationField)]="currentAnswer.textfield"></checkbox-component>
+			</ng-template>
+		</div>
+		<ng-content select=".survey-nav"></ng-content>
+	</ng-container>
+</ng-container>

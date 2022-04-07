@@ -1,0 +1,77 @@
+page-drag-and-drop-modal {
+	ion-content {
+		.gradient-background__content {
+			position: relative;
+		}
+
+		.wrapper {
+			display: table;
+			width: 100%;
+
+			.row {
+				display: table-row;
+
+				.dnd-container {
+					display: table-cell;
+					padding: 12px 0;
+					width: calc(50%);
+
+					&.dnd-container-header {
+						padding-bottom: 12px;
+						text-align: center;
+						font-weight: bold;
+					}
+
+					&:first-child() {
+						border-right: 1px solid $color-border;
+					}
+
+					.dnd-elem {
+						margin: 5px 3px;
+						padding: 8px;
+						border: 1px solid $color-border;
+						border-radius: 3px;
+						font-family: $font-primary;
+						font-size: 16px;
+						transition: all 0.3s;
+
+						ion-icon {
+							float: right;
+							color: $color-text;
+						}
+
+						&.gu-transit {
+							background: $color-white;
+							opacity: 0.5;
+						}
+					}
+
+					&.ex-over {
+						background: rgba(255, 255, 255, 0.4);
+					}
+				}
+			}
+		}
+	}
+
+	ion-footer {
+	}
+}
+
+.dnd-disable-scroll,
+.dnd-disable-scroll * {
+	overflow: hidden !important;
+}
+
+.gu-mirror {
+	position: absolute;
+	margin: 5px 3px;
+	padding: 12px;
+	border: 1px solid $color-border;
+	border-radius: 3px;
+	background: $color-white;
+	font-family: $font-primary;
+	font-size: 14px;
+	opacity: 0.5;
+	pointer-events: none;
+}

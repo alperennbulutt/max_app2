@@ -1,0 +1,40 @@
+$ion-footer-padding: 24px;
+$ion-footer-height: 40px;
+
+ion-footer {
+	z-index: 20 !important;
+	display: flex;
+	height: calc(#{$ion-footer-height} + (#{$ion-footer-padding} * 2));
+}
+
+.footer__button-wrapper {
+	position: relative;
+	padding: $ion-footer-padding;
+	width: 100%;
+	height: 100%;
+}
+
+ion-footer:not(.footer-double-button).invisible-footer {
+	text-align: right;
+	pointer-events: none;
+
+	button,
+	button.button-ios {
+		margin: 0;
+		height: 100%;
+		pointer-events: auto;
+
+		&.button-left {
+			float: left;
+		}
+
+		.button-inner {
+			color: $color-primary;
+			font-family: $font-bold;
+		}
+
+		ion-icon {
+			margin-left: 12px;
+		}
+	}
+}

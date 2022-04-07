@@ -1,0 +1,100 @@
+<div class="chart-wrapper" [class.chart-wrapper--yAxis-hidden]="chartData.yAxis?.visible === false">
+    <div class="chart-title" *ngIf="chartData.title" [innerHTML]="chartData.title"></div>
+    <div class="chart-container">
+        <div
+            class="chart-y-axis"
+            [class.has-x-axis]="chartData.xAxis?.visible !== false"
+            *ngIf="chartData.yAxis?.visible !== false"
+        >
+            <div class="chart__y-axis-value" *ngFor="let value of yAxisValues">
+                <div>{{ value }}</div>
+            </div>
+        </div>
+        <div class="chart-body">
+            <ion-slides
+                [spaceBetween]="20"
+                [initialSlide]="chartData.initialPage || 0"
+                #ionSlider
+                (ionSlideDidChange)="onSlideDidChange($event)"
+            >
+                <ion-slide *ngFor="let chart of chartData.data">
+                    <div
+                        class="chart__content"
+                        [ngClass]="'hightest-value-' + highestValue"
+                        [class.highest-value-under-5]="highestValue <= 5"
+                    >
+                        <div class="chart__page-title" *ngIf="chart.pageTitle">
+                            {{ chart.pageTitle }}
+                        </div>
+                        <div
+                            class="chart__bar-wrapper value-{{ column.value }}"
+                            [class.chart__bar--disabled]="column.disabled && column.value === undefined"
+                            [class.chart__bar--undefined]="column.value === undefined"
+                            [class.chart__bar--value-0]="column.value === 0"
+                            [class.chart__bar--no-goal]="column.goal === undefined"
+                            [class.chart__bar--goal-0]="column.goal === 0"
+                            *ngFor="let column of chart.data; let index = index"
+                            (click)="onBarClick(column, index)"
+                        >
+                            <div
+                                class="chart__bar-goal"
+                                [ngClass]="'goal-height' + column.goal"
+                                [ngStyle]="{ 'height': ((100 / highestValue) * column.goal) + '%' }"
+                                *ngIf="column.value !== undefined || !column.disabled"
+                            >
+                                <div class="top" *ngIf="column.goal !== -1"></div>
+                            </div>
+                            <div
+                                class="chart__bar-background chart__bar--{{ column.color }}"
+                                [ngStyle]="{
+									'height': 'calc(' + ((100 / highestValue) * column.value) + '% - 2px)',
+									'max-height': ((100 / highestValue) * column.goal) + '%'
+								}"
+                                *ngIf="column.goal"
+                            ></div>
+                            <div
+                                class="chart__bar chart__bar--{{ column.color }}"
+                                [class.chart__bar--shaded]="column.shaded"
+                                [ngStyle]="{
+									'height': 'calc(' + ((100 / highestValue) * column.value) + '% - 2px)',
+									'background-color': column.color
+								}"
+                            >
+                                <div class="chart__bar-value">
+                                    <ion-icon
+                                        name="lnr-thumbsup-detail"
+                                        *ngIf="_chartData.showThumbs && (column.value <= column.goal || column.value === 0)"
+                                    ></ion-icon>
+                                    {{ column.value !== undefined ? column.value : '?' }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-x-axis" *ngIf="chartData.xAxis?.visible !== false">
+                        <div
+                            class="chart__x-axis-value"
+                            [class.x-axis-value--disabled]="column.disabled"
+                            [class.x-axis-value--selected]="selectedBar === barIndex"
+                            *ngFor="let column of chart.data; let barIndex = index"
+                        >
+                            <div
+                                class="x-axis-value__title"
+                                [ngStyle]="{ 'font-size': chartData?.xAxis?.titleSize + 'px' }"
+                                *ngIf="column.title"
+                            >
+                                {{ column.title }}
+                            </div>
+                            <div
+                                class="x-axis-value__subtitle"
+                                [ngStyle]="{ 'font-size': chartData?.xAxis?.subtitleSize + 'px' }"
+                                *ngIf="column.subtitle"
+                            >
+                                {{ column.subtitle }}
+                            </div>
+                        </div>
+                    </div>
+                </ion-slide>
+            </ion-slides>
+        </div>
+    </div>
+</div>

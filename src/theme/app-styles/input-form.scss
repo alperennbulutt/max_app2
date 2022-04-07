@@ -1,0 +1,63 @@
+.input-form {
+	padding: 0 20px;
+
+	.text-input {
+		color: $color-text;
+		font-size: 16px;
+
+		&::-webkit-input-placeholder {
+			margin-left: 10px;
+			color: $color-text;
+			font-family: $font-primary;
+			font-size: 14px;
+		}
+	}
+
+	ion-label,
+	ion-label[stacked] {
+		color: $color-text;
+		font-size: 13px;
+	}
+
+	ion-label[stacked] {
+		position: relative;
+		white-space: normal;
+	}
+}
+
+.input-form__input-info {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 999;
+	padding: 20px;
+}
+
+.input-form__item-terms {
+	margin-top: 15px;
+
+	a {
+		position: relative;
+		z-index: 999;
+		display: inline-block;
+		border-color: $color-primary;
+		color: $color-primary;
+		text-decoration: underline;
+	}
+}
+
+.input-form__submit,
+.button-ios.input-form__submit,
+[dir='ltr'] .button-ios.input-form__submit {
+	margin: 12px 0 0;
+	height: 38px;
+}
+
+.input-form__sublink[inline],
+[dir='ltr'] .input-form__sublink[inline] {
+	margin: 0 0 8px;
+	padding: 18px 0 0;
+	border: none;
+	color: $color-primary;
+	font-size: 15px;
+}

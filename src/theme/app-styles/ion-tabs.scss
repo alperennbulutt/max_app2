@@ -1,0 +1,18 @@
+ion-tabs,
+ion-tabs.tabs-ios {
+	.tabbar {
+		display: flex;
+		border-top: 1px solid $color-border-light;
+		justify-content: space-around;
+
+		.tab-button {
+			max-width: 64px;
+			height: 60px;
+
+			ion-icon {
+				margin-bottom: 0;
+				font-size: 24px;
+			}
+		}
+	}
+}

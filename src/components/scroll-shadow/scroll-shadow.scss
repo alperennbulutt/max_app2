@@ -1,0 +1,34 @@
+$scroll-shadow-color: $color-border-light !default;
+$scroll-shadow-color-dark: rgba(0, 0, 0, 0.1) !default;
+$scroll-shadow-color-light: rgba(255, 255, 255, 0) !default;
+
+[scroll-shadow],
+[scroll-shadow] .scroll-content {
+	/* Scroll Shadow implementation :D */
+	border-radius: 1px;
+	background:
+		/* Shadow covers */
+		linear-gradient(white 30%, $scroll-shadow-color-light),
+		linear-gradient($scroll-shadow-color-light, white 70%) 0 100%,
+		/* Shadows */
+		linear-gradient($scroll-shadow-color 0%, $scroll-shadow-color-light 50%),
+		linear-gradient($scroll-shadow-color-light 50%, $scroll-shadow-color 100%) 0 100%;
+	background:
+		/* Shadow covers */
+		linear-gradient(white 30%, $scroll-shadow-color-light),
+		linear-gradient($scroll-shadow-color-light, white 70%) 0 100%,
+		/* Shadows */
+		linear-gradient($scroll-shadow-color 0%, $scroll-shadow-color-light 50%),
+		linear-gradient($scroll-shadow-color-light 50%, $scroll-shadow-color 100%) 0 100%;
+	background-repeat: no-repeat;
+	background-color: white;
+	background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+	/* Opera doesn't support this in the shorthand */
+	background-attachment: local, local, scroll, scroll;
+}
+
+[scroll-shadow].scroll_shadow--forced,
+[scroll-shadow].scroll_shadow--forced .scroll-content {
+	box-shadow: inset  0  6px 6px -6px $scroll-shadow-color,
+				inset  0 -6px 6px -6px $scroll-shadow-color;
+}

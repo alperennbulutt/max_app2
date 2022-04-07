@@ -1,0 +1,36 @@
+$toolbar-ios-height: 48px;
+
+.platform-mobileweb,
+.platform-android {
+	// ion-header {
+	// 	padding-top: 13px;
+	// }
+}
+
+ion-navbar.toolbar-ios {
+	padding: 12px;
+	padding-top: 0;
+	padding-bottom: 0;
+
+	.toolbar-background {
+		border: none;
+		background: $color-background;
+	}
+
+	.toolbar-title {
+		white-space: normal;
+	}
+}
+
+ion-navbar.toolbar-ios ion-title,
+[dir='ltr'] ion-navbar.toolbar-ios ion-title {
+	padding-right: 50px;
+	padding-left: 50px;
+
+	.toolbar-title {
+		color: $color-text;
+		font-family: $font-primary;
+		font-size: 18px;
+		font-weight: normal;
+	}
+}

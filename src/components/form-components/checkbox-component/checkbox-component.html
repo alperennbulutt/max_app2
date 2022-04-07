@@ -1,0 +1,8 @@
+<ion-item *ngFor="let item of items; let index = index">
+	<ion-label>{{item[model.label]}}</ion-label>
+	<ion-checkbox (ionChange)="valueChanged($event, index)" [checked]="item.checked"></ion-checkbox>
+</ion-item>
+
+<input-component *ngIf="custom" (onAddCustom)="addCustom($event)" [placeholder]="placeholder"></input-component>
+
+<textarea-component *ngIf="showExplanationField" [(textareaValue)]="explanationField" (textareaValueChange)="explanationFieldChanged()"></textarea-component>

@@ -1,0 +1,18 @@
+<div class="radiocomponent">
+	<div radio-group [ngModel]="_storageData.selected">
+		<div class="radio-button-wrapper" *ngFor="let item of exercise.options; let index = index" [class.is-checked]="_storageData.selected === index">
+			<ion-radio value="{{ index }}" (click)="onSelectChange(index)" [class.right]="item.result === 1" [class.wrong]="item.result === 0"></ion-radio>
+			<div class="label-content">
+				<a *ngIf="!item.custom" (click)="onSelectChange(index)" [innerHTML]="item.label"></a>
+				<ion-input [disabled]="!canEdit" *ngIf="item.custom" [(ngModel)]="_storageData.customInputs[index]"></ion-input>
+				<button class="remove" ion-button round *ngIf="canEdit && item.custom" (click)="removeCustomInput(index)"><ion-icon name="close"></ion-icon></button>
+				<div class="feedback-button" *ngIf="item.feedback && _storageData.selected === index">
+					<button ion-button inline (click)="showFeedbackAlert(index)">Lees waarom</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button ion-button inset class="btn-add-custom" *ngIf="canEdit && addCustomAllowed()" (click)="addInputValue()">
+		<ion-icon name="add"></ion-icon>
+	</button>
+</div>

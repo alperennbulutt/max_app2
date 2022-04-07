@@ -1,0 +1,94 @@
+.checkboxcomponent {
+	margin-top: 24px;
+
+	a {
+		color: $color-primary;
+	}
+
+	.checkbox-wrapper {
+		position: relative;
+		margin-bottom: 12px;
+		padding-left: 35px;
+	}
+
+	ion-checkbox {
+		position: absolute;
+		top: 4px;
+		left: 0;
+
+		.checkbox-icon {
+			width: 23px;
+			height: 23px;
+			border: 1px solid $color-border;
+			border-radius: 3px;
+			background: $color-white;
+		}
+
+		.checkbox-checked {
+			border-color: $color-cta;
+			background-color: $color-cta;
+
+			.checkbox-inner {
+				top: 4px;
+				left: 7px;
+				z-index: 1;
+				margin-left: 1px;
+				width: 5px;
+				height: 11px;
+				border-width: 0 2px 2px 0;
+				border-color: $color-white;
+			}
+		}
+	}
+
+	p,
+	a {
+		display: inline-block;
+		font-size: 15px;
+	}
+
+	ion-input {
+		display: inline-block;
+		margin: 11px 0;
+		width: auto;
+		border: 1px solid $color-border;
+	}
+
+	.remove {
+		margin: 0;
+		padding: 0;
+		width: 16px;
+		height: 16px;
+		vertical-align: middle;
+	}
+
+	.btn-add-custom {
+		display: inline-block;
+		margin: 0;
+		margin-left: 16px;
+		padding: 12px;
+		height: 36px;
+		background: $color-cta;
+		flex-shrink: 0;
+
+		ion-icon {
+			font-size: 24px;
+
+			&:before {
+				font-weight: bold;
+			}
+		}
+	}
+
+	.actions {
+		display: flex;
+		margin-top: 16px;
+
+		input {
+			min-height: 0;
+			height: 36px;
+			font-size: 14px;
+			line-height: 36px;
+		}
+	}
+}

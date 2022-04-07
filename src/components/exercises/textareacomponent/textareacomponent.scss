@@ -1,0 +1,100 @@
+.textareacomponent {
+	div {
+		position: relative;
+
+		&.custom {
+			margin: 20px 0;
+			padding: 10px;
+			border: 1px dashed $color-primary;
+			border-radius: 5px;
+
+			p.label {
+				margin-bottom: 5px !important;
+
+				&.title {
+					margin-top: 0;
+				}
+			}
+
+			ion-input.title {
+				margin: 0;
+			}
+
+			.remove {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				margin: 0;
+				padding: 0;
+				width: 24px;
+				height: 24px;
+				vertical-align: middle;
+
+				ion-icon {
+					&:before {
+						font-weight: bold;
+					}
+				}
+			}
+		}
+
+		p {
+			margin-bottom: 6px !important;
+		}
+
+		ion-textarea {
+			textarea {
+				min-height: 100px;
+				border: 1px solid #efefef;
+			}
+		}
+
+		textarea {
+			padding: 8px;
+			min-height: 100px;
+			width: 100%;
+			border: 1px solid #631f0e;
+			border-radius: 4px;
+			background: rgba(255, 255, 255, 0.5);
+			resize: none;
+			-webkit-appearance: none;
+		}
+
+		ion-input {
+			display: inline-block;
+			margin: 18px 0 10px;
+			width: 50%;
+			border: 1px solid #efefef;
+			border-color: $color-primary;
+			border-radius: 4px;
+			background: rgba($color-background, 0.5);
+
+			input {
+				padding: 0 8px;
+			}
+		}
+
+		.remove {
+			margin: 0;
+			padding: 0;
+			width: 24px;
+			height: 24px;
+			vertical-align: middle;
+		}
+	}
+
+	.btn-add-custom {
+		margin: 15px 0;
+		padding: 12px;
+		height: 36px;
+		background: $color-cta;
+
+		ion-icon {
+			font-size: 24px;
+
+			&:before {
+				font-weight: bold;
+			}
+		}
+	}
+}

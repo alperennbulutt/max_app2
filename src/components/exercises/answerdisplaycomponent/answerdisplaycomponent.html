@@ -1,0 +1,39 @@
+<div class="answerdisplaycomponent">
+	<p>Hier zijn uw eerdere antwoorden uit...</p>
+	<h3>{{_answers.lesson_title}}</h3>
+	<div [ngSwitch]="_answers.component">
+		<!-- Radio buttons -->
+		<div *ngSwitchCase="'RadioComponent'" class="exercise-wrapper">
+			<radiocomponent [canEdit]="false" [exercise]="_answers.questiondef" [(data)]="_answers.answers"></radiocomponent>
+		</div>
+		<!-- Mutiple checkboxes -->
+		<div *ngSwitchCase="'CheckboxComponent'" class="exercise-wrapper">
+			<checkboxcomponent [canEdit]="false" [exercise]="_answers.questiondef" [(data)]="_answers.answers"></checkboxcomponent>
+		</div>
+		<!-- Multiple textareas -->
+		<div *ngSwitchCase="'TextareaComponent'" class="exercise-wrapper">
+			<textareacomponent [canEdit]="false" [exercise]="_answers.questiondef" [(data)]="_answers.answers"></textareacomponent>
+		</div>
+		<!-- Multple inputs -->
+		<div *ngSwitchCase="'TextfieldComponent'" class="exercise-wrapper">
+			<textfieldcomponent [canEdit]="false" [exercise]="_answers.questiondef" [(data)]="_answers.answers"></textfieldcomponent>
+		</div>
+		<!--  -->
+		<!-- <div *ngSwitchCase="'DragAndDropComponent'" [innerHTML]="pageblock.content"></div> -->
+		<!-- Word grid -->
+		<div *ngSwitchCase="'WordgridComponent'" class="exercise-wrapper">
+			<wordgridcomponent [canEdit]="false" [exercise]="_answers.questiondef" [(data)]="_answers.answers"></wordgridcomponent>
+		</div>
+		<!-- Multiple sliders -->
+		<div *ngSwitchCase="'SliderComponent'" class="exercise-wrapper">
+			<slidercomponent [canEdit]="false" [exercise]="_answers.questiondef" [(data)]="_answers.answers"></slidercomponent>
+		</div>
+		<!-- Question list -->
+		<div *ngSwitchCase="'TestComponent'" class="exercise-wrapper">
+			<questionnairecomponent [canEdit]="false" [exercise]="pageblock.questiondef" [(data)]="_answers.answers"></questionnairecomponent>
+		</div>
+		<!--  -->
+		<!-- <div *ngSwitchCase="'FeedbackComponent'" [innerHTML]="pageblock.content"></div> -->
+		<div class="exercise-wrapper" *ngSwitchDefault>ONGEDEFINIEERD OEFENING TYPE: {{_answers.component}}</div>
+	</div>
+</div>

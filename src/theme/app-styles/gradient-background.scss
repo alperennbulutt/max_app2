@@ -1,0 +1,201 @@
+.gradient-background {
+	padding: 24px;
+	background: linear-gradient(to top, $color-secondary 0%, $color-primary 70%);
+
+	&:after {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: url(../assets/img/watermark.png);
+		content: '';
+	}
+
+	.scroll-content {
+		padding: 24px;
+	}
+
+	&.gradient-background--small-padding {
+		padding: 12px;
+
+		.scroll-content {
+			padding: 12px;
+		}
+	}
+
+	&.gradient-background--has-footer {
+		.scroll-content {
+			margin-bottom: 0 !important;
+			padding-bottom: 70px !important;
+		}
+	}
+
+	&.gradient-background--has-big-footer {
+		.scroll-content {
+			margin-bottom: 0 !important;
+			padding-bottom: 104px !important;
+		}
+	}
+}
+
+.gradient-background__header {
+	margin: 0 0 24px;
+	color: $color-background;
+	font-family: $font-bold;
+	font-size: 18px;
+
+	ion-menu & {
+		margin: 12px 0 24px;
+	}
+}
+
+.gradient-background__header p:first-child {
+	margin-top: 0;
+}
+
+.gradient-background__header-description {
+	font-size: 15px;
+}
+
+.gradient-background__content {
+	position: relative;
+	margin: 12px 0;
+	padding: 12px;
+	border-radius: 4px;
+	background: $color-overlay-light;
+	color: $color-text;
+	transition: background 0.3s, color 0.3s;
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&.gradient-background__content--small-margin {
+		margin: 4px 0;
+	}
+
+	&.gradient-background__content--selected {
+		background: $color-primary;
+		color: $color-background;
+	}
+
+	&.gradient-background__content--clickable {
+		padding-right: 32px;
+
+		&:after {
+			position: absolute;
+			top: 50%;
+			right: 12px;
+			content: '\e93c';
+			font-family: 'Linearicons';
+			font-weight: bold;
+			transform: translateY(-50%);
+		}
+	}
+}
+
+.gradient-background__header + .gradient-background__content {
+	margin-top: 0;
+}
+
+.gradient-background__content ul,
+.gradient-background__content ol {
+	padding-left: 24px;
+}
+
+.gradient-background__content p {
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&[text-block] {
+		line-height: 1.5;
+	}
+}
+
+.gradient-background__content--select {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	padding-left: 48px;
+	transition: opacity 0.3s;
+	align-items: center;
+
+	&.disabled {
+		opacity: 0.5;
+	}
+
+	p {
+		margin: 0;
+	}
+}
+
+.gradient-background__content--select ion-checkbox {
+	position: absolute;
+	top: 48%;
+	left: 16px;
+	font-size: 30px;
+	transform: translateY(-50%);
+	pointer-events: none;
+
+	& .checkbox-checked {
+		background: transparent;
+	}
+}
+
+.gradient-background__content--select.select--checkbox ion-checkbox .checkbox-icon {
+	border-radius: 3px;
+}
+
+.gradient-background__content-title {
+	display: block;
+	margin-bottom: 12px;
+	font-size: 17px;
+
+	&.gradient-background__content-title--center {
+		text-align: center;
+	}
+}
+
+.gradient-background__content button[inline],
+[dir='ltr'] .gradient-background__content button[inline] {
+	border-bottom-color: $color-primary;
+	color: $color-primary;
+}
+
+.gradient-background__buttons {
+	margin: 24px 0 0;
+	height: 40px;
+	text-align: right;
+
+	button,
+	button.button-ios {
+		margin: 0;
+		height: 100%;
+
+		&.button--left {
+			float: left;
+
+			ion-icon {
+				margin-right: 12px;
+				margin-left: 0;
+			}
+		}
+
+		.button-inner {
+			color: $color-primary;
+			font-family: $font-bold;
+		}
+
+		ion-icon {
+			margin-left: 12px;
+		}
+	}
+}
+
+.end-of-page {
+	margin: 24px;
+}

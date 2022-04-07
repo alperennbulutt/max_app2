@@ -1,0 +1,10 @@
+<div class="form-element">
+	<ion-list radio-group [(ngModel)]="radioValue">
+		<ion-item *ngFor="let item of items">
+			<ion-radio [value]="item.value" (ionSelect)="valueChanged()" [checked]="item.selected"></ion-radio>
+			<ion-label>{{item.label}}</ion-label>
+		</ion-item>
+	</ion-list>
+
+	<textarea-component *ngIf="showCustom" [(textareaValue)]="_textareaValue" ></textarea-component>
+</div>

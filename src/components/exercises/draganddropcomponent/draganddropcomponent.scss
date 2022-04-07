@@ -1,0 +1,61 @@
+.draganddropcomponent {
+	.wrapper {
+		display: table;
+		width: 100%;
+
+		.row {
+			display: table-row;
+
+			.dnd-container {
+				display: table-cell;
+				padding: 0;
+				width: calc(50%);
+
+				&.dnd-container-header {
+					padding-bottom: 12px;
+					text-align: center;
+					font-weight: bold;
+				}
+
+				&:first-child() {
+					border-right: 1px solid $color-border;
+				}
+
+				.dnd-elem {
+					margin: 5px 3px;
+					padding: 4px 8px;
+					border: 1px solid $color-border;
+					border-radius: 3px;
+					font-family: $font-primary;
+					font-size: 16px;
+					transition: all 0.3s;
+
+					&.right {
+						background: rgba($color-success, 0.4);
+					}
+
+					&.wrong {
+						background: rgba($color-error, 0.4);
+					}
+
+					&.gu-transit {
+						background: $color-white;
+						opacity: 0.5;
+					}
+
+					.item-feedback {
+						font-size: 13px;
+					}
+				}
+
+				&.ex-over {
+					background: rgba(255, 255, 255, 0.4);
+				}
+			}
+		}
+	}
+
+	button {
+		height: 36px;
+	}
+}

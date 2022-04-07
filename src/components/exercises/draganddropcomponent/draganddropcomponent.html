@@ -1,0 +1,24 @@
+<div class="draganddropcomponent" #dnd>
+	<div class='wrapper'>
+		<div class="row">
+			<div class="dnd-container dnd-container-header">Ongeselecteerd</div>
+			<div class="dnd-container dnd-container-header">Geselecteerd</div>
+		</div>
+		<div class="row">
+			<div class='dnd-container'>
+				<div class="dnd-elem" [class.right]="isDirty && item.result === 0" [class.wrong]="isDirty && item.result !== 0" *ngFor="let item of _visibleValues.left">
+					{{item.label}}
+					<div class="item-feedback" *ngIf="isDirty">{{item.feedback}}</div>
+				</div>
+			</div>
+			<div class='dnd-container'>
+				<div class="dnd-elem" [class.right]="isDirty && item.result === 1" [class.wrong]="isDirty && item.result !== 1" *ngFor="let item of _visibleValues.right">
+					{{item.label}}
+					<div class="item-feedback" *ngIf="isDirty">{{item.feedback}}</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<button ion-button *ngIf="canEdit" (click)="openModal()">Bewerk</button>
+</div>

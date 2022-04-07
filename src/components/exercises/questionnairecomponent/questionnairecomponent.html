@@ -1,0 +1,19 @@
+<div class="questionnaire__container">
+	<div class="questionnaire__question" *ngFor="let choice of exerciseChoices; let questionNumber = index">
+		<div class="questionnaire__label">
+			{{choice.label}}
+		</div>
+		<div class="questionnaire__anwser">
+			<button class="questionnaire__button" *ngFor="let answer of choice.options; let index = index" [class.is-active]="index == storageData[questionNumber]" (click)="answerChosen(questionNumber, answer.valid)">
+				{{answer.option}}
+			</button>
+		</div>
+	</div>
+	<button class="questionnaire__button questionnaire__button--result" [disabled]=!answeredAllQuestions (click)="showResult()">
+		Bereken je uitslag
+	</button>
+	<div class="questionnaire__result" *ngIf="result">
+		<h4>Jouw uitslag</h4>
+		<p>{{result}}</p>
+	</div>
+</div>
