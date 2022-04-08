@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
-import { File, IWriteOptions } from '@ionic-native/file';
-import { Platform, normalizeURL } from '@ionic/angular';
+import { File, IWriteOptions } from '@ionic-native/file/ngx';
+import { Platform } from '@ionic/angular';
 
 @Injectable()
 export class FileProvider {

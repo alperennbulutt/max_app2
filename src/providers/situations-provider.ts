@@ -13,9 +13,9 @@ export class SituationsProvider {
     private cacheRequest: CacheRequest
   ) {}
 
-  public getSituations(hideLoader?: boolean): Observable<any> {
-    let method: string = 'maxx.getSituations';
-    return this.apiGateway.get(
+  public async getSituations(hideLoader?: boolean): Promise<Observable<any>> {
+    const method = 'maxx.getSituations';
+    return await this.apiGateway.get(
       this.settings.apiEndpoint + method,
       {},
       hideLoader
@@ -24,7 +24,7 @@ export class SituationsProvider {
 
   public fetch(hideLoader?: boolean): Promise<any[]> {
     hideLoader = hideLoader || true;
-    let method: string = 'maxx.getSituations';
+    const method = 'maxx.getSituations';
     return this.cacheRequest.fetch(
       this.settings.apiEndpoint,
       method,

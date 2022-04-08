@@ -1,11 +1,8 @@
-/*****************************
- * Requires:                 *
- * - `@ionic/background-mode` module *
- * - `@ionic/media` module *
- *****************************/
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/member-ordering */
 
 import { Injectable } from '@angular/core';
-import { Media, MediaObject } from '@ionic-native/media';
+import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { Settings } from './utilities/app-settings';
 import { Subject } from 'rxjs';
 
@@ -18,9 +15,9 @@ export interface IPodcastProgress {
 @Injectable()
 export class PodcastProvider {
   private _podcast: MediaObject;
-  private _isPlaying: boolean = false;
-  private _progress: number = 0;
-  private _duration: number = 0;
+  private _isPlaying = false;
+  private _progress = 0;
+  private _duration = 0;
   private _progressInterval: any;
 
   public progressObservable: Subject<any> = new Subject();
@@ -28,11 +25,6 @@ export class PodcastProvider {
 
   constructor(private media: Media) {}
 
-  /**
-   * Set the url of the podcast. Stop currently active podcast.
-   * @param  {string}     url [description]
-   * @return Promise<any>     [description]
-   */
   public setUrl(url: string): void {
     if (this._podcast) {
       this._podcast.release();
@@ -60,7 +52,7 @@ export class PodcastProvider {
           this._podcast.getCurrentPosition().then((position: number) => {
             position = Math.round(position);
             if (position !== this._progress && this._isPlaying) {
-              let progress: IPodcastProgress = {
+              const progress: IPodcastProgress = {
                 progress: position,
                 percentage: this.timeToPercent(position),
                 duration: this._duration,
@@ -95,7 +87,7 @@ export class PodcastProvider {
     this.playingObservable.next(false);
     this._progress = 0;
     this._duration = 0;
-    let progress: IPodcastProgress = {
+    const progress: IPodcastProgress = {
       progress: 0,
       percentage: this.timeToPercent(0),
       duration: 0,

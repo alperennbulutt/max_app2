@@ -1,6 +1,11 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @angular-eslint/no-output-on-prefix */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ModalController, Modal } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 interface IDnDValues {
   left: any[];
@@ -59,19 +64,16 @@ export class DragAndDropComponent {
 
   constructor(private modalController: ModalController) {}
 
-  public openModal(): void {
-    let modal: Modal = this.modalController.create('DragAndDropModal', {
-      title: 'Drag and Drop',
-      exercise: this._exercise,
-      answerData: this._storageData,
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: DragAndDropComponent,
+      componentProps: {
+        title: 'Drag and Drop',
+        exercise: this._exercise,
+        answerData: this._storageData,
+      },
     });
-    modal.onWillDismiss((result: any) => {
-      if (result) {
-        this.isDirty = true;
-        this._visibleValues = result;
-      }
-    });
-    modal.present();
+    await modal.present();
   }
 
   private setCorrectValues(): void {

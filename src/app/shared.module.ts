@@ -1,29 +1,28 @@
 import { NgModule } from '@angular/core';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { HttpModule } from '@angular/http';
 import { DragulaModule } from 'ng2-dragula';
 
 // Ionic native
 import { MockCamera } from './mocks/mock-camera';
-import { SplashScreen } from '@ionic-native/splash-screen/';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { FCM } from '@ionic-native/fcm/';
+import { FCM } from '@ionic-native/fcm/ngx';
 import { Camera } from '@ionic-native/camera/ngx/index';
 import { File } from '@ionic-native/file/ngx/index';
 import { Media } from '@ionic-native/media/ngx/index';
 import { SafariViewController } from '@ionic-native/safari-view-controller/ngx/index';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx/index';
 
-// Translate
+// // Translate
 import {
   TranslateModule,
-  MissingTranslationHandler,
-  MissingTranslationHandlerParams,
-} from 'ng2-translate';
+  // MissingTranslationHandler,
+  // MissingTranslationHandlerParams,
+} from '@ngx-translate/core';
 
 // Dragula
 
@@ -33,12 +32,12 @@ import { DirectivesModule } from '../directives/directives.module';
 import { ComponentsModule } from '../components/components.module';
 import { HttpClientModule } from '@angular/common/http';
 
-export class MyMissingTranslationHandler implements MissingTranslationHandler {
-  handle(params: MissingTranslationHandlerParams): string {
-    console.warn('Missing translation', params);
-    return '...';
-  }
-}
+// export class MyMissingTranslationHandler implements MissingTranslationHandler {
+//   handle(params: MissingTranslationHandlerParams): string {
+//     console.warn('Missing translation', params);
+//     return '...';
+//   }
+// }
 
 @NgModule({
   declarations: [],
@@ -58,10 +57,10 @@ export class MyMissingTranslationHandler implements MissingTranslationHandler {
     SafariViewController,
     InAppBrowser,
 
-    {
-      provide: MissingTranslationHandler,
-      useClass: MyMissingTranslationHandler,
-    },
+    // {
+    //   provide: MissingTranslationHandler,
+    //   useClass: MyMissingTranslationHandler,
+    // },
   ],
   imports: [
     DragulaModule,

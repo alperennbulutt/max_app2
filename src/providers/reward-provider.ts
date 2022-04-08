@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { normalizeURL } from '@ionic/angular';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { StorageProvider } from './utilities/storage-provider';
 import { FileProvider } from './file-provider';
 
@@ -17,14 +16,14 @@ export class RewardProvider {
   public getCurrentReward(): void {
     this.storageProvider.getItem('currentReward').then((reward: any) => {
       // If image is a custom image
-      if (reward && !!reward['image'] && reward.image.length > 50) {
+      if (reward && !!reward.image && reward.image.length > 50) {
         this.file.getFromLibrary('rewards').then((data: any) => {
           const fileName: string =
             reward.image.split('/')[reward.image.split('/').length - 1];
           const newImage: any = data.find(
             (file: any) => file.name === fileName
           );
-          reward['image'] = newImage.nativeURL;
+          reward.image = newImage.nativeURL;
           this.currentReward.next(reward);
         });
       } else {

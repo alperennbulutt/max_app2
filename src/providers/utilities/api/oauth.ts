@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable guard-for-in */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/prefer-for-of */
@@ -81,7 +82,7 @@ export class Oauth {
   }
 
   addOauthParameters(): Object {
-    let params = {};
+    const params = {};
     params['oauth_consumer_key'] = this.settings.oAuth.consumer.key;
     params['oauth_token'] = '';
     params['oauth_nonce'] = this.createNonce(32);
@@ -93,8 +94,9 @@ export class Oauth {
 
   createNonce(howMany): string {
     howMany = howMany || 32;
-    let res = [];
-    let chars = 'abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789';
+    const res = [];
+    const chars =
+      'abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789';
 
     for (let i = 0; i < howMany; i++) {
       res.push(chars[Math.round(Math.random() * chars.length)]);

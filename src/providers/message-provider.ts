@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
@@ -372,18 +373,26 @@ export class MessageProvider {
     });
   }
 
-  public postMessage(data: IMessage, hideLoader?: boolean): Observable<any> {
+  public async postMessage(
+    data: IMessage,
+    hideLoader?: boolean
+  ): Promise<Observable<any>> {
     const method = 'messages.save';
-    return new Observable((observer: any) => {
-      this.apiGateway
-        .post(this.settings.apiEndpoint + method, {}, data, hideLoader)
-        .subscribe(() => {
-          this.fetchUnreadMessages(hideLoader);
-        });
+    return new Promise<any>(async (observer: any) => {
+      (
+        await this.apiGateway.post(
+          this.settings.apiEndpoint + method,
+          {},
+          data,
+          hideLoader
+        )
+      ).subscribe(async () => {
+        await this.fetchUnreadMessages(hideLoader);
+      });
     });
   }
 
-  public getMessages(hideLoader?: boolean): Observable<any> {
+  public getMessages(hideLoader?: boolean): Promise<Observable<any>> {
     this.resetMessages(false);
     const method = 'messages.get';
 
@@ -394,12 +403,15 @@ export class MessageProvider {
     );
   }
 
-  public deleteMessage(id: number, hideLoader?: boolean): Observable<any> {
+  public async deleteMessage(
+    id: number,
+    hideLoader?: boolean
+  ): Promise<Observable<any>> {
     //this.resetMessages(false);
     let method = 'messages.delete';
     method += `&id=${id}`;
 
-    return this.apiGateway.get(
+    return await this.apiGateway.get(
       this.settings.apiEndpoint + method,
       {},
       hideLoader
@@ -420,27 +432,31 @@ export class MessageProvider {
     }
   }
 
-  public fetchUnreadMessages(hideLoader?: boolean): void {
+  public async fetchUnreadMessages(hideLoader?: boolean): Promise<void> {
     const method = 'messages.getunreadcount';
-    this.apiGateway
-      .get(this.settings.apiEndpoint + method, {}, hideLoader)
-      .subscribe((data) => {
-        let messageData: any;
-        // If there are already messages, dont overwrite it but add the amount of unread messages
-        if (this.messages) {
-          for (const key in this.messages.unread_count) {
-            if (data && data.unread_count[key]) {
-              this.messages.unread_count[key] =
-                this.messages.unread_count[key] + data.unread_count[key];
-            }
+    (
+      await this.apiGateway.get(
+        this.settings.apiEndpoint + method,
+        {},
+        hideLoader
+      )
+    ).subscribe((data) => {
+      let messageData: any;
+      // If there are already messages, dont overwrite it but add the amount of unread messages
+      if (this.messages) {
+        for (const key in this.messages.unread_count) {
+          if (data && data.unread_count[key]) {
+            this.messages.unread_count[key] =
+              this.messages.unread_count[key] + data.unread_count[key];
           }
-          messageData = this.messages;
-        } else {
-          messageData = data;
-          this.messages = JSON.parse(JSON.stringify(data));
         }
-        this.messageObserver.next(messageData);
-      });
+        messageData = this.messages;
+      } else {
+        messageData = data;
+        this.messages = JSON.parse(JSON.stringify(data));
+      }
+      this.messageObserver.next(messageData);
+    });
   }
 
   public resetMessages(resetAll?: boolean): void {
@@ -451,14 +467,18 @@ export class MessageProvider {
     }
   }
 
-  private newMessage(data: any, hideLoader?: boolean): Observable<any> {
+  private async newMessage(
+    data: any,
+    hideLoader?: boolean
+  ): Promise<Observable<any>> {
     const method = 'messages.save';
-    return this.apiGateway.post(
+    const a = await this.apiGateway.post(
       this.settings.apiEndpoint + method,
       {},
       data,
       hideLoader
     );
+    return a;
   }
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -563,7 +583,7 @@ export class MessageProvider {
     dateToCheck?: string
   ): Promise<any> {
     return new Promise((resolve: any, reject: any) => {
-      this.getInfo().then(() => {
+      this.getInfo().then(async () => {
         let title: string;
         let message: string;
         const hasGoals: boolean =
@@ -794,18 +814,19 @@ export class MessageProvider {
         }
 
         if (!this.feedbackStatus[id].hasOwnProperty('sendAmount')) {
-          // eslint-disable-next-line @typescript-eslint/dot-notation
           this.feedbackStatus[id]['sendAmount'] = 0;
         } else {
           this.feedbackStatus[id].sendAmount++;
         }
         //Only a few messages of id 10 are posted in messagebox
         if (id === 10 && message !== 'De gegevens zijn succesvol opgeslagen') {
-          this.postMessage({
-            title,
-            content: message,
-            type: 5,
-          }).subscribe();
+          (
+            await this.postMessage({
+              title,
+              content: message,
+              type: 5,
+            })
+          ).subscribe();
         }
         // Send message
         if (this.feedback[key].addToMessages) {
@@ -819,17 +840,19 @@ export class MessageProvider {
             messageForMessageBox = `${messageForMessageBox}<br><strong>${date}</strong>`;
           }
 
-          this.postMessage({
-            title: titleForMessageBox,
-            content: messageForMessageBox,
-            type: 5,
-          }).subscribe();
+          (
+            await this.postMessage({
+              title: titleForMessageBox,
+              content: messageForMessageBox,
+              type: 5,
+            })
+          ).subscribe();
         }
 
         // Build and display feedback
         this.storeFeedbackStatus();
         const alert: any = this.alertController.create({
-          title,
+          header: title,
           message,
           buttons,
         });
@@ -967,11 +990,8 @@ export class MessageProvider {
 
     if (version === 0 || version === 99) {
       const alert: any = this.alertController.create({
-        // eslint-disable-next-line @typescript-eslint/dot-notation
-        title: this.feedback['lastSevenLogs'].title,
-        // eslint-disable-next-line @typescript-eslint/dot-notation
+        header: this.feedback['lastSevenLogs'].title,
         message: this.feedback['lastSevenLogs'].message[version],
-        // eslint-disable-next-line @typescript-eslint/dot-notation
         buttons: this.feedback['lastSevenLogs'].buttons,
         cssClass: 'logbook-feedback',
       });
@@ -993,36 +1013,36 @@ export class MessageProvider {
           ? version.toString() + versionLetters[versionCounter].toUpperCase()
           : version.toString();
       const logbookCode: string = 'LOGBOEK_' + finalVersionNumber;
-      this.infoProvider.getInfo(logbookCode).subscribe((textData: any) => {
-        if (textData) {
-          const feedbackText: string = textData.content;
-          const message = `
+      this.infoProvider
+        .getInfo(logbookCode)
+        .subscribe(async (textData: any) => {
+          if (textData) {
+            const feedbackText: string = textData.content;
+            const message = `
 					Afgelopen week (${weekAgo} t/m ${beginDate}) heb je ${logsAmount} keer je logboek ingevuld.
 					<div class="divider"></div>
 					${feedbackText} `;
 
-          const alert: any = this.alertController.create({
-            // eslint-disable-next-line @typescript-eslint/dot-notation
-            title: this.feedback['lastSevenLogs'].title,
-            message,
-            // eslint-disable-next-line @typescript-eslint/dot-notation
-            buttons: this.feedback['lastSevenLogs'].buttons,
-            cssClass: 'logbook-feedback',
-          });
-          alert.present();
+            const alert: any = this.alertController.create({
+              header: this.feedback['lastSevenLogs'].title,
+              message,
+              buttons: this.feedback['lastSevenLogs'].buttons,
+              cssClass: 'logbook-feedback',
+            });
+            alert.present();
 
-          // Send message
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          if (this.feedback['lastSevenLogs'].addToMessages) {
-            this.postMessage({
-              // eslint-disable-next-line @typescript-eslint/dot-notation
-              title: this.feedback['lastSevenLogs'].title,
-              content: message.replace('<div class="divider"></div>', ''),
-              type: 5,
-            }).subscribe();
+            // Send message
+            if (this.feedback['lastSevenLogs'].addToMessages) {
+              (
+                await this.postMessage({
+                  title: this.feedback['lastSevenLogs'].title,
+                  content: message.replace('<div class="divider"></div>', ''),
+                  type: 5,
+                })
+              ).subscribe();
+            }
           }
-        }
-      });
+        });
       //Save new version
       versionCounter++;
       this.weekEvaluationVersionStatus[version].version = versionCounter;
@@ -1035,7 +1055,7 @@ export class MessageProvider {
     }
   }
 
-  public checkGoals(nav: any): void {
+  public async checkGoals(nav: any): Promise<void> {
     const todayLog: any = JSON.parse(localStorage.getItem('lastLog'));
     if (!todayLog) {
       return;
@@ -1078,8 +1098,8 @@ export class MessageProvider {
           successmessage +
           ` Je beloning: ${this.currentReward.rewardName.label}`;
 
-        const alert: Alert = this.alertController.create({
-          title: 'Gefeliciteerd!',
+        const alert = await this.alertController.create({
+          header: 'Gefeliciteerd!',
           message: messageText,
           buttons: [
             {
@@ -1096,15 +1116,14 @@ export class MessageProvider {
         });
         alert.present();
 
-        // eslint-disable-next-line max-len
-        //adding the image in message is difficult local images is no problem but the url of self taken images changes after each app update.
-
-        this.postMessage({
-          title: 'Gefeliciteerd!',
-          content:
-            (successmessage += `<br>Je hebt hiermee de volgende beloning verdiend: ${this.currentReward.rewardName.label}`),
-          type: 5,
-        }).subscribe();
+        (
+          await this.postMessage({
+            title: 'Gefeliciteerd!',
+            content:
+              (successmessage += `<br>Je hebt hiermee de volgende beloning verdiend: ${this.currentReward.rewardName.label}`),
+            type: 5,
+          })
+        ).subscribe();
       }
       this.currentReward.daysReached = newDaysOfReachedGoals.toString();
       this.rewardProvider.updateReward(this.currentReward);

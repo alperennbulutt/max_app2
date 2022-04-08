@@ -8,18 +8,17 @@ import { HttpClient, HttpClientModule, HttpEvent } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import {
-  MissingTranslationHandler,
-  MissingTranslationHandlerParams,
-  // TranslateLoader,
-  // TranslateStaticLoader,
-} from 'ng2-translate/src/translate.service';
+// import {
+//   MissingTranslationHandler,
+//   MissingTranslationHandlerParams,
+//   // TranslateLoader,
+//   // TranslateStaticLoader,
+// } from 'ng2-translate/src/translate.service';
 import { HttpErrorHandler } from 'src/providers/utilities/api/http-error-handler';
 import { ProvidersModule } from '../providers/providers.module';
 
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared.module';
-// import { TranslateModule } from 'ng2-translate';
 
 // Modules
 
@@ -32,23 +31,23 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n', '.json');
 }
 
-export class MyMissingTranslationHandler implements MissingTranslationHandler {
-  handle(params: MissingTranslationHandlerParams): string {
-    console.warn('Missing translation', params);
-    return '';
-  }
-}
+// export class MyMissingTranslationHandler implements MissingTranslationHandler {
+//   handle(params: MissingTranslationHandlerParams): string {
+//     console.warn('Missing translation', params);
+//     return '';
+//   }
+// }
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     IonicModule.forRoot({
       mode: 'ios',
     }),
     SharedModule.forRoot(),
-    HttpClientModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateHttpLoader,

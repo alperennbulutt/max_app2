@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { CacheRequest } from './utilities/cache-request';
@@ -33,36 +35,36 @@ export class InfoProvider {
   }
 
   public getTextInfo(fresh?: boolean): void {
-    this.storage.getItem('textInfo').then((info: any) => {
+    this.storage.getItem('textInfo').then(async (info: any) => {
       if (info && !fresh) {
         this.textInfo.next(info);
       } else {
         const method = 'info.getAll';
 
-        this.apiGateway
-          .get(this.settings.apiEndpoint + method, {
+        (
+          await this.apiGateway.get(this.settings.apiEndpoint + method, {
             appid: this.settings.appId,
           })
-          .subscribe(
-            (data: any) => {
-              if (data && data.status === 'success') {
-                this.storage.setItem('textInfo', data.data);
-                this.textInfo.next(data.data);
-              }
-            },
-            (error) => {
-              if (info) {
-                this.textInfo.next(info);
-              }
+        ).subscribe(
+          (data: any) => {
+            if (data && data.status === 'success') {
+              this.storage.setItem('textInfo', data.data);
+              this.textInfo.next(data.data);
             }
-          );
+          },
+          (error) => {
+            if (info) {
+              this.textInfo.next(info);
+            }
+          }
+        );
       }
     });
   }
 
-  public getFaq(hideLoader?: boolean): Observable<any> {
-    let method: string = 'faq.get';
-    return this.apiGateway.get(
+  public async getFaq(hideLoader?: boolean): Promise<Observable<any>> {
+    const method: string = 'faq.get';
+    return await this.apiGateway.get(
       this.settings.apiEndpoint + method,
       { appid: this.settings.appId },
       hideLoader

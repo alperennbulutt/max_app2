@@ -5,7 +5,7 @@
  ***************************************************/
 
 import { Injectable } from '@angular/core';
-import { Platform } from '../platform';
+import { Platform } from '@ionic/angular';
 
 @Injectable()
 export class Settings {

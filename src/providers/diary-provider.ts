@@ -16,23 +16,26 @@ export class DiaryProvider {
     private apiGateway: ApiGateway
   ) {}
 
-  public getDiaryData(hideLoader?: boolean): Observable<any> {
+  public async getDiaryData(hideLoader?: boolean): Promise<Observable<any>> {
     const diaryCache: any = {
       fetchedOn: moment().startOf('day').format(),
     };
     localStorage.setItem('diaryCache', JSON.stringify(diaryCache));
     const method = 'diary.getAllDataArray';
-    return this.apiGateway.post(
+    return await this.apiGateway.post(
       this.settings.apiEndpoint + method,
       {},
       hideLoader
     );
   }
 
-  public saveDiaryData(data: any, hideLoader?: boolean): Observable<any> {
+  public async saveDiaryData(
+    data: any,
+    hideLoader?: boolean
+  ): Promise<Observable<any>> {
     const method = 'diary.save';
 
-    return this.apiGateway.post(
+    return await this.apiGateway.post(
       this.settings.apiEndpoint + method,
       {},
       data,
@@ -70,8 +73,8 @@ export class DiaryProvider {
   }
 
   private buildDiaryData(): Promise<any> {
-    return new Promise((resolve: any) => {
-      this.getDiaryData().subscribe((data: any) => {
+    return new Promise(async (resolve: any) => {
+      (await this.getDiaryData()).subscribe((data: any) => {
         if (data) {
           const logs: any = [];
           // eslint-disable-next-line guard-for-in

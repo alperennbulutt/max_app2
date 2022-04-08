@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 
@@ -104,7 +105,7 @@ export class StrategyProvider {
         situation['id'] = this.generateId();
         this.situationData.push(situation);
       } else {
-        situation['id'] = 1;
+        situation.id = 1;
         this.situationData = [situation];
       }
     }
@@ -115,7 +116,7 @@ export class StrategyProvider {
   }
 
   public deleteSituation(situation: ISituation): void {
-    let situationIndex: any = this.situationData.findIndex(
+    const situationIndex: any = this.situationData.findIndex(
       (singleSituation: any) => singleSituation.id === situation.id
     );
     this.situationData.splice(situationIndex, 1);
@@ -128,9 +129,9 @@ export class StrategyProvider {
   }
 
   // Direct API calls
-  public getData(hideLoader?: boolean): Observable<any> {
-    let method: string = 'maxx.getStrategies';
-    return this.apiGateway.get(
+  public async getData(hideLoader?: boolean): Promise<Observable<any>> {
+    const method = 'maxx.getStrategies';
+    return await this.apiGateway.get(
       this.settings.apiEndpoint + method,
       {},
       !!hideLoader
@@ -140,7 +141,7 @@ export class StrategyProvider {
   // Cache API calls
   public fetch(): Promise<any> {
     return new Promise((resolve: any, reject: any): any => {
-      let method: string = 'maxx.getStrategies';
+      const method = 'maxx.getStrategies';
       this.cacheRequest
         .fetch(this.settings.apiEndpoint, method, false)
         .then((data: any) => {

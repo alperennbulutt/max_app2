@@ -1,5 +1,9 @@
+/* eslint-disable @angular-eslint/no-output-on-prefix */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @angular-eslint/component-selector */
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AlertController, Alert } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 interface IRadioExercise {
   options: {
@@ -27,7 +31,7 @@ interface IRadioAnswer {
   templateUrl: 'radiocomponent.html',
 })
 export class RadioComponent {
-  private _customInputCount: number = 0;
+  private _customInputCount = 0;
 
   public _exercise: IRadioExercise;
   public _storageData: IRadioAnswer;
@@ -51,7 +55,7 @@ export class RadioComponent {
     return this._storageData;
   }
   set data(val: any) {
-    let initialData: any = this._storageData;
+    const initialData: any = this._storageData;
     this._storageData = val || {
       selected: -1,
       customInputs: [],
@@ -91,11 +95,11 @@ export class RadioComponent {
     this.showFeedbackAlert(index);
   }
 
-  private showFeedbackAlert(index: number): void {
+  private async showFeedbackAlert(index: number): Promise<void> {
     if (this._exercise.options[index].feedback) {
-      let alert: Alert = this.alertController.create({
-        title: this._exercise.options[index].label,
-        subTitle: this._exercise.options[index].feedback,
+      const alert: any = await this.alertController.create({
+        header: this._exercise.options[index].label,
+        subHeader: this._exercise.options[index].feedback,
         buttons: ['Ok'],
       });
       alert.present();

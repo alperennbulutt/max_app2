@@ -51,10 +51,13 @@ export class UserProvider {
     );
   }
 
-  public update(data: any, hideLoader?: boolean): Observable<any> {
+  public async update(
+    data: any,
+    hideLoader?: boolean
+  ): Promise<Observable<any>> {
     const method = 'profile.update';
     data.appid = this.settings.appId;
-    return this.apiGateway.post(
+    return await this.apiGateway.post(
       this.settings.apiEndpoint + method,
       null,
       data,
@@ -62,13 +65,13 @@ export class UserProvider {
     );
   }
 
-  public setNotification(
+  public async setNotification(
     data: INotifications,
     hideLoader?: boolean
-  ): Observable<any> {
+  ): Promise<Observable<any>> {
     const method = 'profile.setNotifications';
     data.appid = this.settings.appId;
-    return this.apiGateway.post(
+    return await this.apiGateway.post(
       this.settings.apiEndpoint + method,
       null,
       data,

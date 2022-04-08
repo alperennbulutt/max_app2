@@ -23,7 +23,10 @@ export class BoostMeAnalyticsProvider {
     public platform: Platform
   ) {}
 
-  public track(data: IAnalyticEvent, hideLoader?: boolean): void {
+  public async track(
+    data: IAnalyticEvent,
+    hideLoader?: boolean
+  ): Promise<void> {
     if (this.platform.is('cordova')) {
       if (hideLoader === undefined) {
         hideLoader = true;
@@ -31,9 +34,14 @@ export class BoostMeAnalyticsProvider {
       data.date = moment().toISOString();
 
       const method = 'events.save';
-      this.apiGateway
-        .post(this.settings.apiEndpoint + method, {}, data, hideLoader)
-        .subscribe();
+      (
+        await this.apiGateway.post(
+          this.settings.apiEndpoint + method,
+          {},
+          data,
+          hideLoader
+        )
+      ).subscribe();
     }
   }
 

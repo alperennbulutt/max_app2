@@ -19,7 +19,7 @@ import {
   ActionSheetOptions,
 } from '@ionic/angular';
 import normalizeUrl from 'normalize-url';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file';
 import { FileProvider } from '../../providers/file-provider';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
@@ -218,9 +218,9 @@ export class Editor {
     }
   }
 
-  public removeImage(img: string, imgIndex: number): void {
-    const alert = this.alertController.create({
-      title: 'Afbeelding verwijderen',
+  public async removeImage(img: string, imgIndex: number): Promise<void> {
+    const alert = await this.alertController.create({
+      header: 'Afbeelding verwijderen',
       message: 'Weet je zeker dat je deze afbeelding wilt verwijderen?',
       buttons: [
         {
@@ -242,10 +242,10 @@ export class Editor {
     alert.present();
   }
 
-  public addNewImage(): void {
-    const actionSheet: ActionSheetController =
+  public async addNewImage() {
+    const actionSheet: Promise<HTMLIonActionSheetElement> =
       this.actionSheetController.create({
-        title: 'Afbeelding toevoegen',
+        header: 'Afbeelding toevoegen',
         buttons: [
           {
             text: 'Maak een foto',
@@ -261,7 +261,7 @@ export class Editor {
           },
         ],
       });
-    actionSheet.present();
+    (await actionSheet).present();
   }
 
   private addImage(makePhoto?: boolean): void {
@@ -304,40 +304,45 @@ export class Editor {
 
             //this.onImageChange.emit(image);
           })
-          .catch((err) => {
+          .catch(async (err) => {
             console.log('1', err);
 
-            const alert: AlertController = this.alertController.create({
-              title: 'Oeps',
-              message:
-                'Er is iets verkeerd gegaan tijdens het opslaan van de foto. Probeer het later opnieuw',
-              buttons: [{ text: 'Sluiten', role: 'cancel' }],
-            });
-            alert.present();
+            const alert: Promise<HTMLIonAlertElement> =
+              this.alertController.create({
+                header: 'Oeps',
+                message:
+                  'Er is iets verkeerd gegaan tijdens het opslaan van de foto. Probeer het later opnieuw',
+                buttons: [{ text: 'Sluiten', role: 'cancel' }],
+              });
+            (await alert).present();
             this.showLoader = false;
           });
       })
-      .catch((err: any) => {
+      .catch(async (err: any) => {
         console.log('2', err);
-        const alert: AlertController = this.alertController.create({
-          title: 'Oeps',
-          message:
-            'Er is iets verkeerd gegaan tijdens het opslaan van de foto. Probeer het later opnieuw',
-          buttons: [{ text: 'Sluiten', role: 'cancel' }],
-        });
+        const alert: Promise<HTMLIonAlertElement> = this.alertController.create(
+          {
+            header: 'Oeps',
+            message:
+              'Er is iets verkeerd gegaan tijdens het opslaan van de foto. Probeer het later opnieuw',
+            buttons: [{ text: 'Sluiten', role: 'cancel' }],
+          }
+        );
         this.showLoader = false;
-        alert.present();
+        (await alert).present();
       });
 
-    setTimeout(() => {
+    setTimeout(async () => {
       if (this.showLoader) {
-        const alert: AlertController = this.alertController.create({
-          title: 'Oeps',
-          message: 'Het uploaden is niet gelukt. Probeer het later opnieuw',
-          buttons: [{ text: 'Sluiten', role: 'cancel' }],
-        });
+        const alert: Promise<HTMLIonAlertElement> = this.alertController.create(
+          {
+            header: 'Oeps',
+            message: 'Het uploaden is niet gelukt. Probeer het later opnieuw',
+            buttons: [{ text: 'Sluiten', role: 'cancel' }],
+          }
+        );
         this.showLoader = false;
-        alert.present();
+        (await alert).present();
       }
     }, 15000);
   }

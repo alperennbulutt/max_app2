@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/no-shadow */
 //import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
@@ -12,12 +13,17 @@ export class MockCamera extends Camera {
       }
     } catch (error) {
       return new Promise((resolve: any, reject: any) => {
-        navigator.getUserMedia(
-          {
+        navigator.mediaDevices
+          .getUserMedia({
             audio: false,
             video: true,
-          },
-          (stream: any) => {
+          })
+          .then((stream) => {
+            const recorder = new MediaSource();
+            const source = new MediaSource();
+
+            const elem = createVideoElem();
+
             const video: any = document.createElement('video');
             document.body.appendChild(video);
             video.style.position = 'absolute';
@@ -27,7 +33,7 @@ export class MockCamera extends Camera {
             // eslint-disable-next-line @typescript-eslint/dot-notation
             canvas.style['position'] = 'absolute';
             canvas.style['z-index'] = '999';
-            video.src = window.URL.createObjectURL(stream);
+            // video.src = window.URL.createObjectURL(stream);
             video.play();
             const context: any = canvas.getContext('2d');
             setTimeout(() => {
@@ -43,13 +49,20 @@ export class MockCamera extends Camera {
               });
             }, 1000);
             // eslint-disable-next-line @typescript-eslint/no-shadow
-          },
-          (error: any) => {
+          })
+          .catch((error) => {
             console.log('error', error);
             reject();
-          }
-        );
+          });
       });
     }
   }
+}
+function createVideoElem() {
+  const elem = document.createElement('video');
+  elem.controls = true;
+  elem.autoplay = true; // for chrome
+  elem.play(); // for firefox
+  document.body.appendChild(elem);
+  return elem;
 }

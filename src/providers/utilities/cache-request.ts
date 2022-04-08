@@ -12,24 +12,15 @@ import { StorageProvider } from './storage-provider';
 
 @Injectable()
 export class CacheRequest {
-  private storageKey: string = 'cacheData';
+  private storageKey = 'cacheData';
   private requests: any = {};
-  private debug: boolean = false;
+  private debug = false;
 
   constructor(
     private apiGateway: ApiGateway,
     private storageProvider: StorageProvider
   ) {}
 
-  /**
-   * Get appCache
-   * @param  {string}       endpoint   Endpoint to make request to
-   * @param  {string}       method     Request to make to server
-   * @param  {boolean}      fresh      Wether to fetch fresh data from server or use cache
-   * @param  {boolean}      hideLoader Wether to show a loading spinner while request is being made
-   * @param  {number}       ttl        Lifetime of the cache (in seconds)
-   * @return {Promise<any>}            [description]
-   */
   public fetch(
     endpoint: string,
     method: string,
@@ -38,27 +29,27 @@ export class CacheRequest {
     hideLoader?: boolean,
     ttl?: number
   ): Promise<any> {
-    let key: string = method.split('&')[0];
-    return new Promise((resolve: any, reject: any) => {
+    const key: string = method.split('&')[0];
+    return new Promise(async (resolve: any, reject: any) => {
       if (fresh) {
-        this.serverRequest(endpoint, method, params, hideLoader).subscribe(
-          (data: any) => {
-            if (data) {
-              if (this.debug) {
-                console.log('from server:', method);
-              }
-              this.requests[key] = {
-                data: data,
-                lifetime: ttl * 1000,
-                timestamp: Date.now(),
-              };
-              this.save();
-              resolve(this.requests[key].data);
+        (
+          await this.serverRequest(endpoint, method, params, hideLoader)
+        ).subscribe((data: any) => {
+          if (data) {
+            if (this.debug) {
+              console.log('from server:', method);
             }
+            this.requests[key] = {
+              data,
+              lifetime: ttl * 1000,
+              timestamp: Date.now(),
+            };
+            this.save();
+            resolve(this.requests[key].data);
           }
-        );
+        });
       } else {
-        let isDead: boolean = false;
+        let isDead = false;
 
         if (this.requests[key]) {
           if (
@@ -80,7 +71,7 @@ export class CacheRequest {
 
         this.storageProvider
           .getItem(this.storageKey)
-          .then((storageData: any) => {
+          .then(async (storageData: any) => {
             if (!isDead && storageData && storageData[key]) {
               if (this.debug) {
                 console.log('from storage:', method);
@@ -91,15 +82,12 @@ export class CacheRequest {
               if (this.debug) {
                 console.log('from server:', method);
               }
-              this.serverRequest(
-                endpoint,
-                method,
-                params,
-                hideLoader
+              (
+                await this.serverRequest(endpoint, method, params, hideLoader)
               ).subscribe((data: any) => {
                 if (data) {
                   this.requests[key] = {
-                    data: data,
+                    data,
                     lifetime: ttl * 1000,
                     timestamp: Date.now(),
                   };
@@ -121,29 +109,18 @@ export class CacheRequest {
     this.requests = {};
   }
 
-  /**
-   * Clear cache for provided request
-   * @param {string} method [description]
-   */
   public clearRequestCache(method: string): void {
     delete this.requests[method];
     this.save();
   }
 
-  /**
-   * Make a request using apiGateway
-   * @param  {string}          endpoint   [description]
-   * @param  {string}          method     [description]
-   * @param  {boolean}         hideLoader [description]
-   * @return {Observable<any>}            [description]
-   */
-  private serverRequest(
+  private async serverRequest(
     endpoint: string,
     method: string,
     params: any,
     hideLoader?: boolean
-  ): Observable<any> {
-    return this.apiGateway.get(endpoint + method, params, hideLoader);
+  ): Promise<Observable<any>> {
+    return await this.apiGateway.get(endpoint + method, params, hideLoader);
   }
 
   /**

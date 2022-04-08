@@ -8,8 +8,8 @@
 
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { SafariViewController } from '@ionic-native/safari-view-controller';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
 
 @Injectable()
 export class WebPopup {
@@ -19,17 +19,13 @@ export class WebPopup {
     private platform: Platform
   ) {}
 
-  /**
-   * Open an url in a inApp browser
-   * @param {string} url [description]
-   */
   public open(url: string): void {
     if (this.platform.is('cordova')) {
       this.safariViewController.isAvailable().then((available: boolean) => {
         if (available) {
           this.safariViewController
             .show({
-              url: url,
+              url,
               hidden: false,
               animated: false,
               transition: 'curl',

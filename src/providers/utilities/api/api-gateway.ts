@@ -1,8 +1,14 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable guard-for-in */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoadingController, Loading } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular/';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/finally';
 
 import { Oauth } from './oauth';
 import { AuthToken } from './auth-token';
@@ -30,7 +36,7 @@ export class ApiGateway {
   private pendingCommandCount = 0;
 
   private pendingRequestsCount = 0;
-  private loader: Loading;
+  private loader: HTMLIonLoadingElement;
 
   // Provide the *public* Observable that clients can subscribe to
   pendingCommands$: Observable<number>;
@@ -45,10 +51,10 @@ export class ApiGateway {
     this.errors$ = this.errorsSubject.asObservable();
     this.pendingCommands$ = this.pendingCommandsSubject.asObservable();
 
-    this.loader = this.loadingCtrl.create({
-      showBackdrop: false,
-      spinner: 'circles',
-    });
+    // this.loader = await this.loadingCtrl.create({
+    //   showBackdrop: false,
+    //   spinner: 'circles',
+    // });
   }
 
   defaultErrorHandler(error: any) {
@@ -68,8 +74,12 @@ export class ApiGateway {
 
   // I perform a GET request to the API, appending the given params
   // as URL search parameters. Returns a stream.
-  get(url: string, params: any, hideLoader?: boolean): Observable<any> {
-    let options = new ApiGatewayOptions();
+  get(
+    url: string,
+    params: any,
+    hideLoader?: boolean
+  ): Promise<Observable<any>> {
+    const options = new ApiGatewayOptions();
     options.method = 'get';
     options.url = url;
     options.params = params;
@@ -89,12 +99,12 @@ export class ApiGateway {
     params: any,
     data: any,
     hideLoader?: boolean
-  ): Observable<any> {
+  ): Promise<Observable<any>> {
     if (!data) {
       data = params;
       params = {};
     }
-    let options = new ApiGatewayOptions();
+    const options = new ApiGatewayOptions();
     options.method = 'post';
     options.url = url;
     options.params = params;
@@ -113,12 +123,12 @@ export class ApiGateway {
     params: any,
     data: any,
     hideLoader?: boolean
-  ): Observable<any> {
+  ): Promise<Observable<any>> {
     if (!data) {
       data = params;
       params = {};
     }
-    let options = new ApiGatewayOptions();
+    const options = new ApiGatewayOptions();
     options.method = 'put';
     options.url = url;
     options.params = params;
@@ -136,12 +146,12 @@ export class ApiGateway {
     params: any,
     data: any,
     hideLoader?: boolean
-  ): Observable<any> {
+  ): Promise<Observable<any>> {
     if (!data) {
       data = params;
       params = {};
     }
-    let options = new ApiGatewayOptions();
+    const options = new ApiGatewayOptions();
     options.method = 'delete';
     options.url = url;
     options.params = params;
@@ -150,10 +160,10 @@ export class ApiGateway {
     return this.request(options, hideLoader);
   }
 
-  private request(
+  private async request(
     options: ApiGatewayOptions,
     hideLoader?: boolean
-  ): Observable<any> {
+  ): Promise<Observable<ArrayBuffer>> {
     options.method = options.method || 'get';
     options.url = options.url || '';
     options.headers = options.headers || {};
@@ -161,13 +171,13 @@ export class ApiGateway {
     options.data = options.data || {};
 
     //add required Oauth parameters
-    let oauthParams = this.oauth.addOauthParameters();
-    for (let key in oauthParams) {
+    const oauthParams = this.oauth.addOauthParameters();
+    for (const key in oauthParams) {
       options.params[key] = oauthParams[key];
     }
 
     //calculate signature and add to params
-    let parsedUrl = this.oauth.parseUrl(options.url);
+    const parsedUrl = this.oauth.parseUrl(options.url);
     options.params['oauth_signature'] = this.oauth.generateOauthSignature(
       options.method,
       parsedUrl.baseUrl,
@@ -178,19 +188,19 @@ export class ApiGateway {
     //this.addXsrfToken(options);
     this.addContentType(options);
 
-    let requestOptions: any = {};
+    const requestOptions: any = {};
     requestOptions.method = options.method;
     requestOptions.url = options.url;
     requestOptions.headers = options.headers;
     requestOptions.params = this.buildHttpParams(options.params);
     requestOptions.body = JSON.stringify(options.data);
 
-    let token = this.authToken.getToken();
+    const token = this.authToken.getToken();
     if (token) {
       requestOptions.headers['Authorization'] = 'Bearer ' + token;
     }
 
-    let isCommand = options.method !== 'get';
+    const isCommand = options.method !== 'get';
 
     if (isCommand) {
       this.pendingCommandsSubject.next(++this.pendingCommandCount);
@@ -198,17 +208,17 @@ export class ApiGateway {
 
     if (this.pendingRequestsCount === 0) {
       if (!hideLoader && !this.loader) {
-        this.loader = this.loadingCtrl.create({
+        this.loader = await this.loadingCtrl.create({
           showBackdrop: false,
           spinner: 'circles',
           duration: 5000,
         });
-        this.loader.present();
+        await this.loader.present();
       }
     }
     this.pendingRequestsCount++;
 
-    let stream = this.http
+    const stream = this.http
       .request(options.method, options.url, requestOptions)
       .catch((error: any) => {
         this.errorsSubject.next(error);
@@ -218,11 +228,11 @@ export class ApiGateway {
       .catch((error: any) => {
         return Observable.throw(error);
       })
-      .finally(() => {
+      .finally(async () => {
         this.pendingRequestsCount--;
         if (this.pendingRequestsCount === 0) {
           if (!hideLoader && this.loader) {
-            this.loader
+            (await this.loader)
               .dismiss()
               .then(() => {
                 this.loader = null;
@@ -246,7 +256,7 @@ export class ApiGateway {
   }
 
   private extractValue(collection: any, key: string): any {
-    var value = collection[key];
+    const value = collection[key];
     delete collection[key];
     return value;
   }
@@ -273,8 +283,8 @@ export class ApiGateway {
     */
 
   private buildHttpParams(params: any): any {
-    var searchParams = {};
-    for (var key in params) {
+    const searchParams = {};
+    for (const key in params) {
       searchParams[key] = params[key];
     }
     return searchParams;

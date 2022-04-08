@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { EventService } from './events-service';
 
 import {
@@ -13,7 +13,8 @@ import {
 import { Subject } from 'rxjs';
 
 import { TranslateService } from '@ngx-translate/core';
-// import { TranslateService } from 'lib/ng2-translate';
+
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import * as moment from 'moment';
 import { BoostMeAnalyticsProvider } from 'src/providers/boost-me-analytics-provider';
@@ -109,10 +110,10 @@ export class AppComponent {
       localStorage.setItem('activityDate', moment().startOf('day').format());
       // If user is logged in, continue where he/she left
       if (localStorage.getItem('auth-token')) {
-        this.nav.setRoot('Home');
+        this.nav.navigateRoot('Home');
         this.boostMeAnalyticsProvider.track({ name: 'HOME' });
       } else {
-        this.nav.setRoot('IntroductionPage');
+        this.nav.navigateRoot('IntroductionPage');
       }
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -192,7 +193,7 @@ export class AppComponent {
       this.boostMeAnalyticsProvider.track(analyticsLabels[page.component]);
     }
 
-    this.nav.push(page.component, navParams);
+    this.nav.navigateForward(page.component, navParams);
     this.menuController.close();
   }
 
@@ -202,11 +203,8 @@ export class AppComponent {
     this.strategyProvider.resetExpiredSituations();
     this.authToken.setToken('');
     this.authToken.setUserId();
-    this.nav.setRoot(
-      'Login',
-      { isLogin: 'true' },
-      { animate: true, direction: 'back' }
-    );
+
+    this.nav.navigateBack('Login', { animated: true });
     this.menuController.close();
     this.userProvider.setRegistrationDate('');
   }

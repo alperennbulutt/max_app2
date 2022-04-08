@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -29,10 +30,13 @@ export interface IPassForgot {
 export class LoginProvider {
   constructor(private settings: Settings, private apiGateway: ApiGateway) {}
 
-  public register(data: IRegister, hideLoader?: boolean): Observable<any> {
-    let method: string = 'profile.register';
+  public async register(
+    data: IRegister,
+    hideLoader?: boolean
+  ): Promise<Observable<any>> {
+    const method = 'profile.register';
     data.appid = this.settings.appId;
-    return this.apiGateway.post(
+    return await this.apiGateway.post(
       this.settings.apiEndpoint + method,
       null,
       data,
@@ -40,10 +44,13 @@ export class LoginProvider {
     );
   }
 
-  public login(data: ILogin, hideLoader?: boolean): Observable<any> {
-    let method: string = 'access.login';
+  public async login(
+    data: ILogin,
+    hideLoader?: boolean
+  ): Promise<Observable<any>> {
+    const method = 'access.login';
     data.appid = this.settings.appId;
-    return this.apiGateway.post(
+    return await this.apiGateway.post(
       this.settings.apiEndpoint + method,
       null,
       data,
@@ -51,13 +58,13 @@ export class LoginProvider {
     );
   }
 
-  public forgotPassword(
+  public async forgotPassword(
     data: IPassForgot,
     hideLoader?: boolean
-  ): Observable<any> {
-    let method: string = 'access.resetPassword';
+  ): Promise<Observable<any>> {
+    const method = 'access.resetPassword';
     data.appid = this.settings.appId;
-    return this.apiGateway.post(
+    return await this.apiGateway.post(
       this.settings.apiEndpoint + method,
       null,
       data,
@@ -65,9 +72,11 @@ export class LoginProvider {
     );
   }
 
-  public getPermissionGroup(hideLoader?: boolean): Observable<any> {
-    let method: string = 'access.randomise';
-    return this.apiGateway.get(
+  public async getPermissionGroup(
+    hideLoader?: boolean
+  ): Promise<Observable<any>> {
+    const method = 'access.randomise';
+    return await this.apiGateway.get(
       this.settings.apiEndpoint + method,
       { appid: this.settings.appId },
       hideLoader

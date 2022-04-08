@@ -1,11 +1,18 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/dot-notation */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import normalizeUrl from 'normalize-url';
 
 import { ApiGateway } from './utilities/api/api-gateway';
 import { CacheRequest } from './utilities/cache-request';
 import { Settings } from './utilities/app-settings';
 import { StorageProvider } from './utilities/storage-provider';
-import { normalizeURL, Platform } from '@ionic/angular';
+
+import { Platform } from '@ionic/angular';
 import { FileProvider } from './file-provider';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
@@ -59,9 +66,9 @@ export class MotivatorsProvider {
         this.getRatings(),
       ]).then((data: any) => {
         if (data[0]) {
-          let customMotivators = data[0];
+          const customMotivators = data[0];
           customMotivators.forEach((customMotivator: any) => {
-            let customMotivatorIndex: number = this.motivators.findIndex(
+            const customMotivatorIndex: number = this.motivators.findIndex(
               (singeMotivator: any) => singeMotivator.id === customMotivator.id
             );
             if (customMotivatorIndex > -1) {
@@ -99,12 +106,12 @@ export class MotivatorsProvider {
       if (this.motivators) {
         resolve();
       } else {
-        this.storage.getItem('motivators').then((motivators: any) => {
+        this.storage.getItem('motivators').then(async (motivators: any) => {
           if (motivators) {
             this.motivators = motivators;
             resolve();
           } else {
-            this.fetchMotivators().subscribe((motivators: any) => {
+            (await this.fetchMotivators()).subscribe((motivators: any) => {
               this.motivators = motivators.motivators;
               resolve();
             });
@@ -115,7 +122,7 @@ export class MotivatorsProvider {
   }
 
   public reorderMotivators(): void {
-    let favoriteMotivators: IMotivator[] = this.motivators.filter(
+    const favoriteMotivators: IMotivator[] = this.motivators.filter(
       (motivator: IMotivator, index: number) =>
         this.motivatorRatings[motivator.id].isFavorite
     );
@@ -123,9 +130,9 @@ export class MotivatorsProvider {
       (motivator: IMotivator, index: number) =>
         !this.motivatorRatings[motivator.id].isFavorite
     );
-    let deletedItems: number = 0;
+    let deletedItems = 0;
     let allRated: boolean;
-    for (let key in this.motivatorRatings) {
+    for (const key in this.motivatorRatings) {
       if (this.motivatorRatings[key].likeStatus === 0) {
         allRated = false;
         break;
@@ -156,9 +163,9 @@ export class MotivatorsProvider {
     // });
 
     // Delete all dislikes
-    orderedMotivators = orderedMotivators.filter((motivator: any) => {
-      return this.motivatorRatings[motivator.id].likeStatus < 2;
-    });
+    orderedMotivators = orderedMotivators.filter(
+      (motivator: any) => this.motivatorRatings[motivator.id].likeStatus < 2
+    );
     //randomize Favorites and add them in the beginning of the array
     orderedMotivators = favoriteMotivators
       .sort((a: any, b: any) => 0.5 - Math.random())
@@ -215,7 +222,7 @@ export class MotivatorsProvider {
 
       return this.sanitizer.bypassSecurityTrustStyle(`url(${fixedURL})`);
     } else {
-      const test: any = normalizeURL(url);
+      const test: any = normalizeUrl(url);
       return test;
     }
   }
@@ -241,7 +248,7 @@ export class MotivatorsProvider {
       this.storage.setItem('motivators', this.motivators);
     } else {
       // new motivator
-      let id: number = 1;
+      let id = 1;
       while (this.motivatorRatings.hasOwnProperty(id)) {
         id++;
       }
@@ -278,9 +285,9 @@ export class MotivatorsProvider {
   }
 
   // Direct API calls
-  public fetchMotivators(hideLoader?: boolean): Observable<any> {
+  public async fetchMotivators(hideLoader?: boolean): Promise<Observable<any>> {
     let method: string = 'maxx.getMotivators';
-    return this.apiGateway.get(
+    return await this.apiGateway.get(
       this.settings.apiEndpoint + method,
       {},
       !!hideLoader

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -14,9 +15,9 @@ export interface ITips {
 export class TipsProvider {
   constructor(private settings: Settings, private apiGateway: ApiGateway) {}
 
-  public get(hideLoader?: boolean): Observable<ITips> {
-    let method: string = 'tips.get';
-    return this.apiGateway.get(
+  public async get(hideLoader?: boolean): Promise<Observable<ITips>> {
+    const method = 'tips.get';
+    return await this.apiGateway.get(
       this.settings.apiEndpoint + method,
       { appid: this.settings.appId },
       hideLoader

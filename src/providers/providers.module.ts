@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 import { NgModule } from '@angular/core';
 
 // API providers
@@ -37,51 +39,53 @@ import { SituationsProvider } from './situations-provider';
 import { MessageProvider } from './message-provider';
 import { PodcastProvider } from './podcast-provider';
 import { RewardProvider } from './reward-provider';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 export function httpErrorHandler(httpErrorHandler: HttpErrorHandler): any {
-	return (): any => { };
+  return (): any => {};
 }
 
 @NgModule({
-	providers: [
-		// API providers
-		Oauth,
-		AuthToken,
-		HttpErrorHandler,
-		ApiGateway,
-		// Utility providers
-		Settings,
-		Config,
-		Utilities,
-		StorageProvider,
-		CacheRequest,
-		// GAProvider,
-		WebPopup,
-		FormValidator,
-		// Other providers
-		ProgressProvider,
-		MenuProvider,
-		LoginProvider,
-		UserProvider,
-		SurveyProvider,
-		MotivatorsProvider,
-		StrategyProvider,
-		TipsProvider,
-		InfoProvider,
-		LessonProvider,
-		AuthorizationProvider,
-		SessionProvider,
-		FavoriteProvider,
-		BoostMeAnalyticsProvider,
-		FCMProvider,
-		DiaryProvider,
-		MotivatorsProvider,
-		FileProvider,
-		NotificationProvider,
-		SituationsProvider,
-		MessageProvider,
-		PodcastProvider,
-		RewardProvider
-	]
+  providers: [
+    // API providers
+    Oauth,
+    AuthToken,
+    HttpErrorHandler,
+    ApiGateway,
+    // Utility providers
+    Settings,
+    Config,
+    Utilities,
+    StorageProvider,
+    CacheRequest,
+    // GAProvider,
+    WebPopup,
+    FormValidator,
+    // Other providers
+    StatusBar,
+    ProgressProvider,
+    MenuProvider,
+    LoginProvider,
+    UserProvider,
+    SurveyProvider,
+    MotivatorsProvider,
+    StrategyProvider,
+    TipsProvider,
+    InfoProvider,
+    LessonProvider,
+    AuthorizationProvider,
+    SessionProvider,
+    FavoriteProvider,
+    BoostMeAnalyticsProvider,
+    FCMProvider,
+    DiaryProvider,
+    MotivatorsProvider,
+    FileProvider,
+    NotificationProvider,
+    SituationsProvider,
+    MessageProvider,
+    PodcastProvider,
+    RewardProvider,
+  ],
 })
-export  class ProvidersModule { }
+export class ProvidersModule {}
