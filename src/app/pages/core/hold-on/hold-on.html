@@ -1,0 +1,59 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Hou vol omdat
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper motivator__content-wrapper">
+		<div class="motivator__slider-wrapper">
+			<div class="speak-balloon" *ngIf="showExplanation" [@explanationState]="'showExplanation'">
+				<div class="close-button" tappable (click)="showExplanation = false">
+					<ion-icon name="close"></ion-icon>
+				</div>
+				<div class="speak-balloon__inner" [innerHTML]="explanationText"></div>
+			</div>
+			<ion-slides #motivatorSlider (ionSlideWillChange)="slideWillChange()">
+				<ion-slide class="motivator__slide" *ngFor="let motivator of motivators">
+					<div class="motivator__wrapper" [style.background-image]="motivator.imageStyle">
+						{{motivator.title}}
+						<div class="motivator__text" [innerHTML]="motivator.text"></div>
+					</div>
+				</ion-slide>
+			</ion-slides>
+			<div class="motivator__rating-buttons" [class.has-rating]="activeMotivatorRating > 0">
+				<button ion-button class="rating-button rating-button--like" (click)="rateMotivation(true)" [class.is-rated]="isRated === 'like' || activeMotivatorRating === 1">
+					<ion-icon name="lnr-thumbsup-detail"></ion-icon>
+					<div class="label">Like</div>
+				</button>
+				<button ion-button class="rating-button rating-button--favorite" (click)="toggleFavorite()">
+					<ion-icon name="ios-heart-outline" *ngIf="!isFavorite()"></ion-icon>
+					<ion-icon name="ios-heart" *ngIf="isFavorite()" class="favorite"></ion-icon>
+				</button>
+				<button ion-button (click)="rateMotivation(false)" class="rating-button rating-button--dislike" [class.is-rated]="isRated === 'dislike' || activeMotivatorRating === 2">
+					<ion-icon name="lnr-thumbsdown-detail"></ion-icon>
+					<div class="label">Nope</div>
+				</button>
+			</div>
+		</div>
+		<div class="button-wrapper button-container" [class.is-custom]="isCustom">
+			<button ion-button icon-start class="themed-button" navPush="AddMotivator">
+				<ion-icon name="md-add"></ion-icon>
+				Voeg toe
+			</button>
+			<button ion-button clear class="themed-button remove-button" (click)="deleteMotivator()" *ngIf="isCustom">
+				<ion-icon name="lnr-trash"></ion-icon>
+			</button>
+			<button ion-button icon-start class="themed-button info-button" (click)="showExplanation = true" *ngIf="!isCustom">
+				<ion-icon name="ios-information-circle-outline"></ion-icon>
+				Uitleg
+			</button>
+			<button ion-button icon-start class="themed-button edit-button" (click)="editMotivator()" *ngIf="isCustom">
+				<ion-icon name="lnr-pencil"></ion-icon>
+				Wijzig
+			</button>
+		</div>
+	</div>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            {{ 'MEASURES.title' | translate }}
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="close()" color="primary-dark">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="wrapper">
+        <div class="intro">
+            Hieronder staan alcoholische producten. Je ziet daarbij aangegeven
+            hoeveel eenheden alcohol= glazen zo'n product bevat.
+        </div>
+        <div
+            class="gradient-background__content gradient-background__content--no-transparency"
+            *ngFor="let measure of measures"
+        >
+            <div
+                class="avatar"
+                [ngStyle]="{ 'background-image': 'url(' + measure.image + ')' }"
+            ></div>
+            <p class="measure">
+                <span class="measure__drink-name">
+                    {{ 'MEASURES.' + measure.key + '.title' | translate }}
+                </span>
+                {{ 'MEASURES.' + measure.key + '.subtitle' | translate }}<br />
+                ({{ measure.volume }}{{ 'MEASURES.volume' | translate }} | {{
+                measure.alcohol }}% {{ 'MEASURES.alcohol' | translate }})
+                <strong
+                    >= {{ measure.standard }} {{ 'MEASURES.standard-type' |
+                    translate }}</strong
+                >
+            </p>
+        </div>
+    </div>
+</ion-content>

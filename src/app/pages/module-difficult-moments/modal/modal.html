@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            {{theme}}
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="dismiss()" class="close-button">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="wrapper buttons-bottom">
+        <div divider nospace=true></div>
+
+        <div class="checkbox-wrapper">
+            <checkbox-component 
+            #checkbox
+            [items]="strategies" 
+            custom=true 
+            outputAll=true 
+            [model]="model"
+            placeholder="voeg toe"
+            (onChange)="changedItems($event)"
+            ></checkbox-component>
+
+            <!-- <ion-item *ngFor="let strategy of strategies">
+                <checkbox-component [items]="items"></checkbox-component>
+                <ion-label>{{ strategy.title }}</ion-label>
+                <ion-checkbox (ionChange)="onChange($event, index)" [checked]="strategy.checked"></ion-checkbox>
+            </ion-item> -->
+        </div>
+        <div class="button-container">
+            <button ion-button full type="button" (click)="addStrategies()" class="themed-button">
+                Voeg selectie toe
+            </button>
+        </div>
+    </div>
+</ion-content>

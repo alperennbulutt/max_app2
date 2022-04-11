@@ -1,0 +1,93 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			{{ activeOverviewType?.pageTitle }}
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+		<div class="chart-legend chart-legend--outside" *ngIf="chartData.data[0]?.data?.length && isAlternateLegendVisible">
+			<div class="chart-legend__block">
+				De percentages in de grafiek zijn gebaseerd op je logboek registraties.
+			</div>
+		</div>
+
+		<div class="graph">
+			<div class="chart-legend"
+				*ngIf="!chartData.data[0]?.data?.length"
+			>
+				<p>Er is geen informatie hierover in je logboek.</p>
+			</div>
+
+			<div class="chart"
+				*ngIf="chartData.data[0]?.data?.length"
+				[class.no-legend]="!isLegendVisible"
+			>
+				<ion-spinner *ngIf="!pageIsLoaded"></ion-spinner>
+				<column-chart
+					[chartData]="chartData"
+					[selectedBar]="currentPageIndex"
+					*ngIf="pageIsLoaded"
+					(barClicked)="onChartBarClick($event)"
+					(slideDidChange)="onChartSlideChanged($event)"
+					[ngClass]="'view-' + activeOverviewType.view"
+				></column-chart>
+			</div>
+		</div>
+		<div class="chart-legend" *ngIf="isLegendVisible">
+			<div class="chart-legend__block" [ngClass]="['chart-legend__block--' + legend]" *ngFor="let legend of activeOverviewType?.legend">{{legendLabels[legend]}}</div>
+		</div>
+
+		<ion-slides
+			#daySlider
+			class="summary"
+			[pager]="true"
+			[spaceBetween]="20"
+			*ngIf="chartData.data.length && !chartData.hideDayData"
+			(ionSlideWillChange)="onSlideDidChange($event)"
+		>
+			<ion-slide *ngFor="let day of chartData?.data[currentChartPageIndex].data; let index = index">
+				<div class="summary__day" [class.summary__day--inactive]="currentPageIndex !== index">
+					<div class="summary__day-header">
+						{{ day.customParams.date | moment: 'dddd D MMMM' }}
+					</div>
+					<div class="summary__list" *ngIf="day.customParams?.registry?.registries">
+						<div class="summary__item">
+							<span>Dagde{{ day.customParams?.registryData?.dayparts?.length === 1 ? 'el' : 'len'}}</span>
+							<strong>
+								<span *ngFor="let daypart of day.customParams?.registryData?.dayparts">
+									<ion-icon class="select-option__icon" [name]="daypart.icon"></ion-icon>
+								</span>
+							</strong>
+						</div>
+						<div class="summary__item">
+							<span>Stemming{{ day.customParams?.registryData?.moods?.length === 1 ? '' : 'en' }}</span>
+							<strong>
+								<span *ngFor="let mood of day.customParams?.registryData?.moods">
+									<ion-icon class="select-option__icon" [name]="mood.icon"></ion-icon>
+								</span>
+							</strong>
+						</div>
+						<div class="summary__item">
+							<span>Locatie{{ day.customParams?.registryData?.locations.length === 1 ? '' : 's' }}</span>
+							<strong>{{ day.customParams?.registryData?.locations.join(', ') || '-' }}</strong>
+						</div>
+						<div class="summary__item">
+							<span>Perso{{ day.customParams?.registryData?.people.length === 1 ? 'on' : 'nen' }}</span>
+							<strong>{{ day.customParams?.registryData?.people.join(', ') || '-' }}</strong>
+						</div>
+						<div class="summary__item">
+							<span>Gevoel{{ day.customParams?.registryData?.feelings.length === 1 ? '' : 'ens' }}</span>
+							<strong>{{ day.customParams?.registryData?.feelings.join(', ') || '-' }}</strong>
+						</div>
+					</div>
+					<div class="summary__list">
+						<button ion-button block [disabled]="day.disabled" (click)="openRegistryEdit(day.customParams.date)">Edit</button>
+					</div>
+				</div>
+			</ion-slide>
+		</ion-slides>
+	</div>
+</ion-content>

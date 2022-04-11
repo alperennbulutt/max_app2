@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Berichten
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="wrapper">
+        <div class="messages">
+            <ng-container *ngIf="messageItems.length">
+                <div *ngFor="let messageItem of messageItems; let dateIndex = index">
+                    <div class="messages__date">{{messageItem.label}}</div>
+                    <div
+                        class="messages__item"
+                        *ngFor="let message of messageItem.items; let messageIndex = index"
+                        [class.has-thumb]="message.hasThumbIcon"
+                    >
+                        <div class="messages__title" [innerHTML]="message.title | noSanitize"></div>
+                        <div [innerHTML]="message.content"></div>
+                        <div tappable class="message__remove" (click)="removeMessage(message, dateIndex, messageIndex)">
+                            <ion-icon name="lnr-trash"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="no-messages" *ngIf="messageItems.length === 0">
+                Je hebt nog geen berichten ontvangen.
+            </div>
+        </div>
+        <ion-infinite-scroll (ionInfinite)="addItems($event)" *ngIf="!allItemsLoaded">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+</ion-content>

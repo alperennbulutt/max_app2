@@ -1,0 +1,19 @@
+<ion-content class="gradient-background">
+	<div class="content">
+		<img class="intro-image" src="assets/img/logo.png" />
+		<p>{{ 'INTRO.about-text' | translate }}</p>
+		<!-- <p>
+			<span>{{ 'INTRO.research-text' | translate }}</span>
+			<button ion-button inline>{{ 'INTRO.research-link-text' | translate }}</button><span>.</span>
+		</p> -->
+	</div>
+</ion-content>
+
+<ion-footer class="invisible-footer footer-double-button">
+	<div class="footer__button-wrapper">
+		<div class="dual-buttons">
+			<button ion-button inset color="light" class="dual-buttons__button footer-button--left" navPush="Login" [navParams]="{ isLogin: 'true' }">{{ 'INTRO.login-button-text' | translate }}</button>
+			<button ion-button inset color="white" class="dual-buttons__button footer-button--right" navPush="AboutResearch">{{ 'INTRO.register-button-text' | translate }}</button>
+		</div>
+	</div>
+</ion-footer>

@@ -1,0 +1,41 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Instellingen
+			<div divider nospace=true></div>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+		<div class="settings__wrapper" *ngIf="user">
+			<ion-item class="clickable-item" *ngIf="authorizationProvider.isPageAuthorized('ModulePlanningGoal')" navPush="ModulePlanningGoal"
+			[navParams]="{ isUpdating: 'true' }">
+				<ion-label>Doelen bijstellen</ion-label>
+				<ion-toggle></ion-toggle>
+			</ion-item>
+			<ion-item>
+				<ion-label>Dagelijkse meldingen</ion-label>
+				<ion-toggle color="red" [(ngModel)]="user.notification_daily" (ngModelChange)="onNotificationToggle($event, true)"></ion-toggle>
+			</ion-item>
+			<ion-item>
+				<ion-label>Overige meldingen</ion-label>
+				<ion-toggle color="red" [(ngModel)]="user.notification_others" (ngModelChange)="onNotificationToggle($event)"></ion-toggle>
+			</ion-item>
+			<ion-item>
+				<ion-label>Tijdstip dagelijkse meldingen</ion-label>
+				<ion-datetime displayFormat="H : 00" pickerFormat="H : mm" [(ngModel)]="recievingHour" minuteValues="0" [disabled]="!user.notification_daily" (ngModelChange)="onNotificationToggle(true, true)"></ion-datetime>
+			</ion-item>
+
+			<div class="version-info">
+				<p>{{appName}} versie: {{appVersionNumber}} ({{appVersionCode}})<br/>
+					{{appPlatformName}} versie: {{appPlatformVersion}} </p>
+			</div>
+
+			<div class="settings__footer" padding>
+				<button ion-button block inset class="input-form__submit" type="button" (click)="logout()">{{ 'GENERAL.logout-text' | translate }}</button>
+			</div>
+		</div>
+	</div>
+</ion-content>

@@ -1,8 +1,9 @@
-<ion-nav id="nav" [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
 
-<ion-menu side="left" type="overlay" [swipeEnabled]="false" [content]="content" class="navigation-menu left-menu" (ionOpen)="openMenu()">
+ <ion-app>
+
+
 	<ion-header>
-		<ion-navbar>
+		<ion-toolbar>
 			<ion-title>
 				<div class="title">
 					Maxx
@@ -12,15 +13,16 @@
 			<button ion-button menuToggle color="dark">
 				<ion-icon name="md-close"></ion-icon>
 			</button>
-		</ion-navbar>
+		</ion-toolbar>
 	</ion-header>
-
+	
+	
 	<ion-content>
 		<ul class="app-menu">
-			<li *ngFor="let page of menuPages">
-				<button class="app-menu__button" [class.is-open]="page?.submenu && page?.isOpen" ion-button (click)="openPage(page, $event)" color=white>
+			<li *ngFor="let page of appPages">
+				<ion-button class="app-menu__button" [class.is-open]="page?.submenu && page?.isOpen" ion-button (click)="openPage(page, $event)" color=white>
 					<div class="icon-wrapper" [ngClass]="'icon-wrapper--' + page.color">
-						<ion-icon [name]="page.icon" *ngIf="page.icon !== 'custom'"></ion-icon>
+						<ion-icon name="page.icon" *ngIf="page.icon !== 'custom'"></ion-icon>
 						<div class="custom-icon" *ngIf="page.icon === 'custom'">
 							<div *ngFor="let i of [0,1,2,3]" class="bar" [ngClass]="'bar-' + i"></div>
 						</div>
@@ -28,40 +30,42 @@
 					<span class="custom-icon" [ngClass]="page.component" *ngIf="page.icon === 'custom'"></span>
 					{{page.title}}
 					<ion-icon *ngIf="page?.submenu" class="submenu-icon" name="fa-chevron-right"></ion-icon>
-				</button>
+				</ion-button>
 			</li>
 			<li>
-				<button class="app-menu__button" ion-button (click)="logOut()" color=white>
+				<ion-button class="app-menu__button" ion-button (click)="logOut()" color=white>
 					<div class="icon-wrapper">
 						<ion-icon name="lnr-move-out-right"></ion-icon>
 					</div>
 					Uitloggen
-				</button>
+				</ion-button>
 			</li>
 		</ul>
 	</ion-content>
-</ion-menu>
-
-<ion-menu side="right" type="overlay" [swipeEnabled]="false" [content]="content" class="navigation-menu right-menu">
-	<ion-header>
-		<ion-navbar>
-			<ion-title>
-				<div class="title">
-					{{ menuContent.title }}
-				</div>
-			</ion-title>
-			<div divider nospace=true></div>
-			<ion-buttons end>
-				<button ion-button menuToggle="right" color="dark">
-					<ion-icon name="md-close"></ion-icon>
-				</button>
-			</ion-buttons>
-		</ion-navbar>
-	</ion-header>
-
-	<ion-content>
-		<p *ngIf="menuContent.header">{{ menuContent.header }}</p>
-		<div [innerHTML]="menuContent.content" class="menu-content"></div>
-	</ion-content>
-</ion-menu>
-
+	
+	
+	<ion-menu side="right" type="overlay" swipeGesture="false" contentId="content" class="navigation-menu right-menu">
+		<ion-header>
+			<ion-toolbar>
+				<ion-title>
+					<div class="title">
+						{{ menuContent.title }}
+					</div>
+				</ion-title>
+				<div divider nospace=true></div>
+				<ion-buttons end>
+					<button ion-button menuToggle="right" color="dark">
+						<ion-icon name="md-close"></ion-icon>
+					</button>
+				</ion-buttons>
+			</ion-toolbar>
+		</ion-header>
+	
+		<ion-content>
+			<p *ngIf="menuContent.header">{{ menuContent.header }}</p>
+			<div [innerHTML]="menuContent.content" class="menu-content"></div>
+		</ion-content>
+	</ion-menu> 
+	
+	
+ </ion-app>

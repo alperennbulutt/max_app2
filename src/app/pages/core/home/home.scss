@@ -1,0 +1,144 @@
+page-home {
+	.menu-toggle {
+		position: absolute;
+		top: 50%;
+		left: 30px;
+	}
+
+	.toolbar-ios {
+		min-height: 40px;
+	}
+
+	.home__content {
+		display: flex;
+		height: 100%;
+		align-items: flex-end;
+		justify-content: center;
+		flex-flow: row wrap;
+	}
+
+	.home__your-max {
+		display: flex;
+		color: $color-text;
+		font-family: $font-primary;
+		justify-content: center;
+		align-items: center;
+
+		.home__your-max--left {
+			text-align: right;
+			line-height: 40px;
+		}
+
+		.home__your-max--right {
+			margin-left: 20px;
+		}
+
+		.small {
+			font-size: 32px;
+		}
+
+		.big {
+			margin-top: -14px;
+			font-size: 72px;
+		}
+
+		.extra-big {
+			font-size: 150px;
+			line-height: 110px;
+		}
+	}
+
+	.home__button-container {
+		display: flex;
+		justify-content: space-between;
+		flex-flow: row wrap;
+
+		button {
+			margin: 0;
+			padding: 14px;
+			min-height: 100px;
+			width: 48%;
+			height: auto;
+			border-radius: 16px;
+			color: $color-text;
+			text-align: center;
+			white-space: normal;
+			font-size: 20px;
+
+			&:nth-child(n+3) {
+				margin-top: 10px;
+			}
+
+			.button-inner {
+				position: relative;
+				display: block;
+			}
+
+			&.has-mark {
+				.button-inner:before {
+					position: absolute;
+					top: -8px;
+					left: 50%;
+					z-index: 2;
+					display: flex;
+					margin-left: 25px;
+					width: 20px;
+					height: 20px;
+					border: 2px solid $color-white;
+					border-radius: 100px;
+					background: $color-red;
+					color: $color-white;
+					content: '!';
+					font-family: $font-secondary;
+					font-size: 15px;
+					font-weight: 500;
+					transform: translateX(-50%);
+					justify-content: center;
+					align-items: center;
+				}
+			}
+
+			&.blue-text {
+				color: #1c579d;
+			}
+
+			&.white-text {
+				color: $color-white;
+			}
+
+			&.rotate-icon {
+				ion-icon {
+					transform: rotate(-45deg);
+				}
+			}
+
+			img {
+				display: block;
+				margin: 0 auto 5px;
+				max-width: 30px;
+			}
+
+			ion-icon {
+				display: block;
+				margin-bottom: 5px;
+				width: 100%;
+				font-size: 32px;
+				line-height: 1;
+			}
+		}
+	}
+
+	@media screen and (max-height: 620px) {
+		.home__your-max {
+			margin-top: -10px;
+		}
+
+		.home__your-max .extra-big {
+			font-size: 130px;
+		}
+
+		.divider {
+			margin: 25px 0;
+		}
+	}
+}

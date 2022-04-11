@@ -1,0 +1,33 @@
+page-faq {
+	ion-content {
+		.question-wrapper {
+			margin-top: 10px;
+			color: $color-text;
+		}
+
+		.question {
+			overflow: hidden;
+		}
+
+		.question__title {
+			position: relative;
+			margin: 0;
+			padding-left: 36px;
+			font-family: $font-primary;
+			font-size: 17px;
+
+			ion-icon {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				padding-left: 2px;
+				font-size: 26px;
+				transform: translateY(-50%);
+			}
+		}
+
+		.question__content {
+			line-height: 1.5;
+		}
+	}
+}

@@ -1,0 +1,55 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Sessie overzicht
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="gradient-background">
+	<ion-list>
+		<ion-item>
+			<ion-label stacked>Je vorige WDJ-sessie was op:</ion-label>
+			<div item-content>
+				{{ prevSession.startDate | moment: 'D MMMM' }}
+			</div>
+		</ion-item>
+
+		<ion-item *ngIf="prevSession.lessonId && prevSessionLesson">
+			<ion-label stacked>Deze sessie ging over:</ion-label>
+			<div item-content>
+				{{ prevSessionLesson.title }}
+			</div>
+		</ion-item>
+
+		<ion-item *ngIf="prevSession.goals">
+			<ion-label stacked>Jouw doel:</ion-label>
+			<div item-content>
+				<strong *ngFor="let goal of prevSession.goals.items">
+					<span class="day-indicator">{{ goal.date | moment: 'dd' }}</span> {{ goal.value }} gla{{ goal.value === 1 ? 's' : 'zen' }} alcohol<br />
+				</strong>
+			</div>
+		</ion-item>
+
+		<ion-item>
+			<button
+				ion-button
+				inline
+				navPush="Lesson"
+				[navParams]="{ id: prevSession.lessonId, pageId: 99999999999, continuePage: 'pop', continuePageParams: '{}' }"
+			>Samenvatting</button>
+		</ion-item>
+
+		<ion-item>
+			<ion-label stacked>De volgende sessie is op:</ion-label>
+			<div item-content>
+				{{ nextSession.startDate | moment: 'D MMMM' }}
+			</div>
+		</ion-item>
+	</ion-list>
+
+	<div class="gradient-background__content-title">
+		Tot dan!<br />
+		Watdrinkjij
+	</div>
+</ion-content>

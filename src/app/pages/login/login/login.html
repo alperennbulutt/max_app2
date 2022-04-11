@@ -1,0 +1,92 @@
+<ion-header>
+	<ion-navbar hideBackButton="true">
+		<div class="login__switch-button">
+			<button ion-button clear (click)="showLogin = !showLogin">
+				 {{!showLogin ? 'Log in' : 'Aanmelden'}}
+			</button>
+		</div>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+		<div class="login-top">
+			<div>
+				<div class="big">
+					Maxx
+				</div>
+				<div class="small">
+					{{showLogin ? 'Log in' : 'Aanmelden'}}
+				</div>
+			</div>
+		</div>
+		<ng-container *ngIf="showLogin">
+			<form class="login__form input-form" [formGroup]="loginForm" (ngSubmit)="login()">
+				<ion-list>
+					<ion-item>
+						<ion-input type="email" formControlName="email" placeholder="E-mail"></ion-input>
+					</ion-item>
+					<form-error-message [control]="loginForm.controls.email" [submitted]="isLoginSubmitted"></form-error-message>
+					<ion-item class="password">
+						<div item-content>
+							<password-viewer formControlName="password" placeholder="Wachtwoord"></password-viewer>
+						</div>
+					</ion-item>
+					<form-error-message [control]="loginForm.controls.password" [submitted]="isLoginSubmitted"></form-error-message>
+				</ion-list>
+				<div class="login__password-forgot">
+					<button ion-button clear type="button" navPush="PasswordForgot" [navParams]="{ email: loginForm.value.email }">{{ 'LOGIN.LOGIN.password-forgot-button-text' | translate }}</button>
+				</div>
+				<button ion-button full icon-end type="submit">
+					{{ 'LOGIN.LOGIN.login-button-text' | translate }}
+					<ion-icon name="md-arrow-round-forward"></ion-icon>
+				</button>
+			</form>
+		</ng-container>
+
+		<ng-container *ngIf="!showLogin">
+			<form class="login__form input-form" [formGroup]="registerForm" (ngSubmit)="register()">
+				<ion-list>
+					<ion-item>
+						<ion-input type="email" formControlName="email" placeholder="E-mail"></ion-input>
+					</ion-item>
+					<form-error-message [control]="registerForm.controls.email" [submitted]="isRegisterSubmitted"></form-error-message>
+					<ion-item class="password">
+						<div item-content>
+							<password-viewer formControlName="password" placeholder="Wachtwoord"></password-viewer>
+						</div>
+					</ion-item>
+					<form-error-message [control]="registerForm.controls.password" [submitted]="isRegisterSubmitted"></form-error-message>
+					<ion-item class="select-switch">
+						<ion-label stacked>{{ 'LOGIN.LOGIN.gender-label' | translate }}</ion-label>
+						<div item-content>
+							<select-switch [options]="('LOGIN.LOGIN.gender-options' | translate) || []" formControlName="gender">
+							</select-switch>
+						</div>
+					</ion-item>
+					<form-error-message [control]="registerForm.controls.gender" [submitted]="isRegisterSubmitted"></form-error-message>
+					<ion-item class="date-picker" [class.no-age]="noAgeSelected" [class.no-value]="registerForm.value.age === ''">
+						<ion-label stacked>
+							{{ 'LOGIN.LOGIN.age-label' | translate }}
+						</ion-label>
+						<ion-datetime #agePicker displayFormat="YY" (ionChange)="noAgeSelected = false;" [ngModel]="'0018'" pickerFormat="YY" min="0018" max="0099" formControlName="age"></ion-datetime>
+					</ion-item>
+					<form-error-message [control]="registerForm.controls.age" [submitted]="isRegisterSubmitted"></form-error-message>
+					<ion-item class="terms">
+						<ion-label>
+							<ng-template ngFor let-part [ngForOf]="('LOGIN.LOGIN.terms-label' | translate)">
+								<ng-template [ngIf]="part !== 'button'">{{ part }}</ng-template>
+								<ng-template [ngIf]="part === 'button'">
+									<a navPush="Info" [navParams]="{ code: 'TERMS' }">{{ 'LOGIN.LOGIN.terms-button-label' | translate }}</a>
+								</ng-template>
+							</ng-template>
+						</ion-label>
+						<ion-checkbox formControlName="terms"></ion-checkbox>
+					</ion-item>
+					<form-error-message [control]="registerForm.controls.terms" [submitted]="isRegisterSubmitted"></form-error-message>
+				</ion-list>
+				<button ion-button full type="submit">{{ 'LOGIN.LOGIN.register-button-text' | translate }}</button>
+			</form>
+		</ng-container>
+	</div>
+	</ion-content>

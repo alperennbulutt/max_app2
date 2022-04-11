@@ -1,0 +1,115 @@
+page-login {
+    ion-header {
+        ion-navbar.toolbar-ios ion-title {
+            padding-right: 24px !important;
+            padding-left: 24px !important;
+        }
+    }
+
+    .picker-opts {
+        background: red;
+    }
+
+    .login__switch-button {
+        padding-right: 20px;
+        text-align: right;
+    }
+
+    .login-top {
+        display: flex;
+        color: $color-text;
+        text-align: right;
+        font-family: $font-primary;
+        line-height: 1;
+        justify-content: center;
+        flex-flow: row wrap;
+
+        .big {
+            font-size: 48px;
+        }
+
+        .small {
+            margin-top: -5px;
+            font-size: 22px;
+        }
+    }
+
+    .login__form {
+        margin-top: 20px;
+
+        ion-input {
+            margin-bottom: 15px;
+            border-bottom: 2px solid $color-dark;
+        }
+
+        .password {
+            ion-label {
+                display: none;
+            }
+        }
+
+        ion-label {
+            color: $color-text;
+            font-family: $font-primary;
+        }
+
+        .select-switch {
+            margin-bottom: 10px;
+
+            ion-label {
+                margin-top: 5px;
+                margin-bottom: 7px;
+            }
+        }
+
+        .date-picker {
+            position: relative;
+            margin-bottom: 15px;
+
+            &:before {
+                position: absolute;
+                bottom: 11px;
+                left: 25px;
+                color: $color-text;
+                content: 'jaar';
+                font-family: $font-primary;
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+            &.no-age {
+                &:before,
+                .datetime-text {
+                    opacity: 0;
+                }
+            }
+
+            &.no-value:before {
+                opacity: 0;
+            }
+        }
+
+        .date-picker-unit {
+            position: absolute;
+        }
+
+        .terms {
+            margin-bottom: 10px;
+        }
+    }
+
+    .login__password-forgot {
+        margin-bottom: 20px;
+        text-align: right;
+
+        button {
+            padding: 0;
+            font-size: 13px;
+        }
+    }
+
+    .terms .item-inner {
+        position: relative;
+        z-index: 10;
+    }
+}

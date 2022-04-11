@@ -1,0 +1,138 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Beloon jezelf
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<div class="confetti" *ngIf="showConfetti" @fadeOut>
+	<img [src]="gifUrl">
+</div>
+
+<ion-content>
+	<div class="wrapper">
+		<div class="reward-yourself">
+			<div class="reward-yourself__intro">
+					{{currentIntro}}
+				</div>
+				<div divider></div>
+			<div class="reward-yourself__inner">
+				<div *ngIf="rewardState === 0">
+					<div>
+						<div class="reward-yourself-question no-space">
+							Wanneer verdien je je beloning?
+						</div>
+						<radio-component [items]="options" [initValue]="reward?.goal" (onValueChange)="buildReward('goal', $event)"></radio-component>
+					</div>
+					<div class="days-picker-wrapper">
+						<div class="reward-yourself-question">
+							Na hoeveel dagen verdien je je beloning?
+						</div>
+						<div class="days" *ngIf="reward?.totalDaysUntilGoal">{{reward.totalDaysUntilGoal}} {{reward.totalDaysUntilGoal === '1' ? 'dag' : 'dagen'}}</div>
+						<div>
+							<div class="placeholder" *ngIf="!reward.totalDaysUntilGoal">Kies hier het aantal dagen</div>
+							<ion-datetime
+								[(ngModel)]="days"
+								(ionChange)="buildReward('totalDaysUntilGoal', days)"
+								displayFormat=" "
+								pickerFormat="YY"
+								min="0001"
+								max="0099"
+							></ion-datetime>
+						</div>
+					</div>
+				</div>
+
+				<div *ngIf="rewardState === 1">
+					<div class="reward-yourself-question">
+						Kies jouw beloning!
+					</div>
+					<div class="reward-yourself__choice-wrapper">
+						<div class="reward-yourself-option"
+							*ngFor="let option of priceOptions"
+							(click)="buildReward('rewardName', option)"
+							[class.is-selected]="option.id === reward.rewardName?.id"
+							>
+							{{option.label}}
+						</div>
+					</div>
+					<input-component (onAddCustom)="addItem($event)" [placeholder]="'Voeg een eigen beloning toe'"></input-component>
+
+					<div class="editor-wrapper">
+						<div class="reward-yourself-question">
+							Kies een afbeelding bij je beloning
+						</div>
+						<editor
+							class="reward-editor__image-picker"
+							[options]="imagePicker"
+							[defaultActiveImage]="reward?.image"
+							(onImageChange)="buildReward('image', $event)"
+							>
+						</editor>
+					</div>
+				</div>
+
+				<div *ngIf="rewardState === 2">
+					<div class="current-reward">
+						<div class="current-reward__image">
+							<img [src]="reward.image | URLSanitizer" />
+							<div class="current-reward__image-overlay">
+								<div class="reward-name">
+									{{reward.rewardName.label}}
+								</div>
+								<div class="reward-requirement">
+									Je doel: {{getGoalLine('goalText')}}
+								</div>
+							</div>
+						</div>
+						<div class="current-reward__timer">
+							<ng-container *ngIf="reward?.daysReached > 0 else finished">
+								{{getGoalLine('countdownText')}}
+							</ng-container>
+							<ng-template #finished>
+								{{getGoalLine('finished')}}
+							</ng-template>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<div class="button-container">
+			<ng-container *ngIf="(reward?.finished && rewardState === 2) else defaultNav">
+				<button ion-button icon-start class="themed-button" (click)="reset(true)">
+					Maak nieuwe beloning aan
+				</button>
+			</ng-container>
+			<ng-template #defaultNav>
+				<ng-container *ngIf="onRewardPage else navButtons">
+					<button ion-button icon-start class="themed-button" (click)="editReward()">
+						Wijzigen
+					</button>
+					<button ion-button icon-start class="themed-button" (click)="deleteReward()">
+						Verwijderen
+					</button>
+				</ng-container>
+				<ng-template #navButtons>
+					<ng-container *ngIf="!isEditing else editNav">
+						<button ion-button icon-start class="themed-button" [disabled]="rewardState === 0" (click)="setState('prev')">
+							Vorige
+						</button>
+						<button ion-button icon-start class="themed-button" [disabled]="!nextAllowed(rewardState)" (click)="setState('next')">
+							{{rewardState < 1 ? 'Volgende' : 'Beloning opslaan'}}
+						</button>
+					</ng-container>
+					<ng-template #editNav>
+						<button ion-button icon-start class="themed-button" (click)="rewardState = 2; isEditing = false">
+							Annuleren
+						</button>
+						<button ion-button icon-start class="themed-button" (click)="saveReward()">
+							Opslaan
+						</button>
+					</ng-template>
+				</ng-template>
+			</ng-template>
+		</div>
+		</div>
+	</div>
+</ion-content>

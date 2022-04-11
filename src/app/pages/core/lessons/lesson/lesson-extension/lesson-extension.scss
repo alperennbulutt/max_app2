@@ -1,0 +1,56 @@
+page-lesson-extension {
+	ion-header {
+	}
+
+	ion-content {
+		.label {
+			margin-bottom: 10px;
+			font-size: 17px;
+		}
+
+		textarea-component {
+			display: block;
+			margin-bottom: 20px;
+
+			textarea {
+				color: black;
+				font-family: $font-secondary !important;
+				font-size: 16px !important;
+				font-weight: bold;
+			}
+		}
+
+		.text-input[disabled] {
+			opacity: 1;
+		}
+
+		.title {
+			display: flex;
+			padding: 0 12px;
+			height: 36px;
+			justify-content: center;
+			align-items: center;
+
+			select-switch {
+				flex-grow: 1;
+			}
+
+			.page-title {
+				color: $color-primary;
+				font-family: $font-bold;
+				font-size: 16px;
+			}
+		}
+
+		.content {
+			overflow: auto;
+			padding: 24px 12px;
+			height: calc(100% - 36px);
+			color: $color-primary;
+
+			p:first-child {
+				margin-top: 0;
+			}
+		}
+	}
+}

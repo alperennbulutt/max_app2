@@ -1,0 +1,13 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			{{ page?.title }}
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+		<div [innerHTML]="page?.content"></div>
+	</div>
+</ion-content>

@@ -1,0 +1,130 @@
+<ion-header>
+	<ion-navbar [hideBackButton]="noSituations">
+		<ion-title>
+			{{pageData.title}}
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper buttons-bottom">
+
+		<div class="situations__intro">
+			 {{pageData.intro}}
+		</div>
+
+		<div divider nospace=true></div>
+
+		<div class="situations__small-view" *ngIf="isEditing && !openForm">
+			<div>
+				<div class="label label-date">
+					{{situation.date | moment: 'DD MMM YYYY HH:mm'}}
+				</div>
+				<div class="label">
+					{{situation.description}}
+				</div>
+			</div>
+			<div class="open-button" (click)="openForm = true">
+				Toon meer
+				<ion-icon name="arrow-down"></ion-icon>
+			</div>
+		</div>
+
+		<form class="situations__form situations__column" [formGroup]="form" id="situationForm" (ngSubmit)="save()" *ngIf="openForm || !isEditing">
+			<ion-list>
+				<ion-item>
+					<ion-label>Wanneer:</ion-label>
+					<div item-content (click)="datePicker.open()">
+						<ion-datetime #datePicker class="date-picker"
+						formControlName="event_date"
+						displayFormat="DD MMM, YYYY HH:mm"
+						[(ngModel)]="situation.date"
+						[disabled]="canBeReviewed"
+						[min]="minDate"
+						[max]="maxDate"></ion-datetime>
+						<ion-icon name=lnr-calendar></ion-icon>
+					</div>
+				</ion-item>
+				<form-error-message [control]="form.controls.event_date" [submitted]="isSubmitted"></form-error-message>
+				<ion-item>
+					<ion-label>Omschrijving:</ion-label>
+					<ion-input type="text" formControlName="description" [(ngModel)]="situation.description"></ion-input>
+				</ion-item>
+				<form-error-message [control]="form.controls.description" [submitted]="isSubmitted"></form-error-message>
+
+				<ion-item>
+					<ion-label>Met wie?</ion-label>
+					<ion-input type="text" formControlName="guests" [(ngModel)]="situation.who"></ion-input>
+				</ion-item>
+				<form-error-message [control]="form.controls.guests" [submitted]="isSubmitted"></form-error-message>
+
+				<div class="strategy-theme-container">
+					<div class="strategy-theme-header">Mijn aanpak voor deze situatie</div>
+					<div class="strategy-theme__buttons-wrapper">
+						<div class="strategy-theme__button"
+						tappable
+						*ngFor="let strategy of myStrategies; let i = index"
+						(click)="presentStrategies(i)"
+						[class.active]="myStrategies[i]?.strategies && myStrategies[i]?.strategies.length > 0"
+						>
+							{{strategy.name}}
+						</div>
+					</div>
+					<div class="chosen-strategy-wrapper">
+						<ng-container *ngFor="let strategy of myStrategies; let strategyIndex = index">
+							<div [@listAnimation]="strategy?.strategies && strategy?.strategies.length">
+								<div *ngFor="let rule of strategy.strategies; let i = index" class="strategy-item">
+									<span class="label">
+										{{strategy.name}}:
+									</span>
+									<span class="strategy-content">{{rule.title}}</span>
+									<ion-icon tappable name="lnr-prohibited" (click)="removeStrategy(strategyIndex, i, rule)"></ion-icon>
+								</div>
+							</div>
+						</ng-container>
+					</div>
+				</div>
+				<ion-checkbox formControlName="strategies" [checked]="hasStrategies" class="strategy-check"></ion-checkbox>
+				<form-error-message [control]="form.controls.strategies" [submitted]="isSubmitted"></form-error-message>
+				<ion-item>
+					<ion-label>Herinner mij</ion-label>
+					<ion-select [(ngModel)]="situation.notificationAt" formControlName="reminder">
+						<ion-option value="-1">Geen herinnering</ion-option>
+						<ion-option value="0">Bij aanvang</ion-option>
+						<ion-option value="5">5 minuten voor aanvang</ion-option>
+						<ion-option value="15">15 minuten voor aanvang</ion-option>
+						<ion-option value="30">30 minuten voor aanvang</ion-option>
+					</ion-select>
+				</ion-item>
+			</ion-list>
+		</form>
+
+		<div divider nospace=true gaps=2></div>
+
+		<div class="review-fields" *ngIf="canBeReviewed">
+			<div class="situations__column situations__rating">
+				Hoe succesvol was je?
+				<star-rating [(rating)]="situation.rating" (ratingChange)="ratingChange($event)"></star-rating>
+			</div>
+			<div class="situations__note">
+				<div class="situations__column">
+					Dit had te maken met
+				</div>
+				<ion-textarea [(ngModel)]="situation.note" placeholder="Voeg notitie toe"></ion-textarea>
+			</div>
+		</div>
+
+		<div class="button-container" [class.is-editing]="isEditing">
+			<button ion-button full (click)="onCancel()">
+				Annuleren
+			</button>
+			<button ion-button clear class="themed-button remove-button" *ngIf="isEditing" (click)="delete()">
+				<ion-icon name="lnr-trash"></ion-icon>
+			</button>
+			<button ion-button full [disabled]="canBeReviewed && (!motivatorRating && !situation.note)" class="themed-button" (click)="done()">
+				Opslaan
+			</button>
+		</div>
+	</div>
+
+</ion-content>

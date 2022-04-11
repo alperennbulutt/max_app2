@@ -1,0 +1,250 @@
+$arrow-size: 12px;
+$balloon-color: $color-white;
+
+page-hold-on {
+	.toolbar-title {
+		position: relative;
+	}
+
+	.motivator__slide {
+		.slide-zoom {
+			height: 100%;
+		}
+	}
+
+	.motivator__content-wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+
+		&.wrapper {
+			padding-right: 10px;
+			padding-left: 10px;
+		}
+	}
+
+	.motivator__slider-wrapper {
+		position: relative;
+		max-height: 565px;
+		height: 88%;
+
+		.swiper-container {
+			border-radius: 5px;
+		}
+	}
+
+	.motivator__wrapper {
+		height: 100%;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.motivator__text {
+		position: absolute;
+		top: 50%;
+		padding: 0 30px;
+		width: 100%;
+		color: white;
+		text-align: center;
+		text-shadow: 2px 2px 1px rgba(0, 0, 0,0.4);
+		font-size: 40px;
+		line-height: 42px;
+		transform: translateY(-50%);
+	}
+
+	.motivator__rating-buttons {
+		position: absolute;
+		bottom: 30px;
+		left: 50%;
+		z-index: 10;
+		display: flex;
+		max-width: 250px;
+		width: 95%;
+		transform: translateX(-50%);
+		justify-content: space-between;
+		align-items: flex-end;
+
+		ion-icon {
+			display: block;
+
+			& + .label {
+				margin-top: 6px;
+			}
+		}
+
+		&.has-rating {
+			.rating-button:not(.is-rated) {
+				background: $color-grey;
+				color: $color-text;
+			}
+		}
+	}
+
+	.motivator__rating-buttons .rating-button {
+		width: 65px;
+		height: 65px;
+		border: 2px solid transparent;
+		border-radius: 100%;
+		background: $color-white;
+		box-shadow: none;
+		color: $color-white;
+		font-size: 14px;
+		transition: border 0.3s ease, background 0.5s ease;
+
+		.button-inner {
+			display: block;
+		}
+
+		ion-icon {
+			padding-left: 0;
+			font-size: 18px;
+		}
+
+		&.is-rated {
+			border-color: $color-white;
+		}
+
+		&--like {
+			background: $color-primary;
+		}
+
+		&--dislike {
+			background: $color-red;
+		}
+
+		&--favorite {
+			width: 45px;
+			height: 45px;
+			background: $color-white !important;
+
+			ion-icon {
+				position: relative;
+				top: -1px;
+				left: -4px;
+				margin-bottom: 0;
+				color: $color-text;
+				font-size: 21px;
+
+				&.favorite {
+					color: $color-yellow;
+				}
+			}
+		}
+	}
+
+	.button-wrapper {
+		display: flex;
+		margin-top: 2%;
+		align-items: center;
+		flex-grow: 1;
+
+		.info-button ion-icon {
+			font-weight: bold;
+		}
+
+		.edit-button ion-icon {
+			margin-right: 2px;
+			font-size: 19px;
+		}
+	}
+
+	.icon-wrapper {
+		display: flex;
+		margin-left: 20px;
+		font-size: 20px;
+		justify-content: space-between;
+		flex-grow: 1;
+	}
+
+	@media screen and (max-width: 320px) {
+		.button-wrapper .button {
+			padding: 12px 0 14px;
+			font-size: 15px;
+		}
+	}
+}
+
+.speak-balloon {
+	position: absolute;
+	bottom: 110px;
+	left: 50%;
+	z-index: 10;
+	width: 90%;
+	color: $color-text;
+	text-align: center;
+	font-weight: 500;
+	transform: translateX(-50%);
+
+	.close-button {
+		position: absolute;
+		top: -10px;
+		right: -10px;
+		z-index: 10;
+		z-index: 10;
+		display: flex;
+		width: 30px;
+		height: 30px;
+		border-radius: 100%;
+		background: #efefef;
+		box-shadow: 0 1px 2px rgba(0 ,0, 0, 0.5);
+		font-size: 20px;
+		justify-content: center;
+		align-items: center;
+
+		ion-icon {
+			color: $color-dark;
+			font-weight: bold;
+		}
+	}
+
+	.speak-balloon__inner {
+		position: relative;
+		padding: 10px;
+		border-radius: 5px;
+		background: $balloon-color;
+		font-size: 15px;
+		line-height: 20px;
+
+		p {
+			margin: 0;
+		}
+
+		&:after {
+			position: absolute;
+			bottom: -$arrow-size;
+			left: 50%;
+			width: 0;
+			height: 0;
+			border-top: $arrow-size solid $balloon-color;
+			border-right: $arrow-size solid transparent;
+			border-left: $arrow-size solid transparent;
+			content: '';
+			transform: translateX(-50%);
+		}
+	}
+}
+
+.button-container.is-custom {
+	.button {
+		margin-left: 0;
+		min-width: 0;
+		width: 40%;
+		flex-grow: 0;
+	}
+
+	.remove-button {
+		margin-left: 0;
+		padding-right: 0;
+		padding-left: 0;
+		min-width: 0;
+		width: 20%;
+		background: transparent;
+		color: $color-dark;
+
+		ion-icon {
+			padding-left: 0;
+			font-size: 26px;
+		}
+	}
+}

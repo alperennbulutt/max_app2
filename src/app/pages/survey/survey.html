@@ -1,0 +1,59 @@
+<ion-header>
+	<ion-navbar [hideBackButton]="hideBackButton">
+		<ion-title>
+			{{ survey?.name }}
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper buttons-bottom">
+		<survey-component #surveyComponent [survey]="survey" (onFinish)="finish($event)" *ngIf="!showResult"></survey-component>
+		<div class="survey-intro-image" *ngIf="surveyId == 35 && surveyComponent?.isFirstQuestion()">
+			<img src="assets/img/hoe_test_jezelf.png">
+		</div>
+		<result-component *ngIf="showResult">
+			<ng-container *ngIf="!survey?.outro">
+				<div class="result__head">
+					Jouw uitkomst van de test 'Hoe sta ik ervoor?'
+				</div>
+				<div divider></div>
+				<div contentParser [content]="feedback"></div>
+			</ng-container>
+
+			<ng-container *ngIf="survey?.outro">
+				<div divider></div>
+				<div contentParser [content]="survey?.outro"></div>
+
+				<div class="button-container">
+					<button class="themed-button" full ion-button navPop>
+						Afronden
+					</button>
+				</div>
+			</ng-container>
+		</result-component>
+
+		<div class="button-container">
+			<ng-container *ngIf="!showResult">
+				<button class="themed-button" full ion-button ion-icon icon-start [disabled]="surveyComponent?.isFirstQuestion()" (click)="surveyComponent.prevQuestion()">
+					<ion-icon name="arrow-back"></ion-icon>
+					Terug
+				</button>
+				<button class="themed-button" full ion-button ion-icon icon-end color="light" [disabled]="!surveyComponent?.nextAllowed"
+				 (click)="toNextQuestion()">
+					{{surveyComponent?.isLastQustion ? 'Bekijk resultaat' : 'Verder'}}
+					<ion-icon name="arrow-forward"></ion-icon>
+				</button>
+			</ng-container>
+			<ng-container *ngIf="showResult">
+				<button class="themed-button" full ion-button (click)="restartTest()" *ngIf="surveyId == 35">
+					Maak opnieuw
+				</button>
+				<button class="themed-button" full ion-button (click)="done()" *ngIf="surveyId == 36">
+					Sluiten
+				</button>
+			</ng-container>
+		</div>
+	</div>
+
+</ion-content>

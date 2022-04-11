@@ -1,0 +1,79 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Mijn profiel
+			<div divider nospace="true"></div>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+		<ion-spinner *ngIf="!user"></ion-spinner>
+
+		<div class="user_wrapper" *ngIf="user">
+			<ng-template [ngIf]="isEditing">
+				<form class="input-form" [formGroup]="userForm" (ngSubmit)="updateProfile()">
+					<ion-list>
+						<ion-item>
+							<ion-label stacked>{{ 'LOGIN.LOGIN.email-label' | translate }}</ion-label>
+							<ion-input type="text" formControlName="email"></ion-input>
+						</ion-item>
+						<form-error-message [control]="userForm.controls.email" [submitted]="isRegisterSubmitted"></form-error-message>
+						<ion-item>
+							<ion-label stacked>{{ 'LOGIN.LOGIN.gender-label' | translate }}</ion-label>
+							<div item-content>
+								<select-switch [options]="('LOGIN.LOGIN.gender-options' | translate) || []" formControlName="gender">
+								</select-switch>
+							</div>
+						</ion-item>
+						<form-error-message [control]="userForm.controls.gender" [submitted]="isRegisterSubmitted"></form-error-message>
+						<ion-item class="date-picker">
+							<ion-label stacked>{{ 'LOGIN.LOGIN.age-label' | translate }}</ion-label>
+							{{userAge}}
+							<ion-datetime displayFormat="YY" pickerFormat="YY" min="0018" max="0099" formControlName="age"></ion-datetime>
+						</ion-item>
+						<form-error-message [control]="userForm.controls.age" [submitted]="isRegisterSubmitted"></form-error-message>
+					</ion-list>
+					<div class="input-form__buttons button-container">
+						<button ion-button clear class="input-form__submit"  class="cancel-button" type="button" (click)="toggleEditProfile()">{{ 'GENERAL.cancel-text' | translate }}</button>
+						<button ion-button inset class="input-form__submit" type="submit">{{ 'GENERAL.save-text' | translate }}</button>
+					</div>
+				</form>
+			</ng-template>
+
+			<ng-template [ngIf]="!isEditing">
+				<ion-list>
+					<ion-item>
+						<ion-label stacked>Geregistreerd op:</ion-label>
+						<div item-content class="label-content">
+							{{ user.reg_date | moment: 'D MMMM YYYY' }}
+						</div>
+					</ion-item>
+					<ion-item>
+						<ion-label stacked>{{ 'LOGIN.LOGIN.email-label' | translate }}</ion-label>
+						<div item-content class="label-content">
+							{{ user.email }}
+						</div>
+					</ion-item>
+					<ion-item>
+						<ion-label stacked>{{ 'LOGIN.LOGIN.gender-label' | translate }}</ion-label>
+						<div item-content class="label-content">
+							<strong [hidden]="gender.value !== user.gender" *ngFor="let gender of ('LOGIN.LOGIN.gender-options' | translate)">{{ gender.label }}</strong>
+						</div>
+					</ion-item>
+					<ion-item>
+						<ion-label stacked>{{ 'LOGIN.LOGIN.age-label' | translate }}</ion-label>
+						<div item-content class="label-content">
+							{{userAge}} jaar
+						</div>
+					</ion-item>
+				</ion-list>
+			</ng-template>
+
+			<div class="profile__footer" *ngIf="!isEditing">
+				<button ion-button full (click)="toggleEditProfile()">Wijzig</button>
+			</div>
+		</div>
+	</div>
+</ion-content>

@@ -1,0 +1,298 @@
+$theme-color: $color-pink;
+
+ion-app.platform-ios12 ion-content {
+	pointer-events: auto; /*fix scroll lock on ios12.2*/
+}
+
+page-module-planning-goal {
+	.goal__intro {
+		position: relative;
+		margin-bottom: 16px;
+		font-family: $font-secondary;
+		font-size: 17px;
+
+		span {
+			font-family: $font-secondary;
+			font-weight: 500;
+
+			&.is-editiable {
+				text-decoration: underline;
+				font-weight: 500;
+			}
+		}
+
+		.goals-date__datepicker {
+			display: flex;
+
+			ion-label {
+				margin: 0;
+			}
+
+			ion-datetime .datetime-text {
+				max-height: 0;
+				height: 0;
+			}
+		}
+	}
+
+	.divider {
+		margin: 25px 0;
+
+		&.bottom {
+			margin: 10px 0;
+		}
+	}
+
+	.editing-intro {
+		padding-right: 30px;
+
+		ion-icon {
+			position: absolute;
+			top: 0;
+			right: 0;
+			color: $theme-color;
+			font-size: 32px;
+		}
+	}
+
+	.date-picker__wrapper {
+		margin-top: 12px;
+	}
+
+	.date-picker__title {
+		margin-bottom: 15px;
+	}
+
+	.date-picker__item {
+		position: relative;
+		padding-bottom: 10px;
+		border-bottom: 1px solid $color-grey;
+
+		span {
+			display: inline-block;
+			width: 40px;
+			font-size: 15px;
+		}
+
+		ion-icon {
+			position: absolute;
+			right: 0;
+			margin-right: 10px;
+			color: $color-text;
+			font-size: 22px;
+			font-weight: bold;
+		}
+
+		&--first {
+			margin-bottom: 10px;
+		}
+	}
+
+	ion-content {
+		.goals__week-display {
+			display: flex;
+			margin-bottom: 14px;
+			border: 2px solid $theme-color;
+			border-radius: 6px;
+
+			.button {
+				padding: 8px 0;
+				width: 50%;
+				border-radius: 0;
+				text-decoration: none;
+				font-size: 14px;
+
+				&:last-child {
+					border-left: 2px solid $theme-color;
+				}
+
+				&.is-active {
+					background: $theme-color;
+					color: $color-white;
+				}
+			}
+		}
+
+		.delete-button {
+			margin-top: 10px;
+			font-weight: bold;
+
+			ion-icon {
+				margin-right: 5px;
+				font-size: 18px;
+				font-weight: bold;
+			}
+		}
+
+		ion-slides {
+			height: auto;
+		}
+
+		.list {
+			margin: 0 auto !important;
+			max-width: 340px;
+		}
+
+		.goal__save-button {
+			margin-top: 16px;
+
+			.button-container {
+				margin-bottom: 10px;
+			}
+
+			ion-icon {
+				font-size: 18px;
+			}
+
+			ion-icon.ion-ios-checkmark {
+				font-size: 36px;
+			}
+
+			ion-icon.ion-ios-refresh {
+				margin-right: 10px;
+				padding-right: 10px;
+				padding-left: 0;
+				font-size: 28px;
+				transform: rotateY(180deg);
+			}
+		}
+
+		.content-header {
+			margin-bottom: -8px;
+			min-height: 0;
+			text-align: left;
+		}
+
+		.week-overview {
+			font-family: $font-primary;
+		}
+
+		.item-block {
+			min-height: 0;
+		}
+
+		.item-input ion-label {
+			color: $color-text;
+			font-size: 16px;
+			flex-grow: 1;
+		}
+
+		ion-label[fixed] {
+			margin: 9px 0;
+			margin-right: 0 !important;
+			max-width: 210px;
+			color: $color-text;
+			flex-grow: 1;
+		}
+
+		.input-wrapper {
+			padding-bottom: 10px;
+		}
+
+		ion-list [item-content],
+		ion-list.list-ios [item-content] {
+			min-width: 50px;
+			width: auto;
+			text-align: center;
+			font-size: 15px;
+		}
+
+		ion-list [item-content].input,
+		ion-list.list-ios [item-content].input {
+			position: relative;
+			width: 120px;
+
+			&--head {
+				font-family: $font-secondary;
+				font-size: 15px;
+			}
+		}
+
+		number-input {
+			display: block;
+			overflow: hidden;
+			margin-right: 2px;
+			height: 32px;
+			border-radius: 30px;
+			background: $color-white;
+			box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.3);
+		}
+
+		number-input .number-input__button {
+			margin: 0 !important;
+			padding: 0 !important;
+			width: 40px;
+			height: 100%;
+			border-radius: 0;
+			background: transparent;
+			box-shadow: none;
+			font-size: 20px;
+			flex-grow: 0;
+
+			ion-icon {
+				padding-left: 0;
+				color: $color-text;
+				font-weight: bold;
+			}
+		}
+
+		.label-no-goal {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			text-align: center;
+			font-family: $font-secondary;
+			font-size: 16px;
+			font-weight: bold;
+			transform: translate(-50%, -50%);
+		}
+
+		number-input.has-no-goal {
+			ion-input * {
+				opacity: 0;
+			}
+		}
+
+		number-input .number-input__input {
+			border: none;
+			border-right: 1px solid rgba(217, 210, 199, 0.65);
+			border-left: 1px solid rgba(217, 210, 199, 0.65);
+
+			.text-input-ios {
+				min-width: 30px;
+				height: 100%;
+				pointer-events: none;
+			}
+		}
+
+		.button-container button.small {
+			min-width: 100px;
+		}
+	}
+
+	.no-drinks-label {
+		overflow: unset;
+	}
+
+	.open-modal {
+		&__icon {
+			position: relative;
+			top: 4px;
+			margin-left: 4px;
+			font-size: 21px;
+		}
+
+		&__label {
+			position: relative;
+
+			&:before {
+				position: absolute;
+				bottom: -1px;
+				width: 100%;
+				height: 1px;
+				background: $color-text;
+				content: '';
+			}
+		}
+	}
+}

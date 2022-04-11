@@ -1,0 +1,142 @@
+page-introduction {
+	ion-header {
+		.toolbar-ios {
+			min-height: 16px !important;
+		}
+	}
+
+	ion-slides {
+		min-height: 500px;
+		height: calc(100% - 40px);
+	}
+
+	.swiper-container {
+		padding-bottom: 25px;
+	}
+
+	.swiper-container-horizontal > .swiper-pagination-bullets {
+		bottom: 0;
+
+		.swiper-pagination-bullet {
+			margin: 0 3px;
+		}
+
+		.swiper-pagination-bullet {
+			width: 6px;
+			height: 6px;
+			opacity: 0.1;
+		}
+
+		.swiper-pagination-bullet-active {
+			opacity: 0.8;
+		}
+	}
+
+	.introduction__title {
+		color: $color-text;
+		text-align: center;
+		font-family: $font-primary;
+		font-size: 18px;
+	}
+
+	.introduction-container {
+		display: flex;
+		padding: 0 10px;
+		height: 100%;
+		flex-flow: row wrap;
+		align-items: center;
+		justify-content: center;
+
+		p {
+			margin: 0;
+			width: 100%;
+			text-align: center;
+			font-family: $font-secondary;
+			line-height: 21px;
+		}
+	}
+
+	.image-container {
+		margin-top: 20px;
+		width: 100%;
+		height: 65%;
+		text-align: center;
+
+		.image-holder {
+			position: relative;
+			display: inline-block;
+			padding: 13.5% 4%;
+			width: 64%;
+			height: 100%;
+
+			img {
+				display: block;
+			}
+
+			&:before {
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 10;
+				width: 100%;
+				height: 100%;
+				background-image: url(../assets/img/mobile.png);
+				background-position: center;
+				background-size: contain;
+				background-repeat: no-repeat;
+				content: '';
+			}
+
+			@media screen and (max-height: 580px) and (min-width: 360px) {
+				width: 56%;
+			}
+		}
+	}
+
+	.introduction__last-slide__title {
+		margin-top: -30px;
+		margin-bottom: 30px;
+		color: $color-text;
+		text-align: center;
+		font-family: $font-primary;
+		font-size: 60px;
+		line-height: 1;
+	}
+
+	.introduction__last-slide .button-container {
+		margin: 30px 0;
+	}
+
+	.introduction__footer {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		left: 50%;
+		z-index: 10;
+		display: flex;
+		padding: 0 10px 10px;
+		width: 90%;
+		height: 50px;
+		opacity: 1;
+		transition: opacity 0.4s ease;
+		transform: translateX(-50%);
+		justify-content: space-between;
+
+		@media screen and (max-width: 320px) {
+			height: 44px;
+		}
+
+		&.hide {
+			opacity: 0;
+		}
+
+		button.button {
+			text-decoration: none;
+			font-size: 15px;
+		}
+	}
+}
+
+.platform-ios:not(.platform-mobileweb) page-introduction .wrapper {
+	border-radius: 16px !important;
+}

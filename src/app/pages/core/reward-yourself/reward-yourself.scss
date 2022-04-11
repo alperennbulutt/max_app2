@@ -1,0 +1,132 @@
+page-reward-yourself {
+	.wrapper {
+		display: flex;
+	}
+
+	.confetti {
+		position: fixed;
+		bottom: -50px;
+		z-index: 999999;
+		width: 100%;
+		height: calc(110vh + 50px);
+		pointer-events: none;
+
+		img {
+			display: block;
+			height: 100%;
+		}
+	}
+
+	.divider {
+		margin: 24px 0;
+
+		&.no-topSpace {
+			margin-top: 0;
+		}
+	}
+
+	.reward-yourself-question {
+		margin-bottom: 10px;
+		font-family: 'blockbe-regular';
+		font-size: 15px;
+
+		&.no-space {
+			margin-bottom: 0;
+		}
+	}
+
+	.reward-yourself {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		flex: 1 0 100%;
+	}
+
+	.reward-yourself__intro {
+		font-size: 17px;
+	}
+
+	.reward-yourself__inner {
+		flex: 1 0 auto;
+	}
+
+	.days-picker-wrapper {
+		position: relative;
+		margin-top: 10px;
+
+		.placeholder {
+			position: absolute;
+			opacity: 0.4;
+			pointer-events: none;
+		}
+
+		.days {
+			position: absolute;
+			width: 100%;
+			font-size: 17px;
+		}
+	}
+
+	radio-component .input-wrapper {
+		font-size: 14px;
+		line-height: 22px;
+	}
+
+	.reward-yourself-option {
+		padding: 8px 5px;
+		border: 1px solid #efefef;
+		text-align: center;
+		flex: 0 0 calc(50% - 5px);
+
+		&.is-selected {
+			background: #efefef;
+		}
+
+		&:nth-child(n+3) {
+			margin-top: 10px;
+		}
+	}
+
+	.editor-wrapper {
+		margin-top: 20px;
+
+		.editor__image-picker {
+			border-radius: 4px;
+		}
+	}
+
+	.reward-yourself__choice-wrapper {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+	}
+
+	.current-reward__image {
+		position: relative;
+
+		img {
+			display: block;
+		}
+	}
+
+	.current-reward__image-overlay {
+		position: absolute;
+		bottom: 20px;
+		left: 50%;
+		padding: 10px;
+		width: calc(100% - 20px);
+		border-radius: 5px;
+		background: #efefef;
+		transform: translateX(-50%);
+	}
+
+	.reward-name {
+		font-family: 'blockbe-regular';
+		font-size: 17px;
+	}
+
+	.current-reward__timer {
+		padding: 10px;
+		background: #efefef;
+	}
+}

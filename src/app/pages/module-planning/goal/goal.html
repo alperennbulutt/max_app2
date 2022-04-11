@@ -1,0 +1,161 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Doelen
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="color">
+    <div class="wrapper buttons-bottom">
+        <div class="goal__intro">
+            <ng-container *ngIf="isEditing">
+                <div class="editing-intro">
+                    Bepaal wat je maximaal per dag wilt drinken. Klik voor
+                    advies op de informatie knop
+                    <ion-icon
+                        name="information-circle"
+                        (click)="openInfo()"
+                    ></ion-icon>
+                </div>
+                <div class="date-picker__wrapper">
+                    <div class="date-picker__title">
+                        Stel je periode van je doel in
+                    </div>
+                    <div
+                        tappable
+                        class="date-picker__item date-picker__item--first"
+                        (click)="openDatepicker(true)"
+                    >
+                        <span> van: </span> {{goalDates.startDate.formated}}
+                        <ion-icon name="lnr-calendar"></ion-icon>
+                    </div>
+                    <div
+                        tappable
+                        class="date-picker__item"
+                        (click)="openDatepicker()"
+                    >
+                        <span> Tot: </span> {{goalDates.endDate.formated}}
+                        <ion-icon name="lnr-calendar"></ion-icon>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="!isEditing">
+                Jouw maximum aantal glazen voor
+                <br />
+                <span>{{goalDates.startDate.formated}}</span>
+                tot en met
+                <span>{{goalDates.endDate.formated}}</span>
+            </ng-container>
+        </div>
+
+        <div divider></div>
+
+        <ion-item no-lines hidden="true">
+            <ion-datetime
+                #datePicker
+                displayFormat="D MMMM YYYY"
+                (ionChange)="changeGoalDates($event)"
+                [max]="maxDateYear"
+                [(ngModel)]="goalDates.activeDate.date"
+            ></ion-datetime>
+        </ion-item>
+        <ion-list class="week-overview">
+            <ion-item>
+                <ion-label fixed></ion-label>
+                <div item-content class="input input--head">
+                    <span tappable (click)="openMeasures()" class="open-modal">
+                        <span class="open-modal__label">
+                            Aantal glazen
+                        </span>
+                        <ion-icon
+                            class="open-modal__icon"
+                            name="ios-information-circle-outline"
+                        ></ion-icon>
+                    </span>
+                    <button
+                        ion-button
+                        clear
+                        ion-icon
+                        icon-start
+                        class="delete-button"
+                        *ngIf="isEditing"
+                        (click)="resetEntries()"
+                    >
+                        <ion-icon name="lnr-rotate-left"></ion-icon>
+                        Wis doelen
+                    </button>
+                </div>
+            </ion-item>
+            <ion-item *ngFor="let day of dayEntries">
+                <ion-label fixed>Op {{ day.dateString }}</ion-label>
+                <div item-content class="input">
+                    <span *ngIf="day.noGoal" class="label-no-goal">?</span>
+                    <number-input
+                        minValue="0"
+                        [(value)]="day.value"
+                        (valueChange)="updateTotal($event)"
+                        [class.has-no-goal]="day.noGoal"
+                        *ngIf="isEditing"
+                    ></number-input>
+                    <ng-container *ngIf="!isEditing && !day.noGoal">
+                        {{day.value}}
+                    </ng-container>
+                </div>
+            </ion-item>
+
+            <div divider class="bottom"></div>
+
+            <ion-item class="content-header">
+                <ion-label fixed>Week Totaal</ion-label>
+                <div item-content class="input">
+                    <span [class.label-no-goal]="noGoals">
+                        {{ noGoals ? '?' : totalDrinks }}
+                    </span>
+                </div>
+            </ion-item>
+            <ion-item class="content-header">
+                <ion-label fixed class="no-drinks-label"
+                    >Aantal niet-drinkdagen</ion-label
+                >
+                <div item-content class="input">
+                    <span [class.label-no-goal]="noGoals">
+                        {{ noGoals ? '?' : noDrinkDays }}
+                    </span>
+                </div>
+            </ion-item>
+        </ion-list>
+
+        <div class="goal__save-button button-container">
+            <button
+                full
+                ion-button
+                class="themed-button"
+                *ngIf="!isEditing"
+                (click)="toggleEditing(false, true)"
+            >
+                Bewerken
+            </button>
+            <button
+                ion-button
+                (click)="toggleEditing()"
+                class="small"
+                *ngIf="!isEditingFirstTime && isEditing"
+            >
+                Annuleren
+            </button>
+            <button
+                ion-button
+                full
+                icon-start
+                (click)="done()"
+                class="themed-button"
+                *ngIf="isEditing && !isEditingFirstTime || isEditing"
+            >
+                <ion-icon name="checkmark"></ion-icon>
+                Opslaan
+            </button>
+        </div>
+    </div>
+</ion-content>

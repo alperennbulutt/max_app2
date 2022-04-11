@@ -1,0 +1,46 @@
+page-session-summary {
+	ion-header {
+	}
+
+	ion-content {
+		&.content-ios {
+			color: $color-background;
+		}
+
+		.session-date {
+			margin-top: 18px;
+
+			ion-icon {
+				margin-top: -4px;
+				margin-right: 8px;
+				vertical-align: middle;
+			}
+		}
+
+		.gradient-background__header {
+			margin-bottom: 4px;
+		}
+
+		.previous-button {
+			text-align: right;
+		}
+
+		hr {
+			margin: 24px 0;
+			background: rgba($color-background, 0.5) !important;
+		}
+
+		ion-item.item-ios {
+			color: $color-background;
+		}
+
+		.gradient-background__content-title {
+			margin-top: 24px;
+		}
+
+		.day-indicator {
+			display: inline-block;
+			width: 42px;
+		}
+	}
+}

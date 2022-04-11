@@ -1,0 +1,100 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			<span>Logboek</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+		<div class="log-dates full-header">
+			<ion-slides #weekslider (ionSlideWillChange)="onSlideWillChange($event)" (ionSlideDidChange)="onSlideDidChange($event)">
+					<ion-slide *ngFor="let week of weeks">
+						<div tappable class="log-dates__date"
+							[class.log-dates__date--dot]="dayRegistry.drinkCount > dayRegistry.goal"
+							[class.log-dates__date--active]="selectedDay && (selectedDay.date | moment: 'YYYY-MM-DD') === (dayRegistry.date | moment: 'YYYY-MM-DD')"
+							[class.log-dates__date--disabled]="dayRegistry.disabled"
+							*ngFor="let dayRegistry of week" (click)="selectDay(dayRegistry)"
+						>
+						<div class="date__day">{{ dayRegistry.date | moment: 'dd' }}</div>
+						<div class="date__week">{{ dayRegistry.date | moment: 'D' }}</div>
+						<ion-icon name="ios-thumbs-up-outline" *ngIf="dayRegistry.drinkCount <= dayRegistry.goal"></ion-icon>
+					</div>
+				</ion-slide>
+			</ion-slides>
+		</div>
+
+		<div class="date-header">
+			<div divider nospace=true></div>
+				<div class="date-header__date">
+					{{selectedDay?.date | moment: 'D MMMM'}}
+				</div>
+			<div divider gaps=2 nospace=true></div>
+		</div>
+
+		<div class="log-registrated__loader" *ngIf="!pageIsLoaded">
+			<ion-spinner></ion-spinner>
+		</div>
+
+		<ng-container *ngIf="selectedDay">
+			<div class="log-registrated__wrapper">
+				<div class="log-registrated__counter">
+					<div class="log-registrated__counter-number" [class.is-much]="selectedDay.drinkCount > 9">{{ selectedDay.drinkCount !== undefined ? selectedDay.drinkCount : '?' }}</div>
+					<div class="log-registrated__counter-description">
+						{{ ('GENERAL.glass' + ((selectedDay.drinkCount === 1) ? '' : '-plural')) | translate }} <br>
+						gedronken
+						<div tappable (click)="openDefaultGlas()" class="info-icon">
+							<ion-icon name="ios-information-circle-outline"></ion-icon>
+						</div>
+					</div>
+				</div>
+
+				<div class="log__button-wrapper">
+					<button ion-button clear (click)="resetDay()">Wis</button>
+						<div class="log-registrated__buttons" *ngIf="!selectedDay.isEditDisabled">
+							<button ion-button outline inset color="secondary" class="log-registrated__button" (click)="updateDrinkCount()">
+								<ion-icon name="lnr-icon-minus"></ion-icon>
+							</button>
+							<button ion-button outline inset color="secondary" class="log-registrated__button" (click)="updateDrinkCount(true)">
+								<ion-icon name="lnr-icon-add"></ion-icon>
+							</button>
+						</div>
+					<button ion-button clear (click)="saveLog()">Opslaan</button>
+				</div>
+			</div>
+		</ng-container>
+
+		<div class="log-registrated__note">
+			<ion-textarea placeholder="Voeg notities toe" [(ngModel)]="registeryNote" (ngModelChange)="registeryNoteChange()"></ion-textarea>
+		</div>
+
+		<div class="log-registrated__bottom">
+			<div class="log-registrated__your-max">
+				<div class="log-registrated__your-max--left">
+					<div class="small">
+						Jouw
+					</div>
+					<div class="big">
+						Maxx
+					</div>
+					<div class="small">
+						Deze dag:
+					</div>
+				</div>
+				<div class="log-registrated__your-max--right">
+					<div class="extra-big">
+						{{selectedDay?.goal >= 0 ? selectedDay?.goal : '?'}}
+					</div>
+				</div>
+			</div>
+			<div class="chart-button-wrapper">
+				<div class="chart-button-label">Bekijk voortgang:</div>
+				<button ion-button class="themed-button chart-button" (click)="leavePage('Stats')">
+					<div *ngFor="let i of [0,1,2,3,4]" class="bar" [ngClass]="'bar-' + i"></div>
+					<ion-icon name="arrow-forward"></ion-icon>
+				</button>
+			</div>
+		</div>
+	</div>
+</ion-content>

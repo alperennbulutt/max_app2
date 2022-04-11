@@ -1,0 +1,43 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			{{ page?.title }}
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+		<ion-slides #slider pager=true>
+			<ion-slide *ngFor="let slide of introductionSlides">
+				<div class="introduction-container">
+					<div class="introduction__title">{{slide.title}}</div>
+					<p>{{slide.text}}</p>
+					<div class="image-container">
+						<div class="image-holder">
+							<img [src]="slide.image">
+						</div>
+					</div>
+				</div>
+			</ion-slide>
+			<ion-slide *ngIf="!fromMenu">
+				<div class="introduction__last-slide">
+					<div class="introduction__last-slide__title">
+						MAXX
+					</div>
+					<div divider nospace=true></div>
+					<div class="button-container">
+						<button ion-button navPush="Login">Inloggen</button>
+						<button ion-button navPush="Login" [navParams]="{ showRegister: 'true' }">Registreren</button>
+					</div>
+					<div divider gaps=2 nospace=true></div>
+				</div>
+			</ion-slide>
+		</ion-slides>
+		<div class="introduction__footer" [class.hide]="slider.isEnd()" *ngIf="!fromMenu">
+			<button ion-button clear navPush="Login">Inloggen</button>
+			<button ion-button clear navPush="Login" [navParams]="{ showRegister: 'true' }">Aanmelden</button>
+		</div>
+		<div [innerHTML]="page?.content"></div>
+	</div>
+</ion-content>

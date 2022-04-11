@@ -1,0 +1,22 @@
+page-intro {
+	ion-content {
+		&.gradient-background {
+			.scroll-content {
+				padding: 0;
+			}
+		}
+
+		.content {
+			padding: 24px;
+			padding-top: 30%;
+			color: $color-background;
+			text-align: center;
+			font-family: $font-primary;
+			font-size: 16px;
+			flex-grow: 1;
+		}
+	}
+
+	ion-footer {
+	}
+}

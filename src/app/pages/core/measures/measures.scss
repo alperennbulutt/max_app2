@@ -1,0 +1,49 @@
+page-measures {
+	ion-header {
+	}
+
+	ion-content {
+		.intro {
+			font-size: 15px;
+			font-weight: 500;
+		}
+
+		.gradient-background__content {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			p {
+				margin: 0;
+			}
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		.avatar {
+			margin-right: 12px;
+			width: 40px;
+			height: 40px;
+			background-position: center;
+			background-size: contain;
+			background-repeat: no-repeat;
+			flex-shrink: 0;
+			flex-grow: 1;
+		}
+
+		.measure {
+			width: 100%;
+			font-size: 13px;
+		}
+
+		.measure__drink-name {
+			font-size: 15px;
+		}
+	}
+}

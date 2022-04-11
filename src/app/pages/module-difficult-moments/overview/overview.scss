@@ -1,0 +1,100 @@
+
+
+page-module-difficult-moments-overview {
+	ion-header {
+	}
+
+	ion-content {
+		.situations__intro p,
+		.situations__intro {
+			font-size: 17px;
+
+			ul {
+				padding-left: 30px;
+			}
+		}
+
+		.add-button {
+			margin-bottom: 20px;
+		}
+	}
+
+	.situation__item {
+		position: relative;
+		display: flex;
+		display: flex;
+		margin-top: 16px;
+		padding-bottom: 16px;
+		font-size: 15px;
+		justify-content: space-between;
+
+		.divider {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+		}
+	}
+
+	.situation__date {
+		font-weight: bold;
+	}
+
+	.situation__more {
+		text-decoration: underline;
+		font-weight: bold;
+	}
+
+	.situation__right {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		 > ion-icon {
+			text-align: right;
+			font-size: 22px;
+			font-weight: bold;
+		}
+	}
+
+	.situation__rating {
+		position: relative;
+		display: flex;
+
+		 + ion-icon {
+			margin-bottom: 3px;
+		}
+
+		star-rating .star-button {
+			margin-right: 3px;
+
+			svg {
+				width: 15px;
+				height: 15px;
+			}
+		}
+
+		 > ion-icon {
+			right: 0;
+			margin-top: -2px;
+			margin-left: 10px;
+			font-size: 20px;
+			font-weight: normal;
+
+			&.icon-ios-text {
+				color: $color-text;
+
+				&.no-notes {
+					opacity: 0.4;
+				}
+			}
+		}
+	}
+
+	.situation__question {
+		margin-top: 5px;
+		color: $color-red;
+		text-align: right;
+		font-size: 12px;
+		font-weight: bold;
+	}
+}

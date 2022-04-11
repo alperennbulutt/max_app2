@@ -1,0 +1,14 @@
+page-info {
+	h2 {
+		margin-top: 10px;
+	}
+
+	h4 {
+		margin: 0;
+		font-size: 17px;
+
+		 + p {
+			margin-top: 0;
+		}
+	}
+}

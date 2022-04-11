@@ -1,0 +1,18 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Veelgestelde vragen
+			<div divider nospace="true"></div>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+		<div class="question-wrapper">
+			<div class="question" *ngFor="let question of questions; let index = index">
+				<slide-down [title]="question.question" [hidden]="question.answer" (onOpen)="open(question.id)"></slide-down>
+			</div>
+		</div>
+	</div>
+</ion-content>

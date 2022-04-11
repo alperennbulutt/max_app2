@@ -1,0 +1,15 @@
+page-stats {
+	.intro {
+		font-weight: 500;
+	}
+
+	.button-wrapper {
+		button {
+			margin-bottom: 10px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}

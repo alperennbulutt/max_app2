@@ -1,0 +1,69 @@
+page-lessons {
+	.how__intro {
+		font-family: $font-secondary;
+		font-size: 17px;
+		line-height: 24px;
+
+		p {
+			margin: 0;
+		}
+	}
+
+	.divider {
+		margin: 24px 0;
+	}
+
+	.how__buttons {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+
+		 > li {
+			margin-bottom: 6px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			 > button ion-icon {
+				padding-left: 0;
+				transition: transform 0.4s ease;
+				transform: rotate(0deg);
+			}
+
+			&.is-open > button ion-icon {
+				transform: rotate(90deg);
+			}
+		}
+
+		.how__submenu {
+			overflow: hidden;
+			margin: 0;
+			margin: 0 auto;
+			padding: 0;
+			width: calc(100% - 6px);
+			list-style-type: none;
+
+			li:last-child button {
+				border-radius: 0 0 6px 6px;
+			}
+
+			button {
+				border-radius: 0;
+				background: rgba(247, 186, 68, 0.7);
+			}
+		}
+	}
+
+	ion-content {
+		.session-date {
+			margin-top: 18px;
+
+			ion-icon {
+				margin-top: -4px;
+				margin-right: 8px;
+				vertical-align: middle;
+			}
+		}
+	}
+}

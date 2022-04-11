@@ -1,0 +1,118 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			{{ lesson?.title }}
+			<ion-icon tappable class="example-icon" name="lnr-light-bulb" (click)="openPageExtension()" *ngIf="showExplanationIcon"></ion-icon>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+
+	<ng-template [ngIf]="!isLessonLoaded">
+		<ion-slides>
+			<ion-slide>
+				<div class="gradient-background__content">
+					Loading...
+				</div>
+			</ion-slide>
+		</ion-slides>
+	</ng-template>
+
+	<ng-template [ngIf]="isLessonLoaded && !lesson">
+		<ion-slides>
+			<ion-slide>
+				<div class="gradient-background__content">
+					We konden de les niet vinden. Probeer het nog eens.
+				</div>
+			</ion-slide>
+		</ion-slides>
+	</ng-template>
+
+	<ng-template [ngIf]="lesson">
+		<ion-slides
+			[pager]="true"
+			[initialSlide]="initialSlideIndex"
+			(ionSlideWillChange)="onSlideWillChange($event)"
+			(ionSlideDidChange)="onSlideDidChange($event)"
+			spaceBetween = "15"
+			[class.no-pager]="lesson.pages.length === 1"
+		>
+			<ion-slide *ngFor="let page of lesson.pages; let pageIndex = index">
+				<div class="exercise-block" *ngFor="let pageblock of page.pageblocks">
+					<ng-container [ngSwitch]="pageblock.component" *ngIf="!pageblock.type || pageblock.type == 1">
+
+						<!-- Text block -->
+						<div *ngSwitchCase="'PageComponent'">
+							<pagecomponent [pageContent]="pageblock" (onPodcastStart)="startPodcast($event)"></pagecomponent>
+						</div>
+
+						<!-- Radio buttons -->
+						<div *ngSwitchCase="'RadioComponent'" class="exercise-wrapper">
+							<radiocomponent [canEdit]="true" [exercise]="pageblock.questiondef" (onValueChange)="onValueChange(pageblock.title, $event)" [(data)]="answers[pageblock.id]"></radiocomponent>
+						</div>
+
+						<!-- Mutiple checkboxes -->
+						<div *ngSwitchCase="'CheckboxComponent'" class="exercise-wrapper">
+							<checkboxcomponent [canEdit]="true" [exercise]="pageblock.questiondef" (onValueChange)="onValueChange(pageblock.title, $event)" [(data)]="answers[pageblock.id]"></checkboxcomponent>
+						</div>
+
+						<!-- Multiple textareas -->
+						<div *ngSwitchCase="'TextareaComponent'" class="exercise-wrapper">
+							<textareacomponent [canEdit]="true" [exercise]="pageblock.questiondef" (onValueChange)="onValueChange(pageblock.title, $event)" [(data)]="answers[pageblock.id]"></textareacomponent>
+						</div>
+
+						<!-- Multple inputs -->
+						<div *ngSwitchCase="'TextfieldComponent'" class="exercise-wrapper">
+							<textfieldcomponent [canEdit]="true" [exercise]="pageblock.questiondef" (onValueChange)="onValueChange(pageblock.title, $event)" [(data)]="answers[pageblock.id]"></textfieldcomponent>
+						</div>
+
+						<!-- Word grid -->
+						<div *ngSwitchCase="'WordgridComponent'" class="exercise-wrapper">
+							<wordgridcomponent [canEdit]="true" [exercise]="pageblock.questiondef" (onValueChange)="onValueChange(pageblock.title, $event)" [(data)]="answers[pageblock.id]"></wordgridcomponent>
+						</div>
+
+						<!-- Multiple sliders -->
+						<div *ngSwitchCase="'SliderComponent'" class="exercise-wrapper">
+							<slidercomponent [canEdit]="true" [exercise]="pageblock.questiondef" (onValueChange)="onValueChange(pageblock.title, $event)" [(data)]="answers[pageblock.id]"></slidercomponent>
+						</div>
+
+						<!-- Answers from other exercise -->
+						<div *ngSwitchCase="'AnswerDisplayComponent'" class="exercise-wrapper">
+							<answerdisplaycomponent [exercise]="pageblock.questiondef" [(data)]="answers"></answerdisplaycomponent>
+						</div>
+
+						<!-- Drag and drop -->
+						<div *ngSwitchCase="'DragAndDropComponent'" class="exercise-wrapper">
+							<draganddropcomponent [canEdit]="true" [exercise]="pageblock.questiondef" (onValueChange)="onValueChange(pageblock.title, $event)" [(data)]="answers[pageblock.id]"></draganddropcomponent>
+						</div>
+
+						<!-- Question list -->
+						<div *ngSwitchCase="'TestComponent'" class="exercise-wrapper">
+							<questionnairecomponent [canEdit]="true" [exercise]="pageblock.questiondef" [(data)]="answers[pageblock.page]"></questionnairecomponent>
+						</div>
+
+						<div class="exercise-wrapper" *ngSwitchDefault>ONGEDEFINIEERD OEFENING TYPE: {{pageblock.component}}</div>
+					</ng-container>
+
+					<div *ngIf="page?.extrainfo && !page?.video">
+						<img *ngIf="page?.extrainfo && page?.extrainfo[0]?.beeld" src="{{page?.extrainfo && page?.extrainfo[0]?.beeld | videoUrl: [400]}}"/>
+					</div>
+
+					<div *ngIf="page.extrainfo">
+						<div class="extra-container" *ngFor="let info of page?.extrainfo">
+							<div [innerHTML]="info?.content"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="button-container" *ngIf="pageIndex === lesson.pages.length - 1">
+					<button ion-button full class="finish-button themed-button" (click)="deleteAnswers()" *ngIf="answersCanBeDeleted">Wis antwoorden</button>
+					<button ion-button full class="finish-button themed-button" (click)="finish()">Afronden</button>
+				</div>
+			</ion-slide>
+		</ion-slides>
+	</ng-template>
+	</div>
+</ion-content>

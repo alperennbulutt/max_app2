@@ -1,0 +1,21 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Voorbeeld
+		</ion-title>
+		<ion-buttons end>
+			<button ion-button (click)="close()"><ion-icon name="lnr-close"></ion-icon></button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+		<div class="example" *ngFor="let example of textareaExample">
+			<div class="label">
+				{{example.label}}
+			</div>
+			<textarea-component [textareaValue]="example.example" [editable]="editable"></textarea-component>
+		</div>
+	</div>
+</ion-content>

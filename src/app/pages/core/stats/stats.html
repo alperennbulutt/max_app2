@@ -1,0 +1,32 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Vorderingen
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+		<div class="intro">
+			<p>
+				Hieronder kun je in verschillende grafieken je voorgang bekijken. Deze gegevens zijn gebaseerd op de informatie die je in het logboek hebt ingevuld.
+			</p>
+			<p>Welke gegevens wil je bekijken?</p>
+		</div>
+		<div class="button-wrapper">
+			<button ion-button icon-end full tappable class="align-left themed-button" (click)="toChartPage(0)">
+				Aantal drankjes per dag
+				<ion-icon name="arrow-forward"></ion-icon>
+			</button>
+			<button ion-button icon-end full tappable class="align-left themed-button" (click)="toChartPage(1)">
+				Aantal dagen niet gedronken
+				<ion-icon name="arrow-forward"></ion-icon>
+			</button>
+			<button ion-button icon-end full tappable class="align-left themed-button" (click)="toGoalsStats()">
+				Aantal keer doelen gehaald
+				<ion-icon name="arrow-forward"></ion-icon>
+			</button>
+		</div>
+	</div>
+</ion-content>

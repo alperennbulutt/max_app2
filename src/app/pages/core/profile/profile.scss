@@ -1,0 +1,123 @@
+page-profile {
+	font-family: $font-secondary;
+
+	ion-content {
+		.scroll-content {
+			padding: 0 24px 24px;
+		}
+
+		ion-spinner {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.user_wrapper {
+			position: relative;
+			margin: 0 auto;
+			padding-top: 20px;
+			width: 90%;
+			height: 100%;
+
+			ion-item.item-ios.item-label-stacked .text-input {
+				color: $color-text;
+				font-family: $font-primary;
+				font-size: 18px;
+			}
+		}
+
+		ion-label.label-ios[stacked] {
+			font-size: 17px;
+		}
+
+		.label-content {
+			font-family: $font-primary;
+			font-size: 18px;
+		}
+
+		ion-item,
+		ion-item.item-ios {
+			margin-bottom: 10px;
+			color: inherit;
+			font-size: inherit;
+
+			&.item-block .item-inner {
+				border: none;
+			}
+
+			&.clickable-item {
+				ion-toggle {
+					visibility: hidden;
+				}
+
+				&:after {
+					position: absolute;
+					top: 50%;
+					right: 0;
+					content: '\e93c';
+					font-family: 'Linearicons';
+					font-weight: bold;
+					transform: translateY(-50%);
+				}
+			}
+		}
+
+		.input-form {
+			padding: 0;
+		}
+
+		.input-form__buttons {
+			display: flex;
+			padding: 24px 0 12px;
+
+			.cancel-button {
+				padding-left: 0;
+
+				.button-inner {
+					width: 30%;
+					justify-content: flex-start;
+				}
+			}
+		}
+
+		.date-picker {
+			position: relative;
+			margin-bottom: 15px;
+
+			&:before {
+				position: absolute;
+				bottom: 11px;
+				left: 25px;
+				color: $color-text;
+				content: 'jaar';
+				font-family: $font-primary;
+				font-size: 16px;
+				font-weight: 500;
+			}
+		}
+
+		.input-form__submit {
+			margin: 0 4px;
+			height: 36px;
+
+			&:first-child {
+				margin-left: 0;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		.item-ios .toggle-ios {
+			padding-right: 0 !important;
+		}
+	}
+
+	.profile__footer {
+		position: absolute;
+		bottom: 20px;
+		width: 100%;
+	}
+}

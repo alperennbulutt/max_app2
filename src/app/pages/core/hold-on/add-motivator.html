@@ -1,0 +1,7 @@
+
+<ion-header>
+	<ion-navbar hideBackButton="true"></ion-navbar>
+</ion-header>
+<ion-content>
+	<editor class="wrapper" [options]="editorSteps" (onFinish)="save($event)" (onGoback)="goback()" [data]="defaults"></editor>
+</ion-content>

@@ -1,0 +1,66 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Mijn moeilijke situaties
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper buttons-bottom">
+
+		<ng-container *ngIf="!showResult">
+			<ng-container *ngFor="let situation of situations let index = index">
+				<div class="situation__wrapper" *ngIf="index === currentSituationIndex">
+					<div class="my-situations__intro" [innerHTML]="situations[currentSituationIndex].description"></div>
+				</div>
+			</ng-container>
+
+			<div divider></div>
+
+			<div class="checkbox-wrapper" *ngIf="currentSituation">
+				<ng-container *ngFor="let item of situations[currentSituationIndex].issues; let index = index">
+					<ion-item *ngIf="item.title !== '999'">
+						<ion-label>{{item.title}}</ion-label>
+						<ion-checkbox (ionChange)="onChange($event, index)" [checked]="item.checked"></ion-checkbox>
+					</ion-item>
+				</ng-container>
+			</div>
+
+			<div class="add-button" *ngIf="isCustomSituation">
+				<ion-input placeholder="+ voeg toe" [(ngModel)]="customSituationValue"></ion-input>
+				<button ion-button class="themed-button" (click)="addCustomSituation()">
+					<ion-icon name="md-add"></ion-icon>
+				</button>
+			</div>
+
+			<div class="button-container" *ngIf="currentSituationIndex < situations.length">
+				<button ion-button full class="themed-button" (click)="updateState(true)" [disabled]="currentSituationIndex === 0">Terug</button>
+				<button ion-button full class="themed-button" (click)="updateState()" [disabled]="!canFinish && isCustomSituation" >{{!isCustomSituation ? 'Verder' : 'Klaar'}}</button>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="showResult">
+			<div [innerHTML]="resultText" class="result-text"></div>
+			<div *ngFor="let result of myDifficultSituations" class="result">
+				<div class="result__title">
+					{{result.title}}
+				</div>
+				<div [innerHTML]="result.description"></div>
+				<slide-down
+					*ngFor="let situation of result.situations"
+					class="result__slide-down"
+					[title]="situation.title"
+					[hidden]="situation.description"
+					(onOpen)="open(situation.id)"
+				>
+				</slide-down>
+			</div>
+
+			<div class="button-container">
+				<button ion-button full class="small" (click)="edit()">Wijzig</button>
+				<button ion-button full class="themed-button" (click)="openDifficultMoment()">Moeilijke situaties</button>
+			</div>
+		</ng-container>
+	</div>
+</ion-content>

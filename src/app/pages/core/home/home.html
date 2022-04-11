@@ -1,0 +1,62 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			<div tappable menuToggle class="menu-toggle">
+			<div class="hamburger-icon"></div>
+		</div>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<div class="wrapper">
+		<div class="home__content">
+			<div class="home__your-max">
+				<div class="home__your-max--left">
+					<div class="small">
+						Jouw
+					</div>
+					<div class="big">
+						Maxx
+					</div>
+					<div class="small">
+						vandaag:
+					</div>
+				</div>
+				<div class="home__your-max--right">
+					<div class="extra-big">
+						{{ todayGoal }}
+					</div>
+				</div>
+			</div>
+
+			<div divider></div>
+
+			<div class="home__button-container">
+				<button ion-button color=blue (click)="goToPage('ModuleDifficultMomentsOverview', {}, 0)" class="blue-text" [class.has-mark]="hasMark(messageTypes.DIFFICULTSITUATIONS)">
+					<ion-icon name="lnr-warn"></ion-icon>
+					Moeilijke situaties
+				</button>
+				<button ion-button color=red (click)="goToPage('HoldOn')" class="white-text" [class.has-mark]="hasMark(messageTypes.HOLDON)">
+					<img src="assets/img/muscles.svg">
+					Hou vol <br> omdat...
+				</button>
+				<button ion-button color=pink (click)="goToPage('ModulePlanningGoal', { isUpdating: false }, 2 )" class="white-text" [class.has-mark]="hasMark(messageTypes.GOALS)">
+					<ion-icon name="lnr-target"></ion-icon>
+					Doelen
+				</button>
+				<button ion-button color=primary (click)="goToPage('Log', {}, 3)" [class.has-mark]="hasMark(messageTypes.DIARY)">
+					<ion-icon name="lnr-wine-glass"></ion-icon>
+					Logboek
+				</button>
+				<button ion-button color=yellow (click)="goToPage('Lessons')" class="rotate-icon">
+					<ion-icon name="lnr-weight"></ion-icon>
+					Hoe?
+				</button>
+				<button ion-button color=grey (click)="goToPage('PageMessages', {}, 5)" [class.has-mark]="hasMark(messageTypes.MESSAGES)">
+					<ion-icon name="lnr-mail-envelope"></ion-icon>
+					Berichten
+				</button>
+			</div>
+		</div>
+	</div>
+</ion-content>

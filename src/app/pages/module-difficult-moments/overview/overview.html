@@ -1,0 +1,53 @@
+<ion-header>
+	<ion-navbar #navbar>
+		<ion-title>
+			 Moeilijke situaties
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+
+		<div class="situations__intro">
+			Bereid je voor op situaties waarin je het lastig vindt om niet (te veel) te drinken.
+			<ul>
+				<li>Hoe pak je het aan</li>
+				<li>Leer van je ervaring</li>
+			</ul>
+		</div>
+
+		<button ion-button full class="add-button themed-button" (click)="goToDetail()">Voeg een situatie en plan toe</button>
+
+		<div divider nospace=true></div>
+
+		<div class="overview-wrapper">
+			<div tappable class="situation__item" *ngFor="let event of situations; let even = even;" (click)="goToDetail(event)">
+				<div class="situation__left">
+					<div class="situation__date">
+						{{event.date | moment: 'DD MMM YYYY HH:mm'}}
+					</div>
+					<div class="situation__name">
+						{{event.description}}
+					</div>
+					<div class="situation__more">Meer...</div>
+				</div>
+				<div class="situation__right">
+					<div class="situation__rating">
+						<star-rating edit=false [rating]="event.rating"></star-rating>
+						<ion-icon name="lnr-chat-write" *ngIf="!event.inTheFuture && event.rating === -1" color=red></ion-icon>
+						<ion-icon name="lnr-square-pencil-gum" *ngIf="!event.inTheFuture && event.rating > 0" color=text [class.no-notes]="!event.note"></ion-icon>
+					</div>
+					<div class="situation__question" *ngIf="!event.inTheFuture && event.rating < 0">
+						hoe ging het?
+					</div>
+					<ion-icon name="arrow-forward"></ion-icon>
+				</div>
+				<div divider nospace=true [gaps]="even ? 2 : 1"></div>
+			</div>
+
+		</div>
+
+	</div>
+
+</ion-content>

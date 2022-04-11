@@ -1,0 +1,40 @@
+<ion-header>
+	<ion-navbar (click)="onTitleTap()" (swipe)="onSessionSwipe($event)">
+		<ion-title>
+			Hoe?
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="wrapper">
+
+		<div class="how__intro" contentParser [content]="intro"></div>
+
+		<div divider></div>
+
+		<ul class="how__buttons">
+			<li>
+				<button ion-button full icon-end class="align-left themed-button" (click)="toRewards()">
+					Beloon jezelf
+					<ion-icon name="arrow-forward"></ion-icon>
+				</button>
+			</li>
+			<li *ngFor="let page of menuItems" [class.is-open]="page.hasSubpages && page.isOpen">
+				<button ion-button full icon-end class="align-left themed-button" (click)="openPage(page)">
+					{{page.title}}
+					<ion-icon name="arrow-forward"></ion-icon>
+				</button>
+
+				<ul *ngIf="page.hasSubpages && page.isOpen" class="how__submenu" @slideDown>
+					<li *ngFor="let subPage of page.subpages">
+						<button ion-button full icon-end class="align-left" (click)="openPage(subPage)">
+							{{subPage.title}}
+							<ion-icon name="arrow-forward"></ion-icon>
+						</button>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</ion-content>

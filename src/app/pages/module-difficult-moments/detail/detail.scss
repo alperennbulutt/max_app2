@@ -1,0 +1,302 @@
+page-module-difficult-moments-detail {
+	ion-header {
+	}
+
+	ion-content {
+		.situations__intro {
+			margin-bottom: 16px;
+		}
+
+		.situations__intro p,
+		.situations__intro {
+			font-size: 17px;
+
+			ul {
+				padding-left: 30px;
+			}
+		}
+
+		ion-datetime.datetime-ios.date-picker {
+			border-bottom: none;
+
+			.datetime-text {
+				font-family: $font-secondary;
+				font-size: 17px;
+			}
+		}
+
+		.strategy-check {
+			display: none;
+		}
+
+		.alert-radio-label {
+			color: $color-blue;
+		}
+
+		ion-select {
+			padding-bottom: 10px !important;
+			padding-left: 0 !important;
+			max-width: 80%;
+			font-size: 15px;
+
+			@media screen and (max-width: 320px) {
+				font-size: 12px;
+			}
+		}
+
+		.situations__form {
+			margin-bottom: 10px;
+			padding: 0;
+
+			 + .divider {
+				display: none;
+			}
+
+			.input-wrapper {
+				border-bottom: 1px solid $color-grey;
+			}
+
+			ion-item.item-block {
+				margin-top: 20px;
+				min-height: 0;
+
+				ion-icon {
+					position: absolute;
+					top: 50%;
+					right: 0;
+					color: $color-text;
+					font-size: 18px;
+					font-weight: bold;
+					transform: translateY(-50%);
+				}
+			}
+
+			ion-label {
+				min-width: 35%;
+				font-family: $font-primary;
+				font-size: 15px;
+
+				&.label-ios {
+					margin: 8px 6px 12px 0;
+				}
+			}
+
+			ion-input {
+				border-bottom: none;
+
+				.text-input {
+					height: 100%;
+					font-family: $font-secondary;
+					font-size: 17px;
+				}
+			}
+		}
+
+		.strategy-theme-header {
+			margin-top: 10px;
+			width: 100%;
+			color: $color-text;
+			font-family: $font-primary;
+			font-size: 15px;
+		}
+
+		.strategy-theme__buttons-wrapper {
+			display: flex;
+			overflow: hidden;
+			margin-top: 10px;
+			width: 100%;
+			border-radius: 30px;
+			background: $color-white;
+			box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.3);
+			justify-content: space-between;
+
+			.strategy-theme__button {
+				padding: 14px 0;
+				width: 25%;
+				border-left: 1px solid $color-grey;
+				text-align: center;
+				font-size: 12px;
+				font-weight: bold;
+				transition: background 0.4s ease;
+
+				&:first-child {
+					border: none;
+				}
+
+				&.active {
+					background: $color-blue;
+					color: #1c579d;
+
+					 + .strategy-theme__button.active {
+						border-color: $color-white;
+					}
+				}
+			}
+		}
+
+		.strategy-theme-container {
+			display: flex;
+			margin-top: 30px;
+			flex-wrap: wrap;
+			justify-content: center;
+
+			.strategy-theme-button {
+				position: relative;
+				margin: 5px;
+				width: 60px;
+				height: 60px;
+				border: 1px solid gray;
+				cursor: pointer;
+
+				span {
+					position: absolute;
+					bottom: 0;
+					display: block;
+					width: 100%;
+					text-align: center;
+				}
+			}
+		}
+
+		button[type=submit] {
+			margin-top: 10px;
+		}
+
+		.chosen-strategy-wrapper {
+			margin-top: 16px;
+			width: 100%;
+		}
+
+		.strategy-item {
+			display: flex;
+			padding: 8px 0 10px;
+			border-bottom: 1px solid $color-grey;
+
+			 > div:first-child.strategy-item:first-child {
+				border-top: 1px solid $color-grey;
+			}
+
+			.label {
+				min-width: 60px;
+				font-weight: bold;
+			}
+
+			.strategy-content {
+				flex-grow: 1;
+			}
+
+			ion-icon {
+				margin-top: 4px;
+				margin-left: 10px;
+				color: $color-red;
+				font-size: 16px;
+				font-weight: bold;
+			}
+		}
+
+		.situations__small-view {
+			display: flex;
+			overflow: hidden;
+			padding: 14px 0;
+			justify-content: space-between;
+
+			.label {
+				margin-top: 4px;
+				font-size: 17px;
+
+				&-date {
+					font-weight: bold;
+				}
+			}
+
+			.open-button {
+				text-align: center;
+				font-size: 13px;
+				flex-shrink: 0;
+
+				ion-icon {
+					display: block;
+					margin-top: 5px;
+					font-size: 28px;
+					line-height: 15px;
+				}
+			}
+		}
+
+		.situations__form + .review-fields {
+			margin-top: 25px;
+		}
+
+		.situations__column {
+			margin-right: auto;
+			margin-left: auto;
+			min-width: 260px;
+			width: 90%;
+		}
+
+		.situations__rating {
+			margin-top: 20px;
+			padding-bottom: 20px;
+			border-bottom: 1px solid $color-grey;
+			color: $color-dark;
+			font-family: $font-primary;
+			font-size: 16px;
+
+			star-rating {
+				margin-top: 14px;
+			}
+		}
+
+		.situations__note {
+			margin-top: 20px;
+			margin-bottom: 10px;
+			color: $color-dark;
+
+			.situations__column {
+				margin-bottom: 14px;
+				font-family: $font-primary;
+				font-size: 16px;
+			}
+
+			ion-textarea {
+				border: 1px solid $color-grey;
+				box-shadow: inset 2px 3px 5px -2px rgba(0, 0, 0, 0.2);
+			}
+
+			textarea.text-input-ios {
+				min-height: 150px;
+				background: rgba(255, 255, 255, 0.8);
+				color: #414040;
+				font-family: 'blockbe-regular';
+				font-size: 18px;
+			}
+		}
+
+		.button-container.is-editing {
+			justify-content: space-between;
+
+			button {
+				margin-top: 10px;
+				margin-left: 0;
+				min-width: 105px;
+				width: 40%;
+				flex-grow: 0;
+
+				&.remove-button {
+					margin-left: 0;
+					padding-right: 0;
+					padding-left: 0;
+					min-width: 0;
+					width: 20%;
+					background: transparent;
+					color: $color-dark;
+
+					ion-icon {
+						padding-left: 0;
+						font-size: 26px;
+					}
+				}
+			}
+		}
+	}
+}
